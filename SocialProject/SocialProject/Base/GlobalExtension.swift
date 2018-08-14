@@ -21,6 +21,7 @@ extension UIStoryboard {
         case user = "LoginAndRegisterStoryboard"
         case connection = "ConnectionStoryboard"
         case dynamic = "DynamicStoryboard"
+        case message = "Im"
         case discovery = "DiscoveryStoryboard"
         case mine = "MineStoryboard"
     }

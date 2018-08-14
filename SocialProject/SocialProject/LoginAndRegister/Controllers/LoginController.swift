@@ -61,6 +61,7 @@ class LoginController: ZYYBaseViewController {
             if isSuccess {
                 UserDefaults.standard.set(result!["id"].stringValue, forKey: "ID")
                 UserDefaults.standard.set(result!["token"].stringValue, forKey: "token")
+                UserDefaults.standard.set(result!["circleType"].intValue, forKey: "circleType")
                 UserDefaults.standard.synchronize()
                 if result!["circleType"] == .null {
                     let circleVC = UIStoryboard(name: .user).initialize(class: CircleController.self)

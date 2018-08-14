@@ -156,8 +156,10 @@ extension DynamicContentController {
     func concernRequest(indexPath: IndexPath) {
         self.showBlurHUD()
         let model = self.dataArray[indexPath.row]
-        let attentionRequest = AttentionRequest(ID: userID, concernID: Int(model.id)!)
-        WebAPI.send(attentionRequest) { (isSuccess, result, error) in
+        self.showBlurHUD()
+        let req = AttentionReq(id: userID, otherId: "\(model.id)")
+        WebAPI.send(req) { (isSuccess, result, error) in
+            self.hideBlurHUD()
             self.hideBlurHUD()
             if isSuccess {
                 self.showBlurHUD(result: .success, title: "关注成功") { [unowned self] in

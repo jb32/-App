@@ -174,23 +174,10 @@ struct CircleRequest: RequestType {
     let path: String = "/getAccountById"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<ConnectionModel>
+    typealias ResponsType = ObjectModelArray<UserModel>
     
     init(ID: String, type: String) {
-        self.parameters = ["id": ID, "type": type]
-    }
-}
-
-// 添加关注
-struct AttentionRequest: RequestType {
-    let host: String = ROOT_API_HOST
-    let path: String = "/insertConcern"
-    var parameters: Parameters
-    
-    typealias ResponsType = JSON
-    
-    init(ID: String, concernID: Int) {
-        self.parameters = ["id": ID, "concernId": concernID]
+        self.parameters = ["id": ID, "circleType": type]
     }
 }
 

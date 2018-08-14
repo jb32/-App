@@ -65,7 +65,7 @@ extension ConnectionController {
                 style.titleViewBackgroundColor = .backgroundColor
                 
                 // 创建对应的DNSPageView，并设置它的frame
-                let pageView = DNSPageView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT), style: style, titles: titles, childViewControllers: childViewControllers)
+                let pageView = DNSPageView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT - 44), style: style, titles: titles, childViewControllers: childViewControllers)
                 self.view.addSubview(pageView)
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
