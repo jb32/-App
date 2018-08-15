@@ -15,8 +15,8 @@ class DynamicContentController: ZYYBaseViewController {
     
     var dataArray: [DynamicModel] = []
     var type = "推荐"
-    var chooseIndexPath: IndexPath?
-    var commentView: CustomInputView?
+    
+    var pushAction:(_ vc: CommentListController) -> Void = {_ in }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,9 +130,10 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
         case 5002:
             self.transmitRequest(indexPath: indexPath!)
         case 5003:
-            commentView = CustomInputView.instance(superView: UIApplication.shared.keyWindow!)!
-            commentView?.delegate = self as CustomInputViewDelegate
-            self.chooseIndexPath = indexPath
+            let commentVC = UIStoryboard(name: .dynamic).initialize(class: CommentListController.self)
+            let model = self.dataArray[(indexPath?.row)!]
+            commentVC.model = model
+            self.pushAction(commentVC)
         case 5004:
             self.collectRequest(indexPath: indexPath!)
         default:
@@ -295,23 +296,6 @@ extension DynamicContentController {
             }
         }
     }
-    
-    // 评论
-    func comentRequest(text: String) {
-        self.showBlurHUD()
-        let model = self.dataArray[(self.chooseIndexPath?.row)!]
-        let collectRequest = CommentRequest(comment: text, loginId: userID, movementId: model.id)
-        WebAPI.send(collectRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.showBlurHUD(result: .success, title: "评论成功") { [unowned self] in
-                    self.commentView?.removeFromSuperview()
-                }
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
 }
 
 extension DynamicContentController: DNSPageReloadable {
@@ -322,11 +306,5 @@ extension DynamicContentController: DNSPageReloadable {
     
     func contentViewDidEndScroll() {
         print("contentView滑动结束")
-    }
-}
-
-extension DynamicContentController: CustomInputViewDelegate {
-    func send(text: String) {
-        self.comentRequest(text: text)
     }
 }

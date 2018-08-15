@@ -49,6 +49,9 @@ class DynamicController: UIViewController {
             let controller = UIStoryboard(name: .dynamic).initialize(class: DynamicContentController.self)
             controller.type = str
             controller.view.backgroundColor = UIColor.backgroundColor
+            controller.pushAction = { [unowned self] vc in
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             return controller
         }
         

@@ -358,7 +358,7 @@ struct CommentListRequest: RequestType {
     let path: String = "/ShowAllComments"
     var parameters: Parameters
     
-    typealias ResponsType = JSON
+    typealias ResponsType = ObjectModelArray<CommentModel>
     
     init(movementId: String) {
         self.parameters = ["movementId": movementId]

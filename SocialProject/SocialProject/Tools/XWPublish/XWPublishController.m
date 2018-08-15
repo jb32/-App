@@ -288,16 +288,15 @@ typedef void(^Failure)(NSError * error);
     [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"ID"] forKey:@"id"];
     [dic setValue:@"1" forKey:@"type"];
     [self postImagesToServer:@"http://192.168.1.184:8080/shejiaoappserver/addDynamic" dicPostParams:dic imageArray:smallImageArray file:fileArr Success:^(id responseObject) {
-        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"发布成功!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionCacel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alertController addAction:actionCacel];
+        [self presentViewController:alertController animated:YES completion:nil];
     } andFailure:^(NSError *error) {
         
     }];
-//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"发布成功!" preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction *actionCacel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }];
-//    [alertController addAction:actionCacel];
-//    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 -(void)postImagesToServer:(NSString *)strUrl dicPostParams:(NSMutableDictionary *)params imageArray:(NSArray *)imageArray file:(NSArray *)fileArray Success:(Success)success andFailure:(Failure)failure{
