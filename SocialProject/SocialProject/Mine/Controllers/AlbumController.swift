@@ -56,7 +56,10 @@ class AlbumController: ZYYBaseViewController {
                 
             }, completeHandler: { (isSuccess, urlString, error) in
                 if isSuccess == true, let urlString = urlString as? String {
-                    self.showBlurHUD(result: .success, title: "上传成功")
+                    self.showBlurHUD(result: .success, title: "上传成功") { [unowned self] in
+                        self.imgs = urlString.components(separatedBy: ",")
+                        self.collectionView.reloadData()
+                    }
                 } else {
                     self.showBlurHUD(result: .failure, title: error?.errorMsg)
                 }

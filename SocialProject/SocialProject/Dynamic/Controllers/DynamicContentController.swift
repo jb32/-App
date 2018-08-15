@@ -15,6 +15,8 @@ class DynamicContentController: ZYYBaseViewController {
     
     var dataArray: [DynamicModel] = []
     var type = "推荐"
+    var chooseIndexPath: IndexPath?
+    var commentView: CustomInputView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +33,11 @@ class DynamicContentController: ZYYBaseViewController {
             self.getHotData()
         } else if type == "好友动态" {
             self.dynamicRequest()
+        } else if type == "咨询" {
+            self.getInformationData()
         } else {
-            self.getProjectData(type: type)
+            let circleType = UserDefaults.standard.integer(forKey: "circleType")
+            self.getProjectData(type: "\(circleType)")
         }
     }
 
@@ -64,27 +69,72 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        if self.dataArray.count > 0 {
+            return updateRowHeight(indexPath: indexPath)
+        }
+        return 0
+    }
+    
+    func updateRowHeight(indexPath: IndexPath) -> CGFloat {
+        let model = self.dataArray[indexPath.row]
+        var height:CGFloat = 105
+        let textHeight = String.getTextHeigh(textStr: (model.content), font: UIFont.systemFont(ofSize: 15), width: DEVICE_WIDTH - 75)
+        print(textHeight)
+        height = height + textHeight
+        //4.配图视图
+        var pictureHeight: CGFloat = 0.0
+        var picURLs: [String] = []
+        let arr = model.image.components(separatedBy: ",")
+        for url in arr {
+            if url.length > 0 {
+                picURLs.append(Image_Path+url)
+            }
+        }
+        switch picURLs.count {
+        case 0:
+            pictureHeight = 0
+        case 1:
+            pictureHeight = 120
+        default:
+            let row = (picURLs.count - 1) / 3 + 1
+            pictureHeight = CGFloat(row) * PicWidth
+            pictureHeight = CGFloat(row - 1) * PictureInMargin + pictureHeight
+        }
+        height = height + pictureHeight
+        print("======================" + "\(height)")
+        return height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DynamicCell", for: indexPath) as! DynamicCell
-        let model = self.dataArray[indexPath.row]
-        cell.avatarImgView.setWebImage(with: model.image, placeholder: UIImage(named: "dynamic_avatar_boy"))
-        cell.timeLabel.text = model.createtime
-        cell.contentLabel.text = model.content
-        cell.concernBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+        if self.dataArray.count > 0 {
+            let model = self.dataArray[indexPath.row]
+            cell.model = model
+            cell.concernBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            cell.collectBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            cell.commentBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            cell.transpondBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            cell.likeBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+        }
         return cell
     }
     
     @objc func btnsAction(_ sender: UIButton) {
-        let cell = sender.superview?.superview as! ConnectionCell
+        let cell = sender.superview?.superview?.superview as! DynamicCell
         let indexPath = self.tableView.indexPath(for: cell)
         switch sender.tag {
         case 5000:
             self.concernRequest(indexPath: indexPath!)
         case 5001:
             self.praseRequest(indexPath: indexPath!)
+        case 5002:
+            self.transmitRequest(indexPath: indexPath!)
+        case 5003:
+            commentView = CustomInputView.instance(superView: UIApplication.shared.keyWindow!)!
+            commentView?.delegate = self as CustomInputViewDelegate
+            self.chooseIndexPath = indexPath
+        case 5004:
+            self.collectRequest(indexPath: indexPath!)
         default:
             break
         }
@@ -137,6 +187,21 @@ extension DynamicContentController {
         }
     }
     
+    // 咨询
+    func getInformationData() {
+        self.showBlurHUD()
+        let informationRequest = InformationListRequest()
+        WebAPI.send(informationRequest) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                self.dataArray = (result?.objectModels)!
+                self.tableView.reloadData()
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        }
+    }
+    
     // 好友动态
     func dynamicRequest() {
         self.showBlurHUD()
@@ -174,13 +239,16 @@ extension DynamicContentController {
     // 点赞
     func praseRequest(indexPath: IndexPath) {
         self.showBlurHUD()
-        let model = self.dataArray[indexPath.row]
-        let praiseRequest = PraiseRequest(ID: userID, userLoginId: Int(model.id)!)
+        var model = self.dataArray[indexPath.row]
+        let praiseRequest = PraiseRequest(ID: model.id, userLoginId: userID)
         WebAPI.send(praiseRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
                 self.showBlurHUD(result: .success, title: "点赞成功") { [unowned self] in
-                    self.getData()
+                    model.praselen = "\(Int(model.praselen)! + 1)"
+                    self.dataArray.remove(at: indexPath.row)
+                    self.dataArray.insert(model, at: indexPath.row)
+                    self.tableView.reloadData()
                 }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
@@ -191,13 +259,16 @@ extension DynamicContentController {
     // 转发
     func transmitRequest(indexPath: IndexPath) {
         self.showBlurHUD()
-        let model = self.dataArray[indexPath.row]
-        let transmitRequest = TransmitRequest(ID: userID, loginId: Int(model.id)!)
+        var model = self.dataArray[indexPath.row]
+        let transmitRequest = TransmitRequest(ID: model.id, loginId: userID)
         WebAPI.send(transmitRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
                 self.showBlurHUD(result: .success, title: "转发成功") { [unowned self] in
-                    self.getData()
+                    model.forwardlen = "\(Int(model.forwardlen)! + 1)"
+                    self.dataArray.remove(at: indexPath.row)
+                    self.dataArray.insert(model, at: indexPath.row)
+                    self.tableView.reloadData()
                 }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
@@ -208,13 +279,33 @@ extension DynamicContentController {
     // 收藏
     func collectRequest(indexPath: IndexPath) {
         self.showBlurHUD()
-        let model = self.dataArray[indexPath.row]
-        let collectRequest = CollectRequest(ID: userID, userLoginId: Int(model.id)!)
+        var model = self.dataArray[indexPath.row]
+        let collectRequest = CollectRequest(ID: model.id, userLoginId: userID)
         WebAPI.send(collectRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
                 self.showBlurHUD(result: .success, title: "收藏成功") { [unowned self] in
-                    self.getData()
+                    model.collectionlen = "\(Int(model.collectionlen)! + 1)"
+                    self.dataArray.remove(at: indexPath.row)
+                    self.dataArray.insert(model, at: indexPath.row)
+                    self.tableView.reloadData()
+                }
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        }
+    }
+    
+    // 评论
+    func comentRequest(text: String) {
+        self.showBlurHUD()
+        let model = self.dataArray[(self.chooseIndexPath?.row)!]
+        let collectRequest = CommentRequest(comment: text, loginId: userID, movementId: model.id)
+        WebAPI.send(collectRequest) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                self.showBlurHUD(result: .success, title: "评论成功") { [unowned self] in
+                    self.commentView?.removeFromSuperview()
                 }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
@@ -231,5 +322,11 @@ extension DynamicContentController: DNSPageReloadable {
     
     func contentViewDidEndScroll() {
         print("contentView滑动结束")
+    }
+}
+
+extension DynamicContentController: CustomInputViewDelegate {
+    func send(text: String) {
+        self.comentRequest(text: text)
     }
 }

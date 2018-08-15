@@ -167,6 +167,19 @@ struct ChooseCircleRequest: RequestType {
     }
 }
 
+// 修改用户坐标
+struct LocationRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/app/appUserCoordinate"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String, longitude: Double, latitude: Double) {
+        self.parameters = ["id": ID, "longitude": longitude, "latitude": latitude]
+    }
+}
+
 // MARK: 人脉
 // 根据圈子对人脉进行分类
 struct CircleRequest: RequestType {
@@ -243,7 +256,7 @@ struct PraiseRequest: RequestType {
     
     typealias ResponsType = JSON
     
-    init(ID: String, userLoginId: Int) {
+    init(ID: String, userLoginId: String) {
         self.parameters = ["id": ID, "userLoginId": userLoginId]
     }
 }
@@ -256,7 +269,7 @@ struct TransmitRequest: RequestType {
     
     typealias ResponsType = JSON
     
-    init(ID: String, loginId: Int) {
+    init(ID: String, loginId: String) {
         self.parameters = ["id": ID, "loginId": loginId]
     }
 }
@@ -269,7 +282,7 @@ struct CollectRequest: RequestType {
     
     typealias ResponsType = JSON
     
-    init(ID: String, userLoginId: Int) {
+    init(ID: String, userLoginId: String) {
         self.parameters = ["id": ID, "userLoginId": userLoginId]
     }
 }
@@ -313,6 +326,19 @@ struct ProjectListRequest: RequestType {
     }
 }
 
+// 咨询
+struct InformationListRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/getInformation"
+    var parameters: Parameters
+    
+    typealias ResponsType = ObjectModelArray<DynamicModel>
+    
+    init() {
+        self.parameters = ["id": ""]
+    }
+}
+
 // 添加评论
 struct CommentRequest: RequestType {
     let host: String = ROOT_API_HOST
@@ -321,8 +347,8 @@ struct CommentRequest: RequestType {
     
     typealias ResponsType = JSON
     
-    init(ID: Int, comment: String, loginId: Int, movementId: String) {
-        self.parameters = ["id": ID, "comment": comment, "loginId": loginId, "movementId": movementId]
+    init(comment: String, loginId: String, movementId: String) {
+        self.parameters = ["comment": comment, "loginId": loginId, "movementId": movementId]
     }
 }
 
@@ -348,7 +374,7 @@ struct PublishRequest: RequestType {
     typealias ResponsType = JSON
     
     init(userid: String, type: String, comment: String, file: [Data]) {
-        self.parameters = ["userid": userid, "type": type, "comment": comment, "file": file]
+        self.parameters = ["id": userid, "type": type, "comment": comment, "file": file]
     }
 }
 
@@ -408,7 +434,7 @@ struct MemberRequest: RequestType {
 // 相册上传
 struct UploadPhotoRequest: RequestType {
     let host: String = ROOT_API_HOST
-    var path: String = "/app/albumUploadFileList"
+    var path: String = "/app/albumUploadFile"
     var parameters: Parameters
     let datas: [Data]
     

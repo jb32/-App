@@ -8,6 +8,11 @@
 
 #import "XWPublishController.h"
 
+// 请求成功回调block
+typedef void(^Success)(id responseObject);
+// 请求失败回调block
+typedef void(^Failure)(NSError * error);
+
 //默认最大输入字数为  kMaxTextCount  300
 #define kMaxTextCount 300
 
@@ -81,7 +86,7 @@
     
     _explainLabel = [[UILabel alloc]init];
 //    _explainLabel.text = @"添加图片不超过9张，文字备注不超过300字";
-    _explainLabel.text = [NSString stringWithFormat:@"添加图片不超过9张，文字备注不超过%d字",kMaxTextCount];
+    _explainLabel.text = [NSString stringWithFormat:@"添加图片不超过9张，文字备注不超过%d字", kMaxTextCount];
     //发布按钮颜色
     _explainLabel.textColor = [UIColor colorWithRed:199.0/255.0 green:199.0/255.0 blue:199.0/255.0 alpha:1.0];
     _explainLabel.textAlignment = NSTextAlignmentCenter;
@@ -258,7 +263,7 @@
 
 #warning 在此处上传服务器->>
 #pragma mark - 上传数据到服务器前将图片转data（上传服务器用form表单：未写）
-- (void)submitToServer{
+- (void)submitToServer {
     
     // 可以选择上传大图数据或者小图数据->
     
@@ -270,20 +275,132 @@
     
     //小图二进制数据
     NSMutableArray *smallImageDataArray = [NSMutableArray array];
-    
+
+    NSMutableArray *fileArr = [NSMutableArray array];
     for (UIImage *smallImg in smallImageArray) {
         NSData *smallImgData = UIImagePNGRepresentation(smallImg);
         [smallImageDataArray addObject:smallImgData];
+        [fileArr addObject:@"file"];
     }
     NSLog(@"上传服务器... +++ 文本内容:%@",_noteTextView.text);
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"发布成功!" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *actionCacel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:_noteTextView.text forKey:@"comment"];
+    [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"ID"] forKey:@"id"];
+    [dic setValue:@"1" forKey:@"type"];
+    [self postImagesToServer:@"http://192.168.1.184:8080/shejiaoappserver/addDynamic" dicPostParams:dic imageArray:smallImageArray file:fileArr Success:^(id responseObject) {
+        
+    } andFailure:^(NSError *error) {
+        
     }];
-    [alertController addAction:actionCacel];
-    [self presentViewController:alertController animated:YES completion:nil];
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"发布成功!" preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *actionCacel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    }];
+//    [alertController addAction:actionCacel];
+//    [self presentViewController:alertController animated:YES completion:nil];
 }
 
+-(void)postImagesToServer:(NSString *)strUrl dicPostParams:(NSMutableDictionary *)params imageArray:(NSArray *)imageArray file:(NSArray *)fileArray Success:(Success)success andFailure:(Failure)failure{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSURL *url = [NSURL URLWithString:strUrl];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        //要上传的图片
+        UIImage *image;
+        
+        //将要上传的图片压缩 并赋值与上传的Data数组
+        NSMutableArray *imageDataArray = [NSMutableArray array];
+        for (int i = 0; i<imageArray.count; i++) {
+            //要上传的图片
+            image= imageArray[i];
+            /**************  将图片压缩成我们需要的数据包大小 *******************/
+            NSData * data = UIImageJPEGRepresentation(image, 1.0);
+            CGFloat dataKBytes = data.length/1000.0;
+            CGFloat maxQuality = 0.9f;
+            CGFloat lastData = dataKBytes;
+            while (dataKBytes > 1024 && maxQuality > 0.01f) {
+                //将图片压缩成1M
+                maxQuality = maxQuality - 0.01f;
+                data = UIImageJPEGRepresentation(image, maxQuality);
+                dataKBytes = data.length / 1000.0;
+                if (lastData == dataKBytes) {
+                    break;
+                }else{
+                    lastData = dataKBytes;
+                }
+            }
+            /**************  将图片压缩成我们需要的数据包大小 *******************/
+            [imageDataArray addObject:data];
+        }
+        
+        //http body的字符串
+        NSMutableString *body=[[NSMutableString alloc]init];
+        //参数的集合的所有key的集合
+        NSArray *keys= [params allKeys];
+        
+        //遍历keys
+        for(int i=0;i<[keys count];i++) {
+            //得到当前key
+            NSString *key=[keys objectAtIndex:i];
+            //添加字段名称，换行
+            [body appendFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key];
+            //添加字段的值
+            [body appendFormat:@"%@\r\n",[params objectForKey:key]];
+        }
+        
+        //声明myRequestData，用来放入http body
+        NSMutableData *myRequestData=[NSMutableData data];
+        //将body字符串转化为UTF8格式的二进制
+        [myRequestData appendData:[body dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //循环加入上传图片
+        for(int i = 0; i< [imageDataArray count] ; i++){
+            //要上传的图片
+            //得到图片的data
+            NSData* data =  imageDataArray[i];
+            NSMutableString *imgbody = [[NSMutableString alloc] init];
+            //此处循环添加图片文件
+            //添加图片信息字段
+            [imgbody appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%d.jpg\"\r\n", fileArray[i],i];
+            //声明上传文件的格式
+            [imgbody appendFormat:@"Content-Type: application/octet-stream; charset=utf-8\r\n\r\n"];
+            
+            //将body字符串转化为UTF8格式的二进制
+            [myRequestData appendData:[imgbody dataUsingEncoding:NSUTF8StringEncoding]];
+            //将image的data加入
+            [myRequestData appendData:data];
+            [myRequestData appendData:[ @"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+        
+        //设置HTTPHeader中Content-Type的值
+        NSString *content=[[NSString alloc]initWithFormat:@"multipart/form-data"];
+        //设置HTTPHeader
+        [request setValue:content forHTTPHeaderField:@"Content-Type"];
+        //设置Content-Length
+        [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[myRequestData length]] forHTTPHeaderField:@"Content-Length"];
+        //设置http body
+        [request setHTTPBody:myRequestData];
+        //http method
+        [request setHTTPMethod:@"POST"];
+        
+        // 3.获得会话对象
+        NSURLSession *session = [NSURLSession sharedSession];
+        // 4.根据会话对象，创建一个Task任务
+        NSURLSessionDataTask *sessionDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (error) {
+                    failure(error);
+                }
+                else{
+                    success(data);
+                }
+            });
+            
+        }];
+        //5.最后一步，执行任务，(resume也是继续执行)。
+        [sessionDataTask resume];
+    });
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

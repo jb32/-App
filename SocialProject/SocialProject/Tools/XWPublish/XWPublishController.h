@@ -36,7 +36,4 @@
 //发布按钮
 @property(nonatomic,strong) UIButton *submitBtn;
 
-
-
-
 @end

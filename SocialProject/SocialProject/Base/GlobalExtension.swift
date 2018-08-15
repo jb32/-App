@@ -240,13 +240,13 @@ extension String {
         return dataFormate.string(from: date!)
     }
     
-//    static func getTextHeigh(textStr:String,font:UIFont,width:CGFloat) -> CGFloat {
-//        let normalText:String = textStr
-//        let size = CGSize(width: width, height: CGFloat(MAXFLOAT))
-//        let dic = NSDictionary(object: font, forKey: NSAttributedStringKey.font as NSCopying)
-//        let stringSize = normalText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [String : AnyObject], context:nil).size
-//        return stringSize.height
-//    }
+    static func getTextHeigh(textStr:String,font:UIFont,width:CGFloat) -> CGFloat {
+        let normalText:String = textStr
+        let size = CGSize(width: width, height: CGFloat(MAXFLOAT))
+        let dic = NSDictionary(object: font, forKey: NSAttributedStringKey.font as NSCopying)
+        let stringSize = normalText.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic as? [NSAttributedStringKey : AnyObject], context:nil).size
+        return stringSize.height
+    }
     
     func changeTextColor(textStr:String,rang:NSRange,color:UIColor) -> NSMutableAttributedString {
         let attrStr:NSMutableAttributedString = NSMutableAttributedString(string: textStr)

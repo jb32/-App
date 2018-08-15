@@ -167,11 +167,13 @@ extension MineController: UIImagePickerControllerDelegate, UINavigationControlle
             WebAPI.upload(uploadRequest, progressHandler: { (progress) in
                 
             }, completeHandler: { (isSuccess, urlString, error) in
-                self.showBlurHUD(result: .success, title: "修改成功")
-                picker.dismiss(animated: true, completion: {
-                    self.getUserData()
-                })
-                self.dismiss(animated: true, completion: nil)
+                if isSuccess == true, let urlString = urlString as? String {
+                    self.showBlurHUD(result: .success, title: "修改成功")
+                    picker.dismiss(animated: true, completion: {
+                        self.avatarImg.setWebImage(with: Image_Path+urlString)
+                    })
+                    self.dismiss(animated: true, completion: nil)
+                }
             })
         } else {
             picker.dismiss(animated: true, completion: nil)
