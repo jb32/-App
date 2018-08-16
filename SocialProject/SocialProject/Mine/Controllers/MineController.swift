@@ -9,8 +9,11 @@
 import UIKit
 import AVFoundation
 import AssetsLibrary
+import DNSPageView
 
-class MineController: UITableViewController {
+class MineController: UIViewController {
+    
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var avatarImg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     var userModel: UserModel?
@@ -18,6 +21,11 @@ class MineController: UITableViewController {
     // 相机，相册
     var cameraPicker: UIImagePickerController!
     var photoPicker: UIImagePickerController!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.getUserData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +35,34 @@ class MineController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        bgView.backgroundColor = UIColor.themOneColor
         
-        self.getUserData()
+        let titles: [String] = ["我的", "简介", "相册", "动态"]
+        var childViewControllers: [UIViewController] = []
+        let myVC = UIStoryboard(name: .mine).initialize(class: MyController.self)
+        myVC.pushAction = { [unowned self] vc in
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        childViewControllers.append(myVC)
+        let describtionVC = UIStoryboard(name: .mine).initialize(class: DescribtionController.self)
+        childViewControllers.append(describtionVC)
+        let albumVC = UIStoryboard(name: .mine).initialize(class: AlbumController.self)
+        albumVC.presentAction = { [unowned self] vc in
+            self.present(vc, animated: true, completion: nil)
+        }
+        childViewControllers.append(albumVC)
+        let dynamicVC = UIStoryboard(name: .mine).initialize(class: MyDynamicController.self)
+        childViewControllers.append(dynamicVC)
+        
+        // 创建DNSPageStyle，设置样式
+        let style = DNSPageStyle()
+        style.titleSelectedColor = .yellow
+        style.titleColor = .white
+        style.titleViewBackgroundColor = .themOneColor
+        
+        // 创建对应的DNSPageView，并设置它的frame
+        let pageView = DNSPageView(frame: CGRect(x: 0, y: 110, width: DEVICE_WIDTH, height: DEVICE_HEIGHT - 44 - 100), style: style, titles: titles, childViewControllers: childViewControllers)
+        self.view.addSubview(pageView)
         
         self.avatarImg.isUserInteractionEnabled = true
         avatarImg.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(changeAvartar)))
@@ -69,50 +103,6 @@ class MineController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func btnsAction(_ sender: UIButton) {
-        switch sender.tag {
-        case 520:
-            // 简介
-            let describtionVC = UIStoryboard(name: .mine).initialize(class: DescribtionController.self)
-            self.navigationController?.pushViewController(describtionVC, animated: true)
-        case 521:
-            // 相册
-            let albumVC = UIStoryboard(name: .mine).initialize(class: AlbumController.self)
-            self.navigationController?.pushViewController(albumVC, animated: true)
-        case 522:
-            // 动态
-            let dynamicVC = UIStoryboard(name: .dynamic).initialize(class: DynamicContentController.self)
-            self.navigationController?.pushViewController(dynamicVC, animated: true)
-        default:
-            // 扫一扫
-            let qrcodeVC = SWQRCodeViewController()
-            self.navigationController?.pushViewController(qrcodeVC, animated: true)
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        switch indexPath.row {
-        case 1:
-            let walletVC = UIStoryboard(name: .mine).initialize(class: WalletController.self)
-            self.navigationController?.pushViewController(walletVC, animated: true)
-        case 2:
-            let pushVC = UIStoryboard(name: .mine).initialize(class: DirectPushController.self)
-            self.navigationController?.pushViewController(pushVC, animated: true)
-        case 3:
-            let collectionVC = UIStoryboard(name: .mine).initialize(class: CollectionController.self)
-            self.navigationController?.pushViewController(collectionVC, animated: true)
-        case 4:
-            let personalVC = UIStoryboard(name: .user).initialize(class: PersonalInfoController.self)
-            self.navigationController?.pushViewController(personalVC, animated: true)
-        case 5:
-            let memberVC = UIStoryboard(name: .mine).initialize(class: MemberController.self)
-            self.navigationController?.pushViewController(memberVC, animated: true)
-        default:
-            break
-        }
     }
 
 }

@@ -457,6 +457,19 @@ struct UploadPhotoRequest: RequestType {
     }
 }
 
+// 我的动态
+struct MyDynamicRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/myDynamics/app/myDynamics"
+    var parameters: Parameters
+    
+    typealias ResponsType = ObjectModelArray<DynamicModel>
+    
+    init(ID: String) {
+        self.parameters = ["id": ID]
+    }
+}
+
 // 删除相册
 struct DeletePhotoRequest: RequestType {
     let host: String = ROOT_API_HOST
@@ -469,6 +482,20 @@ struct DeletePhotoRequest: RequestType {
         self.parameters = ["id": ID, "imgStr": imgUrl]
     }
 }
+
+// 我收藏的动态
+struct CollectionListRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/myDynamics/app/myCollectionDynamics"
+    var parameters: Parameters
+    
+    typealias ResponsType = ObjectModelArray<DynamicModel>
+    
+    init(ID: String) {
+        self.parameters = ["id": ID]
+    }
+}
+
 /// 好友等关系列表
 struct ContactRequest: RequestType {
     

@@ -19,6 +19,7 @@ class AlbumController: ZYYBaseViewController {
     
     var imgs: [String] = []
     var dataArray: [Data] = []
+    var presentAction:(_ vc: UIViewController) -> Void = {_ in }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,10 +33,10 @@ class AlbumController: ZYYBaseViewController {
         let width = (DEVICE_WIDTH - 45) / 3
         layout.itemSize = CGSize(width: width, height: width)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        self.setRightItem(img: UIImage(named: "add")!)
     }
     
-    @objc override func rightAction() {
+    
+    @IBAction func uploadImageAction(_ sender: UIButton) {
         imagePicker = YLImagePickerController.init(maxImagesCount: 9)
         // 导出图片
         imagePicker?.didFinishPickingPhotosHandle = {(photos: [YLPhotoModel]) in
@@ -44,9 +45,9 @@ class AlbumController: ZYYBaseViewController {
                     print((UIImagePNGRepresentation(photo.image!)?.count)! / 1024)
                     self.dataArray.append(UIImageJPEGRepresentation(photo.image!, 0.2)!)
                     
-                }else if photo.type == YLAssetType.gif {
+                } else if photo.type == YLAssetType.gif {
                     print((photo.data?.count)! / 1024)
-                }else if photo.type == YLAssetType.video {
+                } else if photo.type == YLAssetType.video {
                     print("视频")
                 }
             }
@@ -66,7 +67,7 @@ class AlbumController: ZYYBaseViewController {
             })
         }
         
-        present(imagePicker!, animated: true, completion: nil)
+        self.presentAction(imagePicker!)
     }
 
     override func didReceiveMemoryWarning() {
