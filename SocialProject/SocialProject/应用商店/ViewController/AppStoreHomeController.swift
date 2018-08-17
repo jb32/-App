@@ -66,7 +66,10 @@ extension AppStoreHomeController: UICollectionViewDelegateFlowLayout, UICollecti
         switch indexPath.section {
         case 1:
             let cell = collectionView.dequeueReusableCell(type: HorizontalCollectionCell.self, for: indexPath)
-            
+            cell.toSelect = { i in
+                let safari = SFSafariViewController(url: URL(string: "https://www.baidu.com")!)
+                self.present(safari, animated: true, completion: nil)
+            }
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(type: AppCollectionCell.self, for: indexPath)

@@ -15,6 +15,9 @@ class CycleCollectionheader: UICollectionReusableView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    func asycDelegate() -> Void {
         cycleView.delegate = self
     }
 }

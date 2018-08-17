@@ -675,7 +675,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2EW-If-gej">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" id="sLR-ae-afP">
+                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="请输入电话号码" id="sLR-ae-afP">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -757,6 +757,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l5F-rL-Gix"/>
                     </view>
+                    <navigationItem key="navigationItem" title="添加关注" id="OV5-5H-guI">
+                        <barButtonItem key="rightBarButtonItem" title="确认" id="0MW-nP-YC1">
+                            <connections>
+                                <action selector="doSearch:" destination="9UN-3o-L8Z" id="6eW-E9-Rem"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="sLR-ae-afP" id="MnL-Fa-EDK"/>
                         <outlet property="tableView" destination="2EW-If-gej" id="K5l-sQ-Zk1"/>
@@ -778,7 +785,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qls-ib-AaL">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" id="LpN-A1-DEg">
+                                <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="请输入" id="LpN-A1-DEg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -878,6 +885,6 @@
         <image name="mine_avatar" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bVK-wS-BM9"/>
+        <segue reference="bKU-2Z-hKT"/>
     </inferredMetricsTieBreakers>
 </document>

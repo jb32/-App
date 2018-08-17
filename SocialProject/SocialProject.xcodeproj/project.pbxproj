@@ -193,6 +193,13 @@
 		F016CCD721213208003BFBD7 /* BorderButtion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCD621213208003BFBD7 /* BorderButtion.swift */; };
 		F016CCD921213422003BFBD7 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCD821213422003BFBD7 /* UserInfoViewController.swift */; };
 		F016CCDB21213974003BFBD7 /* ContactUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCDA21213974003BFBD7 /* ContactUserCell.swift */; };
+		F088A70621267B9500D42504 /* MyDynamicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70421267B9400D42504 /* MyDynamicController.swift */; };
+		F088A70721267B9500D42504 /* MyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70521267B9500D42504 /* MyController.swift */; };
+		F088A70921267BB800D42504 /* CommentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70821267BB800D42504 /* CommentListController.swift */; };
+		F088A70D21267BE200D42504 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70A21267BE000D42504 /* CommentCell.swift */; };
+		F088A70E21267BE200D42504 /* CustomInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088A70B21267BE100D42504 /* CustomInputView.xib */; };
+		F088A70F21267BE200D42504 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70C21267BE200D42504 /* CustomInputView.swift */; };
+		F088A71121267BEB00D42504 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A71021267BEA00D42504 /* CommentModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -449,6 +456,13 @@
 		F016CCD621213208003BFBD7 /* BorderButtion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButtion.swift; sourceTree = "<group>"; };
 		F016CCD821213422003BFBD7 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		F016CCDA21213974003BFBD7 /* ContactUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUserCell.swift; sourceTree = "<group>"; };
+		F088A70421267B9400D42504 /* MyDynamicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDynamicController.swift; sourceTree = "<group>"; };
+		F088A70521267B9500D42504 /* MyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyController.swift; sourceTree = "<group>"; };
+		F088A70821267BB800D42504 /* CommentListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListController.swift; sourceTree = "<group>"; };
+		F088A70A21267BE000D42504 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		F088A70B21267BE100D42504 /* CustomInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInputView.xib; sourceTree = "<group>"; };
+		F088A70C21267BE200D42504 /* CustomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		F088A71021267BEA00D42504 /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1021,6 +1035,7 @@
 		14B7AC9220FA42C400BBBF28 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F088A70821267BB800D42504 /* CommentListController.swift */,
 				14B7AD5F20FBBB7000BBBF28 /* DynamicController.swift */,
 				14B7AD6120FBBB8500BBBF28 /* DynamicContentController.swift */,
 			);
@@ -1030,6 +1045,7 @@
 		14B7AC9320FA42C400BBBF28 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F088A71021267BEA00D42504 /* CommentModel.swift */,
 				143321872106D09F00868F20 /* DynamicModel.swift */,
 			);
 			path = Models;
@@ -1038,6 +1054,9 @@
 		14B7AC9420FA42C400BBBF28 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F088A70A21267BE000D42504 /* CommentCell.swift */,
+				F088A70C21267BE200D42504 /* CustomInputView.swift */,
+				F088A70B21267BE100D42504 /* CustomInputView.xib */,
 				14B7AD6320FBBC0C00BBBF28 /* DynamicStoryboard.storyboard */,
 				14B7AD6520FBBEB600BBBF28 /* DynamicCell.swift */,
 			);
@@ -1102,6 +1121,8 @@
 		14B7AC9A20FA42DB00BBBF28 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F088A70521267B9500D42504 /* MyController.swift */,
+				F088A70421267B9400D42504 /* MyDynamicController.swift */,
 				14B7AD6720FBC3EB00BBBF28 /* MineController.swift */,
 				1454B39220FF1F6B006C4269 /* DescribtionController.swift */,
 				1454B39420FF26D8006C4269 /* AlbumController.swift */,
@@ -1335,6 +1356,7 @@
 				1454B39120FF1791006C4269 /* MineStoryboard.storyboard in Resources */,
 				143FE9B1210AFB2A002BC1A0 /* XWPublishController.xib in Resources */,
 				143FE995210AFB2A002BC1A0 /* ico_check_select@2x.png in Resources */,
+				F088A70E21267BE200D42504 /* CustomInputView.xib in Resources */,
 				143FE9AE210AFB2A002BC1A0 /* XWPhotoCell.xib in Resources */,
 				143FE9A3210AFB2A002BC1A0 /* MGroupCell.xib in Resources */,
 				149C658320F6F7CD00559E5F /* Assets.xcassets in Resources */,
@@ -1516,6 +1538,7 @@
 				143FE9E0210AFC92002BC1A0 /* UIImage+WebP.m in Sources */,
 				143950B120F8496D007853A8 /* LYAlertView.swift in Sources */,
 				143FE99E210AFB2A002BC1A0 /* JJOneScrollView.m in Sources */,
+				F088A70F21267BE200D42504 /* CustomInputView.swift in Sources */,
 				143FE9A9210AFB2A002BC1A0 /* SDBaseProgressView.m in Sources */,
 				140FC29F210866BA00F69F52 /* DirectPushModel.swift in Sources */,
 				F012424B2124075500A0F37C /* UIButtton+Utils.swift in Sources */,
@@ -1532,11 +1555,14 @@
 				143FE9AA210AFB2A002BC1A0 /* SDLoopProgressView.m in Sources */,
 				143FE99A210AFB2A002BC1A0 /* MFlowLayOut.m in Sources */,
 				143FE94A210AF617002BC1A0 /* SWScannerView.swift in Sources */,
+				F088A70D21267BE200D42504 /* CommentCell.swift in Sources */,
 				14EB3A852101815E008D1223 /* BrandModel.swift in Sources */,
 				14B742292119908A0072FF14 /* ProjectDetaiController.swift in Sources */,
+				F088A70621267B9500D42504 /* MyDynamicController.swift in Sources */,
 				1439509D20F840B1007853A8 /* Configure.swift in Sources */,
 				143950B220F8496D007853A8 /* LYPieProgressView.swift in Sources */,
 				F0011CF4211D24DD0069111E /* JBPageController.swift in Sources */,
+				F088A71121267BEB00D42504 /* CommentModel.swift in Sources */,
 				143FE9D7210AFC92002BC1A0 /* SDWebImageCompat.m in Sources */,
 				143FE9E1210AFC92002BC1A0 /* UIImageView+HighlightedWebCache.m in Sources */,
 				143FE9E3210AFC92002BC1A0 /* UIView+WebCacheOperation.m in Sources */,
@@ -1545,6 +1571,7 @@
 				143FE99B210AFB2A002BC1A0 /* MHeaderImaCell.m in Sources */,
 				F0124255212431FF00A0F37C /* AppStoreClassCell.swift in Sources */,
 				143FE9DF210AFC92002BC1A0 /* UIImage+MultiFormat.m in Sources */,
+				F088A70921267BB800D42504 /* CommentListController.swift in Sources */,
 				143FE9DD210AFC92002BC1A0 /* UIButton+WebCache.m in Sources */,
 				1454B39320FF1F6B006C4269 /* DescribtionController.swift in Sources */,
 				143FE93D210AC5FC002BC1A0 /* PersonalInfoCell.swift in Sources */,
@@ -1553,6 +1580,7 @@
 				143FE99C210AFB2A002BC1A0 /* MHeadImaView.m in Sources */,
 				1454B39920FF3B6B006C4269 /* WalletController.swift in Sources */,
 				14B7AD6820FBC3EB00BBBF28 /* MineController.swift in Sources */,
+				F088A70721267B9500D42504 /* MyController.swift in Sources */,
 				143F84F720FC76A8000E5A0D /* RankCell.swift in Sources */,
 				143FE99F210AFB2A002BC1A0 /* JJPhoto.m in Sources */,
 				14B7AD6620FBBEB600BBBF28 /* DynamicCell.swift in Sources */,

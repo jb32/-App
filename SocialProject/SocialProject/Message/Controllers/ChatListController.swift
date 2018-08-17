@@ -86,24 +86,24 @@ extension ChatListController: RCIMUserInfoDataSource {
         if let info = info {
             completion?(info)
         } else {
-            let req = SearchUserInfoReq(id: Int(userId) ?? 0)
             
-            WebAPI.send(req) { (isSuccess, result, error) in
+            DispatchQueue.main.async {
+                let req = SearchUserInfoReq(id: Int(userId) ?? 0)
                 
-                if isSuccess, let result = result?.array?.first {
-                    let info = RCUserInfo(userId: result[ContactModel.id].string, name: result[ContactModel.name].string, portrait: Image_Path + (result[ContactModel.headImg].string ?? ""))
-                    DispatchQueue.main.async {
+                WebAPI.send(req) { (isSuccess, result, error) in
+                    
+                    if isSuccess, let result = result?.array?.first {
+                        let info = RCUserInfo(userId: result[ContactModel.id].string, name: result[ContactModel.name].string, portrait: Image_Path + (result[ContactModel.headImg].string ?? ""))
                         completion?(info)
                         self.conversationListTableView.reloadData()
-                    }
-                } else {
-                    DispatchQueue.main.async {
+                    } else {
                         completion?(nil)
                         self.conversationListTableView.reloadData()
                     }
+                    
                 }
-                
             }
+            
         }
     }
 }
