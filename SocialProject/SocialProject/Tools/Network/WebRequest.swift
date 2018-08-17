@@ -277,13 +277,13 @@ struct TransmitRequest: RequestType {
 // 收藏
 struct CollectRequest: RequestType {
     let host: String = ROOT_API_HOST
-    let path: String = "/updateCollectionNumber"
+    let path: String = "/myDynamics/app/addCollectionDynamics"
     var parameters: Parameters
     
     typealias ResponsType = JSON
     
-    init(ID: String, userLoginId: String) {
-        self.parameters = ["id": ID, "userLoginId": userLoginId]
+    init(ID: String, dynamicsId: String) {
+        self.parameters = ["id": ID, "dynamicsId": dynamicsId]
     }
 }
 
