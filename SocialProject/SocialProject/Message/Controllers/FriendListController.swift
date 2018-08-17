@@ -56,6 +56,13 @@ class FriendListController: ZYYBaseViewController {
             vc.id = id
         }
     }
+    
+    @IBAction func doSearch(_ sender: UIBarButtonItem) {
+        if let txt = searchBar.text {
+            netSearch(phone: txt)
+        }
+    }
+    
 }
 
 extension FriendListController: UITableViewDataSource, UITableViewDelegate {

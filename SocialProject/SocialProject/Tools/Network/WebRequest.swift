@@ -602,6 +602,59 @@ struct RelationReq: RequestType {
     }
 }
 
+struct AppClassReq: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/applicationStore/app/selectType"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init() {
+        parameters = [:]
+    }
+}
+
+struct AppAdReq: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/applicationStore/app/selectAdvertisement"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init() {
+        parameters = [:]
+    }
+}
+
+struct AppListReq: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/applicationStore/app/searchApplicationStore"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(classId: String?, search: String?) {
+        if let search = search {
+            parameters = ["search": search]
+        }
+        
+        if let classId = classId {
+            parameters = ["classId": classId]
+        }
+        parameters = [:]
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

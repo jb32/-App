@@ -24,6 +24,7 @@ extension UIStoryboard {
         case message = "Im"
         case discovery = "DiscoveryStoryboard"
         case mine = "MineStoryboard"
+        case appStore = "AppStore"
     }
     
     convenience init(name: StoryboardName) {

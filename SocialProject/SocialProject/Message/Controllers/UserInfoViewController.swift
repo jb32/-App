@@ -137,7 +137,8 @@ extension UserInfoViewController {
             self.hideBlurHUD()
             
             if isSuccess {
-                
+                let name = NSNotification.Name("\(FriendListController.self)")
+                NotificationCenter.default.post(name: name, object: nil)
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
@@ -151,7 +152,8 @@ extension UserInfoViewController {
             self.hideBlurHUD()
             
             if isSuccess {
-                
+                let name = NSNotification.Name("\(FriendListController.self)")
+                NotificationCenter.default.post(name: name, object: nil)
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }

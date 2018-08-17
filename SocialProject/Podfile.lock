@@ -4,10 +4,14 @@ PODS:
     - Alamofire (~> 4.5)
   - DNSPageView (1.0.1)
   - IQKeyboardManagerSwift (6.1.1)
+  - Kingfisher (4.8.1)
+  - LLCycleScrollView (1.4.9):
+    - Kingfisher
   - MJRefresh (3.1.15.3)
   - RongCloudIM/IMKit (2.9.3):
     - RongCloudIM/IMLib
   - RongCloudIM/IMLib (2.9.3)
+  - SnapKit (4.0.0)
   - SwiftyJSON (4.1.0)
   - TOCropViewController (2.1.0)
   - YLImagePickerController (0.0.9):
@@ -18,9 +22,11 @@ DEPENDENCIES:
   - AlamofireImage
   - DNSPageView
   - IQKeyboardManagerSwift
+  - LLCycleScrollView
   - MJRefresh
   - RongCloudIM/IMKit
   - RongCloudIM/IMLib
+  - SnapKit
   - SwiftyJSON
   - YLImagePickerController
 
@@ -30,8 +36,11 @@ SPEC REPOS:
     - AlamofireImage
     - DNSPageView
     - IQKeyboardManagerSwift
+    - Kingfisher
+    - LLCycleScrollView
     - MJRefresh
     - RongCloudIM
+    - SnapKit
     - SwiftyJSON
     - TOCropViewController
     - YLImagePickerController
@@ -41,12 +50,15 @@ SPEC CHECKSUMS:
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
   DNSPageView: 93b0f9c9ab0e2f8c1d9aa5b0d44740bd2d775d78
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
+  Kingfisher: 868c1149679a7ab6869be118faa9b5aed154aaf0
+  LLCycleScrollView: fe4438b01970d0f07f514070e9abad5c3fed2aa6
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   RongCloudIM: 3990730b9f65da3fd32c71be699c1a29c219c6b5
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   TOCropViewController: f88194a084f6afe1fd6f21a3f0edda7dd097e38b
   YLImagePickerController: 54a669c5ce7b5928ecf6321b706c4cec46294d67
 
-PODFILE CHECKSUM: 6e7d48f1568b47b2376d10c0267aa8d761c0fc88
+PODFILE CHECKSUM: 2359d569495bb01a95690adc60571bfc160c29c9
 
 COCOAPODS: 1.5.3

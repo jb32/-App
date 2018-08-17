@@ -184,9 +184,29 @@
 		F0011D04211D7A090069111E /* UITableView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0011D03211D7A090069111E /* UITableView+Util.swift */; };
 		F0011D06211D8B120069111E /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0011D05211D8B120069111E /* ContactCell.swift */; };
 		F0011D09211D908E0069111E /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0011D08211D908E0069111E /* UIImage+Utils.swift */; };
+		F012423F2123BFBB00A0F37C /* CycleCollectionheader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F012423E2123BFBB00A0F37C /* CycleCollectionheader.swift */; };
+		F01242412123C7B900A0F37C /* HorizontalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01242402123C7B900A0F37C /* HorizontalCollectionCell.swift */; };
+		F01242432123CCFA00A0F37C /* UICollectionView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01242422123CCFA00A0F37C /* UICollectionView+Utils.swift */; };
+		F01242452123D0DC00A0F37C /* AppCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01242442123D0DC00A0F37C /* AppCollectionCell.swift */; };
+		F012424B2124075500A0F37C /* UIButtton+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F012424A2124075500A0F37C /* UIButtton+Utils.swift */; };
+		F012424D2124154A00A0F37C /* AppStoreOtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F012424C2124154A00A0F37C /* AppStoreOtherController.swift */; };
+		F012424F2124181000A0F37C /* AppStoreNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F012424E2124181000A0F37C /* AppStoreNavController.swift */; };
+		F01242512124184900A0F37C /* AppStorePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01242502124184900A0F37C /* AppStorePageController.swift */; };
+		F0124253212428AC00A0F37C /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0124252212428AC00A0F37C /* AppStore.swift */; };
+		F0124255212431FF00A0F37C /* AppStoreClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0124254212431FF00A0F37C /* AppStoreClassCell.swift */; };
+		F013AB5A212510C900974597 /* AppMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013AB59212510C900974597 /* AppMenuView.swift */; };
+		F015EE142122D48800E3787B /* AppStoreHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015EE132122D48800E3787B /* AppStoreHomeController.swift */; };
+		F015EE162122D75900E3787B /* AppStore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F015EE152122D75900E3787B /* AppStore.storyboard */; };
 		F016CCD721213208003BFBD7 /* BorderButtion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCD621213208003BFBD7 /* BorderButtion.swift */; };
 		F016CCD921213422003BFBD7 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCD821213422003BFBD7 /* UserInfoViewController.swift */; };
 		F016CCDB21213974003BFBD7 /* ContactUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCDA21213974003BFBD7 /* ContactUserCell.swift */; };
+		F088A70621267B9500D42504 /* MyDynamicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70421267B9400D42504 /* MyDynamicController.swift */; };
+		F088A70721267B9500D42504 /* MyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70521267B9500D42504 /* MyController.swift */; };
+		F088A70921267BB800D42504 /* CommentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70821267BB800D42504 /* CommentListController.swift */; };
+		F088A70D21267BE200D42504 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70A21267BE000D42504 /* CommentCell.swift */; };
+		F088A70E21267BE200D42504 /* CustomInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088A70B21267BE100D42504 /* CustomInputView.xib */; };
+		F088A70F21267BE200D42504 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70C21267BE200D42504 /* CustomInputView.swift */; };
+		F088A71121267BEB00D42504 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A71021267BEA00D42504 /* CommentModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -434,9 +454,29 @@
 		F0011D03211D7A090069111E /* UITableView+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Util.swift"; sourceTree = "<group>"; };
 		F0011D05211D8B120069111E /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		F0011D08211D908E0069111E /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
+		F012423E2123BFBB00A0F37C /* CycleCollectionheader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleCollectionheader.swift; sourceTree = "<group>"; };
+		F01242402123C7B900A0F37C /* HorizontalCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionCell.swift; sourceTree = "<group>"; };
+		F01242422123CCFA00A0F37C /* UICollectionView+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Utils.swift"; sourceTree = "<group>"; };
+		F01242442123D0DC00A0F37C /* AppCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCollectionCell.swift; sourceTree = "<group>"; };
+		F012424A2124075500A0F37C /* UIButtton+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButtton+Utils.swift"; sourceTree = "<group>"; };
+		F012424C2124154A00A0F37C /* AppStoreOtherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreOtherController.swift; sourceTree = "<group>"; };
+		F012424E2124181000A0F37C /* AppStoreNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreNavController.swift; sourceTree = "<group>"; };
+		F01242502124184900A0F37C /* AppStorePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorePageController.swift; sourceTree = "<group>"; };
+		F0124252212428AC00A0F37C /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		F0124254212431FF00A0F37C /* AppStoreClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreClassCell.swift; sourceTree = "<group>"; };
+		F013AB59212510C900974597 /* AppMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuView.swift; sourceTree = "<group>"; };
+		F015EE132122D48800E3787B /* AppStoreHomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreHomeController.swift; sourceTree = "<group>"; };
+		F015EE152122D75900E3787B /* AppStore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppStore.storyboard; sourceTree = "<group>"; };
 		F016CCD621213208003BFBD7 /* BorderButtion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButtion.swift; sourceTree = "<group>"; };
 		F016CCD821213422003BFBD7 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		F016CCDA21213974003BFBD7 /* ContactUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUserCell.swift; sourceTree = "<group>"; };
+		F088A70421267B9400D42504 /* MyDynamicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDynamicController.swift; sourceTree = "<group>"; };
+		F088A70521267B9500D42504 /* MyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyController.swift; sourceTree = "<group>"; };
+		F088A70821267BB800D42504 /* CommentListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListController.swift; sourceTree = "<group>"; };
+		F088A70A21267BE000D42504 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		F088A70B21267BE100D42504 /* CustomInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInputView.xib; sourceTree = "<group>"; };
+		F088A70C21267BE200D42504 /* CustomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		F088A71021267BEA00D42504 /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -790,6 +830,7 @@
 		149C657A20F6F7CB00559E5F /* SocialProject */ = {
 			isa = PBXGroup;
 			children = (
+				F015EE0F2122D2EB00E3787B /* 应用商店 */,
 				14B7AC8820FA423D00BBBF28 /* LoginAndRegister */,
 				143950A420F8454C007853A8 /* Tools */,
 				149C65B020F74AC000559E5F /* Base */,
@@ -1018,7 +1059,7 @@
 		14B7AC9320FA42C400BBBF28 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				141AB6C82126AAC500A29CBD /* CommentModel.swift */,
+				F088A71021267BEA00D42504 /* CommentModel.swift */,
 				143321872106D09F00868F20 /* DynamicModel.swift */,
 			);
 			path = Models;
@@ -1027,9 +1068,9 @@
 		14B7AC9420FA42C400BBBF28 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				141AB6CB2126AAD100A29CBD /* CommentCell.swift */,
-				141AB6CC2126AAD100A29CBD /* CustomInputView.swift */,
-				141AB6CA2126AAD100A29CBD /* CustomInputView.xib */,
+				F088A70A21267BE000D42504 /* CommentCell.swift */,
+				F088A70C21267BE200D42504 /* CustomInputView.swift */,
+				F088A70B21267BE100D42504 /* CustomInputView.xib */,
 				14B7AD6320FBBC0C00BBBF28 /* DynamicStoryboard.storyboard */,
 				14B7AD6520FBBEB600BBBF28 /* DynamicCell.swift */,
 			);
@@ -1094,8 +1135,8 @@
 		14B7AC9A20FA42DB00BBBF28 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				141AB6D12126AAE200A29CBD /* MyController.swift */,
-				141AB6D02126AAE200A29CBD /* MyDynamicController.swift */,
+				F088A70521267B9500D42504 /* MyController.swift */,
+				F088A70421267B9400D42504 /* MyDynamicController.swift */,
 				14B7AD6720FBC3EB00BBBF28 /* MineController.swift */,
 				1454B39220FF1F6B006C4269 /* DescribtionController.swift */,
 				1454B39420FF26D8006C4269 /* AlbumController.swift */,
@@ -1153,6 +1194,7 @@
 		F0011D02211D79FD0069111E /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
+				F01242422123CCFA00A0F37C /* UICollectionView+Utils.swift */,
 				F0011D03211D7A090069111E /* UITableView+Util.swift */,
 			);
 			path = Refresh;
@@ -1163,8 +1205,51 @@
 			children = (
 				F0011D08211D908E0069111E /* UIImage+Utils.swift */,
 				F016CCD621213208003BFBD7 /* BorderButtion.swift */,
+				F012424A2124075500A0F37C /* UIButtton+Utils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		F015EE0F2122D2EB00E3787B /* 应用商店 */ = {
+			isa = PBXGroup;
+			children = (
+				F015EE122122D32000E3787B /* View */,
+				F015EE112122D31A00E3787B /* Model */,
+				F015EE102122D30E00E3787B /* ViewController */,
+			);
+			path = "应用商店";
+			sourceTree = "<group>";
+		};
+		F015EE102122D30E00E3787B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F012424E2124181000A0F37C /* AppStoreNavController.swift */,
+				F01242502124184900A0F37C /* AppStorePageController.swift */,
+				F015EE132122D48800E3787B /* AppStoreHomeController.swift */,
+				F012424C2124154A00A0F37C /* AppStoreOtherController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F015EE112122D31A00E3787B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F0124252212428AC00A0F37C /* AppStore.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F015EE122122D32000E3787B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F015EE152122D75900E3787B /* AppStore.storyboard */,
+				F012423E2123BFBB00A0F37C /* CycleCollectionheader.swift */,
+				F01242402123C7B900A0F37C /* HorizontalCollectionCell.swift */,
+				F01242442123D0DC00A0F37C /* AppCollectionCell.swift */,
+				F0124254212431FF00A0F37C /* AppStoreClassCell.swift */,
+				F013AB59212510C900974597 /* AppMenuView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1178,8 +1263,8 @@
 				149C657420F6F7CB00559E5F /* Sources */,
 				149C657520F6F7CB00559E5F /* Frameworks */,
 				149C657620F6F7CB00559E5F /* Resources */,
-				0541B5F8584B43863C0F9DF3 /* [CP] Embed Pods Frameworks */,
-				A01079068A0608C1015609A8 /* [CP] Copy Pods Resources */,
+				0B2A0D5A88828FA10678DE96 /* [CP] Embed Pods Frameworks */,
+				05D60DFA5920F6FF7A26D2E2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1286,6 +1371,7 @@
 				1454B39120FF1791006C4269 /* MineStoryboard.storyboard in Resources */,
 				143FE9B1210AFB2A002BC1A0 /* XWPublishController.xib in Resources */,
 				143FE995210AFB2A002BC1A0 /* ico_check_select@2x.png in Resources */,
+				F088A70E21267BE200D42504 /* CustomInputView.xib in Resources */,
 				143FE9AE210AFB2A002BC1A0 /* XWPhotoCell.xib in Resources */,
 				143FE9A3210AFB2A002BC1A0 /* MGroupCell.xib in Resources */,
 				149C658320F6F7CD00559E5F /* Assets.xcassets in Resources */,
@@ -1296,6 +1382,7 @@
 				143FE992210AFB2A002BC1A0 /* ico_check_nomal@2x.png in Resources */,
 				143FE999210AFB2A002BC1A0 /* plus@3x.png in Resources */,
 				143F84FD20FC7AC3000E5A0D /* DiscoveryStoryboard.storyboard in Resources */,
+				F015EE162122D75900E3787B /* AppStore.storyboard in Resources */,
 				143FE997210AFB2A002BC1A0 /* plus.png in Resources */,
 				143FE98E210AFB2A002BC1A0 /* close.png in Resources */,
 				143FE993210AFB2A002BC1A0 /* ico_check_nomal@3x.png in Resources */,
@@ -1326,57 +1413,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0541B5F8584B43863C0F9DF3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SocialProject/Pods-SocialProject-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/DNSPageView/DNSPageView.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/TOCropViewController/TOCropViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/YLImagePickerController/YLImagePickerController.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DNSPageView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOCropViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YLImagePickerController.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SocialProject/Pods-SocialProject-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3F476FF6A1C2B79D68CFCAB7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SocialProject-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A01079068A0608C1015609A8 /* [CP] Copy Pods Resources */ = {
+		05D60DFA5920F6FF7A26D2E2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1404,6 +1441,62 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SocialProject/Pods-SocialProject-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		0B2A0D5A88828FA10678DE96 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SocialProject/Pods-SocialProject-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/DNSPageView/DNSPageView.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/LLCycleScrollView/LLCycleScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TOCropViewController/TOCropViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/YLImagePickerController/YLImagePickerController.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DNSPageView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LLCycleScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOCropViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YLImagePickerController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SocialProject/Pods-SocialProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F476FF6A1C2B79D68CFCAB7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SocialProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1419,6 +1512,7 @@
 				141AB6C92126AAC500A29CBD /* CommentModel.swift in Sources */,
 				143FE9E2210AFC92002BC1A0 /* UIImageView+WebCache.m in Sources */,
 				14B7AD5A20FBAE9B00BBBF28 /* ConnectionContentController.swift in Sources */,
+				F01242452123D0DC00A0F37C /* AppCollectionCell.swift in Sources */,
 				14B7AD6020FBBB7000BBBF28 /* DynamicController.swift in Sources */,
 				140FC2A321086DBA00F69F52 /* ReferralsCell.swift in Sources */,
 				143950A120F840C0007853A8 /* BaseViewController.swift in Sources */,
@@ -1429,11 +1523,14 @@
 				1454B39720FF2ABB006C4269 /* AlbumCell.swift in Sources */,
 				140FC29B2108544E00F69F52 /* MemberCell.swift in Sources */,
 				143FE9A0210AFB2A002BC1A0 /* JJPhotoManeger.m in Sources */,
+				F012424D2124154A00A0F37C /* AppStoreOtherController.swift in Sources */,
 				143950A320F840C0007853A8 /* BaseNavigationController.swift in Sources */,
 				145892402114533900F870F2 /* ChatListController.swift in Sources */,
 				143FE9DA210AFC92002BC1A0 /* SDWebImageDownloaderOperation.m in Sources */,
+				F015EE142122D48800E3787B /* AppStoreHomeController.swift in Sources */,
 				143FE946210AF617002BC1A0 /* SWQRCodeConfig.swift in Sources */,
 				141F150920FC33D3002C014A /* CommonTF.swift in Sources */,
+				F013AB5A212510C900974597 /* AppMenuView.swift in Sources */,
 				143FE9DC210AFC92002BC1A0 /* SDWebImagePrefetcher.m in Sources */,
 				F0011CF9211D26560069111E /* SegmentedControl.swift in Sources */,
 				143FE9AD210AFB2A002BC1A0 /* XWPhotoCell.m in Sources */,
@@ -1460,37 +1557,49 @@
 				143FE9E0210AFC92002BC1A0 /* UIImage+WebP.m in Sources */,
 				143950B120F8496D007853A8 /* LYAlertView.swift in Sources */,
 				143FE99E210AFB2A002BC1A0 /* JJOneScrollView.m in Sources */,
+				F088A70F21267BE200D42504 /* CustomInputView.swift in Sources */,
 				143FE9A9210AFB2A002BC1A0 /* SDBaseProgressView.m in Sources */,
 				140FC29F210866BA00F69F52 /* DirectPushModel.swift in Sources */,
+				F012424B2124075500A0F37C /* UIButtton+Utils.swift in Sources */,
 				143F84FF20FC8867000E5A0D /* BrandController.swift in Sources */,
 				F0011D09211D908E0069111E /* UIImage+Utils.swift in Sources */,
 				14046834211843E90019B524 /* SelectionTextField.swift in Sources */,
+				F01242512124184900A0F37C /* AppStorePageController.swift in Sources */,
 				1433218C2106D6BC00868F20 /* ConnectionModel.swift in Sources */,
+				F01242432123CCFA00A0F37C /* UICollectionView+Utils.swift in Sources */,
 				143FE9AB210AFB2A002BC1A0 /* SDDemoItemView.m in Sources */,
 				F0011D06211D8B120069111E /* ContactCell.swift in Sources */,
+				F012424F2124181000A0F37C /* AppStoreNavController.swift in Sources */,
 				143F850320FC8BE7000E5A0D /* ProjectController.swift in Sources */,
 				143FE9AA210AFB2A002BC1A0 /* SDLoopProgressView.m in Sources */,
 				143FE99A210AFB2A002BC1A0 /* MFlowLayOut.m in Sources */,
 				143FE94A210AF617002BC1A0 /* SWScannerView.swift in Sources */,
+				F088A70D21267BE200D42504 /* CommentCell.swift in Sources */,
 				14EB3A852101815E008D1223 /* BrandModel.swift in Sources */,
 				14B742292119908A0072FF14 /* ProjectDetaiController.swift in Sources */,
+				F088A70621267B9500D42504 /* MyDynamicController.swift in Sources */,
 				1439509D20F840B1007853A8 /* Configure.swift in Sources */,
 				143950B220F8496D007853A8 /* LYPieProgressView.swift in Sources */,
 				F0011CF4211D24DD0069111E /* JBPageController.swift in Sources */,
+				F088A71121267BEB00D42504 /* CommentModel.swift in Sources */,
 				143FE9D7210AFC92002BC1A0 /* SDWebImageCompat.m in Sources */,
 				143FE9E1210AFC92002BC1A0 /* UIImageView+HighlightedWebCache.m in Sources */,
 				143FE9E3210AFC92002BC1A0 /* UIView+WebCacheOperation.m in Sources */,
 				141E5D1D211A87B900E2BC62 /* CircleController.swift in Sources */,
 				141E5D21211A9A2000E2BC62 /* CircleCell.swift in Sources */,
 				143FE99B210AFB2A002BC1A0 /* MHeaderImaCell.m in Sources */,
+				F0124255212431FF00A0F37C /* AppStoreClassCell.swift in Sources */,
 				143FE9DF210AFC92002BC1A0 /* UIImage+MultiFormat.m in Sources */,
+				F088A70921267BB800D42504 /* CommentListController.swift in Sources */,
 				143FE9DD210AFC92002BC1A0 /* UIButton+WebCache.m in Sources */,
 				1454B39320FF1F6B006C4269 /* DescribtionController.swift in Sources */,
 				143FE93D210AC5FC002BC1A0 /* PersonalInfoCell.swift in Sources */,
 				145F0F3221008DA900202BA6 /* JsonParse.swift in Sources */,
+				F0124253212428AC00A0F37C /* AppStore.swift in Sources */,
 				143FE99C210AFB2A002BC1A0 /* MHeadImaView.m in Sources */,
 				1454B39920FF3B6B006C4269 /* WalletController.swift in Sources */,
 				14B7AD6820FBC3EB00BBBF28 /* MineController.swift in Sources */,
+				F088A70721267B9500D42504 /* MyController.swift in Sources */,
 				143F84F720FC76A8000E5A0D /* RankCell.swift in Sources */,
 				143FE99F210AFB2A002BC1A0 /* JJPhoto.m in Sources */,
 				14B7AD6620FBBEB600BBBF28 /* DynamicCell.swift in Sources */,
@@ -1523,6 +1632,7 @@
 				143FE9D5210AFC92002BC1A0 /* NSData+ImageContentType.m in Sources */,
 				141AB6C72126AAB700A29CBD /* CommentListController.swift in Sources */,
 				F0011CFF211D39FC0069111E /* FriendListController.swift in Sources */,
+				F01242412123C7B900A0F37C /* HorizontalCollectionCell.swift in Sources */,
 				142C6FCE2105C2AF00C84CE1 /* UserModel.swift in Sources */,
 				1404683B211843E90019B524 /* ToolBarView.swift in Sources */,
 				145F0F3321008DA900202BA6 /* WebAPI.swift in Sources */,
@@ -1531,6 +1641,7 @@
 				14B7ACA020FB6A6800BBBF28 /* LoginController.swift in Sources */,
 				14B7AD5820FBAB7400BBBF28 /* ConnectionController.swift in Sources */,
 				F0011CFD211D2BC60069111E /* ContactListViewController.swift in Sources */,
+				F012423F2123BFBB00A0F37C /* CycleCollectionheader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
