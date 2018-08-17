@@ -65,6 +65,38 @@
             endingLineNumber = "45"
             landmarkName = "rightAction()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;YLImagePickerController.YLPhotoModel&gt;) -&gt; () in SocialProject.AlbumController.uploadImageAction(__ObjC.UIButton) -&gt; ()"
+                  moduleName = "SocialProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/Mine/Controllers/AlbumController.swift"
+                  timestampString = "556182656.6476001"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "560">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;YLImagePickerController.YLPhotoModel&gt;) -&gt; () in SocialProject.AlbumController.uploadImageAction(__ObjC.UIButton) -&gt; ()"
+                  moduleName = "SocialProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/Mine/Controllers/AlbumController.swift"
+                  timestampString = "556182656.650358"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "3495">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -86,11 +118,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Array&lt;YLImagePickerController.YLPhotoModel&gt;) -&gt; () in SocialProject.AlbumController.rightAction() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Array&lt;YLImagePickerController.YLPhotoModel&gt;) -&gt; () in SocialProject.AlbumController.uploadImageAction(__ObjC.UIButton) -&gt; ()"
                   moduleName = "SocialProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/Mine/Controllers/AlbumController.swift"
-                  timestampString = "555470056.701843"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/Mine/Controllers/AlbumController.swift"
+                  timestampString = "556182656.6560431"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "56"
@@ -101,11 +133,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__ObjC.Progress) -&gt; () in closure #1 (Swift.Array&lt;YLImagePickerController.YLPhotoModel&gt;) -&gt; () in SocialProject.AlbumController.rightAction() -&gt; ()"
+                  symbolName = "closure #1 (__ObjC.Progress) -&gt; () in closure #1 (Swift.Array&lt;YLImagePickerController.YLPhotoModel&gt;) -&gt; () in SocialProject.AlbumController.uploadImageAction(__ObjC.UIButton) -&gt; ()"
                   moduleName = "SocialProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/Mine/Controllers/AlbumController.swift"
-                  timestampString = "555470056.704071"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/Mine/Controllers/AlbumController.swift"
+                  timestampString = "556182656.6582741"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "58"
@@ -137,8 +169,8 @@
                   symbolName = "SocialProject.RegisterController.registerAction(__ObjC.UIButton) -&gt; ()"
                   moduleName = "SocialProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/LoginAndRegister/Controllers/RegisterController.swift"
-                  timestampString = "555470056.711188"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/LoginAndRegister/Controllers/RegisterController.swift"
+                  timestampString = "556182656.663735"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "113"
@@ -152,8 +184,8 @@
                   symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;SwiftyJSON.JSON&gt;, Swift.Optional&lt;SocialProject.NetworkError&gt;) -&gt; () in SocialProject.RegisterController.registerAction(__ObjC.UIButton) -&gt; ()"
                   moduleName = "SocialProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/LoginAndRegister/Controllers/RegisterController.swift"
-                  timestampString = "555470056.7134399"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/LoginAndRegister/Controllers/RegisterController.swift"
+                  timestampString = "556182656.666055"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "114"
@@ -249,8 +281,8 @@
                   symbolName = "SocialProject.PersonalInfoController.rightAction() -&gt; ()"
                   moduleName = "SocialProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/LoginAndRegister/Controllers/PersonalInfoController.swift"
-                  timestampString = "555470056.752073"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/LoginAndRegister/Controllers/PersonalInfoController.swift"
+                  timestampString = "556182656.689229"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "50"
@@ -264,8 +296,8 @@
                   symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;SocialProject.UserModel&gt;, Swift.Optional&lt;SocialProject.NetworkError&gt;) -&gt; () in SocialProject.PersonalInfoController.rightAction() -&gt; ()"
                   moduleName = "SocialProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/LoginAndRegister/Controllers/PersonalInfoController.swift"
-                  timestampString = "555470056.754249"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/LoginAndRegister/Controllers/PersonalInfoController.swift"
+                  timestampString = "556182656.691359"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "51"
@@ -321,6 +353,38 @@
             endingLineNumber = "118"
             landmarkName = "login(name:userid:token:password:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SocialProject.LoginController.login(name: Swift.String, userid: Swift.String, token: Swift.String, password: Swift.String) -&gt; ()"
+                  moduleName = "SocialProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/LoginAndRegister/Controllers/LoginController.swift"
+                  timestampString = "556182656.7056611"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in SocialProject.LoginController.login(name: Swift.String, userid: Swift.String, token: Swift.String, password: Swift.String) -&gt; ()"
+                  moduleName = "SocialProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/LoginAndRegister/Controllers/LoginController.swift"
+                  timestampString = "556182656.708027"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
+                  offsetFromSymbolStart = "47">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -409,43 +473,28 @@
                   symbolName = "SocialProject.AppDelegate.onRCIMConnectionStatusChanged(__C.RCConnectionStatus) -&gt; ()"
                   moduleName = "SocialProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/Base/AppDelegate.swift"
-                  timestampString = "555470277.3490829"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/Base/AppDelegate.swift"
+                  timestampString = "556182656.7311471"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "1377">
+                  startingLineNumber = "114"
+                  endingLineNumber = "114"
+                  offsetFromSymbolStart = "736">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (__C.RCConnectErrorCode) -&gt; () in SocialProject.AppDelegate.onRCIMConnectionStatusChanged(__C.RCConnectionStatus) -&gt; ()"
+                  symbolName = "closure #2 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in SocialProject.AppDelegate.onRCIMConnectionStatusChanged(__C.RCConnectionStatus) -&gt; ()"
                   moduleName = "SocialProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/Base/AppDelegate.swift"
-                  timestampString = "555470277.351854"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/Base/AppDelegate.swift"
+                  timestampString = "556182656.7332489"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "115"
-                  endingLineNumber = "115"
-                  offsetFromSymbolStart = "8">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in SocialProject.AppDelegate.onRCIMConnectionStatusChanged(__C.RCConnectionStatus) -&gt; ()"
-                  moduleName = "SocialProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/SocialProject/SocialProject/Base/AppDelegate.swift"
-                  timestampString = "555470277.354404"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "117"
-                  endingLineNumber = "117"
-                  offsetFromSymbolStart = "4">
+                  startingLineNumber = "116"
+                  endingLineNumber = "116"
+                  offsetFromSymbolStart = "33">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -464,6 +513,38 @@
             endingLineNumber = "106"
             landmarkName = "onRCIMConnectionStatusChanged(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SocialProject.AppDelegate.onRCIMConnectionStatusChanged(__C.RCConnectionStatus) -&gt; ()"
+                  moduleName = "SocialProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/Base/AppDelegate.swift"
+                  timestampString = "556182656.738768"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "325">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String) -&gt; () in SocialProject.AppDelegate.onRCIMConnectionStatusChanged(__C.RCConnectionStatus) -&gt; ()"
+                  moduleName = "SocialProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a10.11.5/Desktop/%E5%87%A1%E7%89%B9%E9%A1%B9%E7%9B%AE/%E7%A4%BE%E4%BA%A4/FanTeApp/SocialProject/SocialProject/Base/AppDelegate.swift"
+                  timestampString = "556182656.740881"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "25">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

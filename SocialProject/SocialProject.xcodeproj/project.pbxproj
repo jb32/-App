@@ -20,6 +20,13 @@
 		140FC29F210866BA00F69F52 /* DirectPushModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FC29E210866BA00F69F52 /* DirectPushModel.swift */; };
 		140FC2A1210868E600F69F52 /* DirectPushController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FC2A0210868E600F69F52 /* DirectPushController.swift */; };
 		140FC2A321086DBA00F69F52 /* ReferralsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FC2A221086DBA00F69F52 /* ReferralsCell.swift */; };
+		141AB6C72126AAB700A29CBD /* CommentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6C62126AAB700A29CBD /* CommentListController.swift */; };
+		141AB6C92126AAC500A29CBD /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6C82126AAC500A29CBD /* CommentModel.swift */; };
+		141AB6CD2126AAD200A29CBD /* CustomInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 141AB6CA2126AAD100A29CBD /* CustomInputView.xib */; };
+		141AB6CE2126AAD200A29CBD /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6CB2126AAD100A29CBD /* CommentCell.swift */; };
+		141AB6CF2126AAD200A29CBD /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6CC2126AAD100A29CBD /* CustomInputView.swift */; };
+		141AB6D22126AAE200A29CBD /* MyDynamicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6D02126AAE200A29CBD /* MyDynamicController.swift */; };
+		141AB6D32126AAE200A29CBD /* MyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6D12126AAE200A29CBD /* MyController.swift */; };
 		141E5D1D211A87B900E2BC62 /* CircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E5D1C211A87B900E2BC62 /* CircleController.swift */; };
 		141E5D1F211A960A00E2BC62 /* CircleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E5D1E211A960A00E2BC62 /* CircleModel.swift */; };
 		141E5D21211A9A2000E2BC62 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E5D20211A9A2000E2BC62 /* CircleCell.swift */; };
@@ -213,6 +220,13 @@
 		140FC29E210866BA00F69F52 /* DirectPushModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectPushModel.swift; sourceTree = "<group>"; };
 		140FC2A0210868E600F69F52 /* DirectPushController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectPushController.swift; sourceTree = "<group>"; };
 		140FC2A221086DBA00F69F52 /* ReferralsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsCell.swift; sourceTree = "<group>"; };
+		141AB6C62126AAB700A29CBD /* CommentListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListController.swift; sourceTree = "<group>"; };
+		141AB6C82126AAC500A29CBD /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
+		141AB6CA2126AAD100A29CBD /* CustomInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInputView.xib; sourceTree = "<group>"; };
+		141AB6CB2126AAD100A29CBD /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		141AB6CC2126AAD100A29CBD /* CustomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
+		141AB6D02126AAE200A29CBD /* MyDynamicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDynamicController.swift; sourceTree = "<group>"; };
+		141AB6D12126AAE200A29CBD /* MyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyController.swift; sourceTree = "<group>"; };
 		141E5D1C211A87B900E2BC62 /* CircleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleController.swift; sourceTree = "<group>"; };
 		141E5D1E211A960A00E2BC62 /* CircleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleModel.swift; sourceTree = "<group>"; };
 		141E5D20211A9A2000E2BC62 /* CircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
@@ -994,6 +1008,7 @@
 		14B7AC9220FA42C400BBBF28 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				141AB6C62126AAB700A29CBD /* CommentListController.swift */,
 				14B7AD5F20FBBB7000BBBF28 /* DynamicController.swift */,
 				14B7AD6120FBBB8500BBBF28 /* DynamicContentController.swift */,
 			);
@@ -1003,6 +1018,7 @@
 		14B7AC9320FA42C400BBBF28 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				141AB6C82126AAC500A29CBD /* CommentModel.swift */,
 				143321872106D09F00868F20 /* DynamicModel.swift */,
 			);
 			path = Models;
@@ -1011,6 +1027,9 @@
 		14B7AC9420FA42C400BBBF28 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				141AB6CB2126AAD100A29CBD /* CommentCell.swift */,
+				141AB6CC2126AAD100A29CBD /* CustomInputView.swift */,
+				141AB6CA2126AAD100A29CBD /* CustomInputView.xib */,
 				14B7AD6320FBBC0C00BBBF28 /* DynamicStoryboard.storyboard */,
 				14B7AD6520FBBEB600BBBF28 /* DynamicCell.swift */,
 			);
@@ -1075,6 +1094,8 @@
 		14B7AC9A20FA42DB00BBBF28 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				141AB6D12126AAE200A29CBD /* MyController.swift */,
+				141AB6D02126AAE200A29CBD /* MyDynamicController.swift */,
 				14B7AD6720FBC3EB00BBBF28 /* MineController.swift */,
 				1454B39220FF1F6B006C4269 /* DescribtionController.swift */,
 				1454B39420FF26D8006C4269 /* AlbumController.swift */,
@@ -1257,6 +1278,7 @@
 				143FE990210AFB2A002BC1A0 /* close@3x.png in Resources */,
 				143FE9A5210AFB2A002BC1A0 /* MImaCell.xib in Resources */,
 				143FE9A1210AFB2A002BC1A0 /* none.png in Resources */,
+				141AB6CD2126AAD200A29CBD /* CustomInputView.xib in Resources */,
 				143FE991210AFB2A002BC1A0 /* ico_check_nomal.png in Resources */,
 				149C658620F6F7CD00559E5F /* LaunchScreen.storyboard in Resources */,
 				143FE948210AF617002BC1A0 /* SWQRCode.bundle in Resources */,
@@ -1394,6 +1416,7 @@
 				F0011D01211D6A8B0069111E /* ContactModel.swift in Sources */,
 				143321882106D09F00868F20 /* DynamicModel.swift in Sources */,
 				143FE9DB210AFC92002BC1A0 /* SDWebImageManager.m in Sources */,
+				141AB6C92126AAC500A29CBD /* CommentModel.swift in Sources */,
 				143FE9E2210AFC92002BC1A0 /* UIImageView+WebCache.m in Sources */,
 				14B7AD5A20FBAE9B00BBBF28 /* ConnectionContentController.swift in Sources */,
 				14B7AD6020FBBB7000BBBF28 /* DynamicController.swift in Sources */,
@@ -1416,6 +1439,8 @@
 				143FE9AD210AFB2A002BC1A0 /* XWPhotoCell.m in Sources */,
 				14B7AD5E20FBBA2E00BBBF28 /* ConnectionCell.swift in Sources */,
 				143FE947210AF617002BC1A0 /* SWQRCodeManager.swift in Sources */,
+				141AB6CF2126AAD200A29CBD /* CustomInputView.swift in Sources */,
+				141AB6D22126AAE200A29CBD /* MyDynamicController.swift in Sources */,
 				143321852106CA1000868F20 /* GTMBase64.m in Sources */,
 				143FE99D210AFB2A002BC1A0 /* JJMainScrollView.m in Sources */,
 				14B7AC9E20FA46D700BBBF28 /* AppDelegate.swift in Sources */,
@@ -1425,6 +1450,7 @@
 				143FE9A7210AFB2A002BC1A0 /* MShowAllGroup.m in Sources */,
 				F016CCD921213422003BFBD7 /* UserInfoViewController.swift in Sources */,
 				143950A220F840C0007853A8 /* BaseTabbarController.swift in Sources */,
+				141AB6D32126AAE200A29CBD /* MyController.swift in Sources */,
 				143FE9A2210AFB2A002BC1A0 /* MGroupCell.m in Sources */,
 				F0011CFB211D299F0069111E /* ChatPageController.swift in Sources */,
 				140FC29D21085A2700F69F52 /* MemberModel.swift in Sources */,
@@ -1492,8 +1518,10 @@
 				143FE9A6210AFB2A002BC1A0 /* MImaLibTool.m in Sources */,
 				143FE9AC210AFB2A002BC1A0 /* XWImagePickerSheet.m in Sources */,
 				145F0F3421008DA900202BA6 /* WebRequest.swift in Sources */,
+				141AB6CE2126AAD200A29CBD /* CommentCell.swift in Sources */,
 				1454B39520FF26D8006C4269 /* AlbumController.swift in Sources */,
 				143FE9D5210AFC92002BC1A0 /* NSData+ImageContentType.m in Sources */,
+				141AB6C72126AAB700A29CBD /* CommentListController.swift in Sources */,
 				F0011CFF211D39FC0069111E /* FriendListController.swift in Sources */,
 				142C6FCE2105C2AF00C84CE1 /* UserModel.swift in Sources */,
 				1404683B211843E90019B524 /* ToolBarView.swift in Sources */,
