@@ -61,6 +61,7 @@ class LoginController: ZYYBaseViewController {
             if isSuccess {
                 UserDefaults.standard.set(result!["id"].stringValue, forKey: "ID")
                 UserDefaults.standard.set(result!["token"].stringValue, forKey: "token")
+                UserDefaults.standard.set(result!["circleType"].intValue, forKey: "circleType")
                 UserDefaults.standard.synchronize()
                 if result!["circleType"] == .null {
                     let circleVC = UIStoryboard(name: .user).initialize(class: CircleController.self)
@@ -115,6 +116,19 @@ extension LoginController: UITextFieldDelegate {
 extension LoginController {
     func login(name: String, userid: String, token: String, password: String) {
         RCIM.shared().connect(withToken: token, success: { (userID) in
+//            RCRealTimeLocationManager.shared().getRealTimeLocationProxy(.ConversationType_PRIVATE, targetId: userID, success: { (realTimeLocation) in
+//                let location = realTimeLocation?.getLocation(userID)
+//                let locationReuqest = LocationRequest(ID: userID!, longitude: (location?.coordinate.longitude)!, latitude: (location?.coordinate.latitude)!)
+//                WebAPI.send(locationReuqest, completeHandler: { (isSuccess, result, errror) in
+//                    if isSuccess {
+//                        
+//                    } else {
+//                        
+//                    }
+//                })
+//            }, error: { (status) in
+//                print("get location share failure with code " + "\(status)")
+//            })
             print("登录成功 ==== 用户ID:" + userID!)
         }, error: { (status) in
             print("error status ==== %ld", status.rawValue)

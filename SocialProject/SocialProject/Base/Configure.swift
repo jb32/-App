@@ -29,15 +29,19 @@ let RONGCLOUD_IM_APPKEY: String = "x4vkb1qpxfiok"
 let DEVICE_ID: String = UIDevice.current.identifierForVendor!.uuidString // 设备uuid
 let DEVICE_WIDTH: CGFloat = UIScreen.main.bounds.width // 设备宽
 let DEVICE_HEIGHT: CGFloat = UIScreen.main.bounds.height // 设备高
-
-// 支持的年份
-let YEARS: [Int] = [2017]
-
-let UPLOAD_IMAGE_SCALE: CGFloat = 0.5
-let SERVICE_PHONE: String = "400-8888-8888"
-
 let userID: String = UserDefaults.standard.string(forKey: "ID") ?? ""
 let token: String = UserDefaults.standard.string(forKey: "token") ?? ""
+//配图视图外侧的间距
+let PictureOutMargin = CGFloat(10)
+//配图视图内侧的间距
+let PictureInMargin = CGFloat(3)
+//视图的宽度
+let PictureViewWidth = DEVICE_WIDTH - 75
+//每个item的width
+let PicWidth = (PictureViewWidth - 2 * PictureInMargin) / 3
+
+let UPLOAD_IMAGE_SCALE: CGFloat = 0.5
+
 
 var IS_LOGIN: Bool {
     return false

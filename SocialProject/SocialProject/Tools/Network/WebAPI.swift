@@ -30,8 +30,8 @@ struct WebAPI {
     private static let ERROR_MSG: String = "msg"
     private static let DATA: String = "data"
     private static let ACCESS_TOKEN: String = "access_token"
-    private static let UPLOAD_IMAGE: String = "social_img"
-    private static let UPLOAD_IMAGE_URL: String = "img_path"
+    private static let UPLOAD_IMAGE: String = "file"
+    private static let UPLOAD_IMAGE_URL: String = "img"
     
     //是否允许答应调试信息
     static var isPrintEnable: Bool = true
@@ -67,56 +67,37 @@ struct WebAPI {
     
     //MARK: - Public Functions
     static func send<R: RequestType>(_ request: R, completeHandler: ((_ isSuccess: Bool, _ response: R.ResponsType?, _ error: NetworkError?) -> Void)? = nil) {
-        
-        DispatchQueue.main.async {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate, appDelegate.reachabilityManager.isReachable == true else {
-                completeHandler?(false, nil, NetworkError(errorCode: WebStatusCode.networkNotReachable.rawValue, errorMsg: "当前无网络连接"))
-                return
-            }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate, appDelegate.reachabilityManager.isReachable == true else {
+            completeHandler?(false, nil, NetworkError(errorCode: WebStatusCode.networkNotReachable.rawValue, errorMsg: "当前无网络连接"))
+            return
         }
-        
         var request = request
         Alamofire.request(request).responseData { (responseData) in
             if let data = responseData.data {
-                let json = try? JSON(data: data)
-                
+                var json: JSON = JSON()
+                do {
+                    json = try JSON(data: data)
+                } catch {}
                 WebAPI.print(url: request.host + request.path,
                              parameters: request.parameters,
-                             responseJSON: json ?? JSON(),
+                             responseJSON: json,
                              timeline: responseData.timeline)
-                
-                if let json = json, let codeStr = json[STATUS_CODE].string, let statusCode = Int(codeStr), let status = WebStatusCode(rawValue: statusCode) {
-                    let dataJSON = json[DATA]
-                    
-                    switch status {
-                    case .fine:
-                        completeHandler?(true, R.ResponsType.parse(dataJSON), nil)
-                        //                    case WebStatusCode.invalideToken.rawValue, WebStatusCode.invalide.rawValue:
-                        //                        if IS_LOGIN {
-                        //                            //token失效后会返回最新token，存储token后重新调用接口
-                        //                            let new_token = dataJSON[ACCESS_TOKEN].stringValue
-                        //                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LOGINNotification"), object: nil)
-                        //                            //修改请求参数token为最新
-                        //                            request.parameters["token"] = new_token
-                        //                            WebAPI.send(request) { (secIsSuccess, secResponse, secError) in
-                        //                                if secIsSuccess {
-                        //                                    completeHandler?(true, secResponse, nil)
-                        //                                } else {
-                        //                                    completeHandler?(false, nil, secError)
-                        //                                }
-                        //                            }
-                        //                        } else {
-                        //                            if ((statusCode >= 1020001) && (statusCode <= 1020008)) || (statusCode == 2110015) {
-                        //                                completeHandler?(false, nil, NetworkError(errorCode: statusCode, errorMsg: "Token失效"))
-                        //                            }
-                    //                        }
-                    default:
-                        completeHandler?(false, nil, NetworkError(errorCode: statusCode,
-                                                                  errorMsg: json[ERROR_MSG].stringValue))
+                if json[STATUS_CODE] == .null {
+                    completeHandler?(false, nil, NetworkError())
+                } else {
+                    if let statusCode = Int(json[STATUS_CODE].string!) {
+                        let dataJSON = json[DATA]
+                        switch statusCode {
+                        case WebStatusCode.fine.rawValue:
+                            completeHandler?(true, R.ResponsType.parse(dataJSON), nil)
+                        default:
+                            completeHandler?(false, nil, NetworkError(errorCode: statusCode,
+                                                                      errorMsg: json[ERROR_MSG].stringValue))
+                        }
+                        return
                     }
-                    return
+                    completeHandler?(false, nil, NetworkError())
                 }
-                completeHandler?(false, nil, NetworkError())
             }
         }
     }
@@ -142,14 +123,8 @@ struct WebAPI {
                 multipartFormData.append(eachData, withName: UPLOAD_IMAGE, fileName: fileName, mimeType: "image/jpeg")
             }
 
-            if let data = try? JSONSerialization.data(withJSONObject: uploadRequest.parameters, options: []) {
-                let jsonParamStr = String(data: data, encoding: .utf8)!
-                let enJsonParamStr = NSString.urlEncodedString(jsonParamStr)
-                let encodedParam = ["id": userID, "file": enJsonParamStr]
-
-                for (key, value) in encodedParam {
-                    multipartFormData.append(value.data(using: .utf8)!, withName: key)
-                }
+            for (key, value) in uploadRequest.parameters {
+                multipartFormData.append((value as! String).data(using: .utf8)!, withName: key)
             }
         }, with: uploadRequest, encodingCompletion: { (encodingResult) in
             switch encodingResult {
@@ -166,8 +141,12 @@ struct WebAPI {
                             Swift.print("### Upload Finished ###")
                             Swift.print(json)
                             Swift.print("--------------------")
-                            if let result = json["msg"].string, result == "上传成功" {
-                                completeHandler?(true, json[DATA][UPLOAD_IMAGE_URL].string, nil)
+                            if let result = json["status"].string, result == "200" {
+                                if json[DATA][UPLOAD_IMAGE_URL] != .null {
+                                    completeHandler?(true, json[DATA][UPLOAD_IMAGE_URL].string, nil)
+                                } else {
+                                    completeHandler?(true, json[DATA].string, nil)
+                                }
                             } else {
                                 let errorCode = json["status"].intValue
                                 let errorMsg = json["msg"].stringValue

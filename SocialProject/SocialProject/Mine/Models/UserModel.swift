@@ -30,6 +30,11 @@ struct UserModel: JSONParsable {
     let industry: String
     let age: String
     let dateOfBirth: String
+    let autograph: String
+    let distance: String
+    let userAddress: String
+    let concernNumber: String
+    let newDynamic: String
     
     init(json: JSON) {
         self.id = json["id"].intValue
@@ -52,6 +57,11 @@ struct UserModel: JSONParsable {
         self.industry = json["industry"].stringValue
         self.age = json["age"].stringValue
         self.dateOfBirth = json["dateOfBirth"].stringValue
+        self.autograph = json["autograph"].stringValue
+        self.distance = json["distance"].stringValue
+        self.userAddress = json["userAddress"].stringValue
+        self.concernNumber = json["concernNumber"].stringValue
+        self.newDynamic = json["newDynamic"].stringValue
     }
     
     static func parse(_ json: JSON) -> UserModel? {

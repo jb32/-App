@@ -20,6 +20,11 @@ struct DynamicModel: JSONParsable {
     let comment: String
     let collection: String
     let createtime: String
+    var praselen: String
+    var forwardlen: String
+    var collectionlen: String
+    let nickname: String
+    let headImg: String
     
     init(json: JSON) {
         self.id = json["id"].stringValue
@@ -33,6 +38,11 @@ struct DynamicModel: JSONParsable {
         self.comment = json["comment"].stringValue
         self.collection = json["collection"].stringValue
         self.createtime = json["createtime"].stringValue
+        self.praselen = json["praselen"].stringValue
+        self.forwardlen = json["forwardlen"].stringValue
+        self.collectionlen = json["collectionlen"].stringValue
+        self.nickname = json["nickname"].stringValue
+        self.headImg = json["headImg"].stringValue
     }
     
     static func parse(_ json: JSON) -> DynamicModel? {

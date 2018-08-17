@@ -1,44 +1,31 @@
 //
-//  DynamicContentController.swift
+//  MyDynamicController.swift
 //  SocialProject
 //
-//  Created by Mac on 2018/7/16.
+//  Created by Mac on 2018/8/15.
 //  Copyright © 2018年 ZYY. All rights reserved.
 //
 
 import UIKit
 import DNSPageView
 
-class DynamicContentController: ZYYBaseViewController {
-
+class MyDynamicController: ZYYBaseViewController {
+    
     @IBOutlet weak var tableView: UITableView!
     
     var dataArray: [DynamicModel] = []
-    var type = "推荐"
     
-    var pushAction:(_ vc: CommentListController) -> Void = {_ in }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.getDynamicData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: 1))
-        self.getData()
-    }
-    
-    func getData() {
-        if type == "推荐" {
-            self.getRecommendData()
-        } else if type == "热门" {
-            self.getHotData()
-        } else if type == "好友动态" {
-            self.dynamicRequest()
-        } else if type == "咨询" {
-            self.getInformationData()
-        } else {
-            let circleType = UserDefaults.standard.integer(forKey: "circleType")
-            self.getProjectData(type: "\(circleType)")
-        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,7 +46,7 @@ class DynamicContentController: ZYYBaseViewController {
 
 }
 
-extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
+extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -110,7 +97,7 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
         if self.dataArray.count > 0 {
             let model = self.dataArray[indexPath.row]
             cell.model = model
-            cell.concernBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            cell.concernBtn.isHidden = true
             cell.collectBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
             cell.commentBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
             cell.transpondBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
@@ -123,8 +110,6 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
         let cell = sender.superview?.superview?.superview as! DynamicCell
         let indexPath = self.tableView.indexPath(for: cell)
         switch sender.tag {
-        case 5000:
-            self.concernRequest(indexPath: indexPath!)
         case 5001:
             self.praseRequest(indexPath: indexPath!)
         case 5002:
@@ -133,7 +118,7 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
             let commentVC = UIStoryboard(name: .dynamic).initialize(class: CommentListController.self)
             let model = self.dataArray[(indexPath?.row)!]
             commentVC.model = model
-            self.pushAction(commentVC)
+            self.navigationController?.pushViewController(commentVC, animated: true)
         case 5004:
             self.collectRequest(indexPath: indexPath!)
         default:
@@ -142,95 +127,16 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension DynamicContentController {
-    // 推荐
-    func getRecommendData() {
-        self.showBlurHUD()
-        let recommendRequest = RecommendRequest()
-        WebAPI.send(recommendRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.dataArray = (result?.objectModels)!
-                self.tableView.reloadData()
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
+extension MyDynamicController {
     
-    // 热门
-    func getHotData() {
+    func getDynamicData() {
         self.showBlurHUD()
-        let hotRequest = HotRequest()
-        WebAPI.send(hotRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.dataArray = (result?.objectModels)!
-                self.tableView.reloadData()
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
-    
-    // 项目
-    func getProjectData(type: String) {
-        self.showBlurHUD()
-        let hotRequest = ProjectListRequest(type: type)
-        WebAPI.send(hotRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.dataArray = (result?.objectModels)!
-                self.tableView.reloadData()
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
-    
-    // 咨询
-    func getInformationData() {
-        self.showBlurHUD()
-        let informationRequest = InformationListRequest()
-        WebAPI.send(informationRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.dataArray = (result?.objectModels)!
-                self.tableView.reloadData()
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
-    
-    // 好友动态
-    func dynamicRequest() {
-        self.showBlurHUD()
-        let dynamicRequest = DynamicRequest(userId: userID)
+        let dynamicRequest = MyDynamicRequest(ID: userID)
         WebAPI.send(dynamicRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
                 self.dataArray = (result?.objectModels)!
                 self.tableView.reloadData()
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
-    
-    // 关注
-    func concernRequest(indexPath: IndexPath) {
-        self.showBlurHUD()
-        let model = self.dataArray[indexPath.row]
-        self.showBlurHUD()
-        let req = AttentionReq(id: userID, otherId: "\(model.id)")
-        WebAPI.send(req) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            self.hideBlurHUD()
-            if isSuccess {
-                self.showBlurHUD(result: .success, title: "关注成功") { [unowned self] in
-                    self.getData()
-                }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
@@ -298,10 +204,10 @@ extension DynamicContentController {
     }
 }
 
-extension DynamicContentController: DNSPageReloadable {
+extension MyDynamicController: DNSPageReloadable {
     func titleViewDidSelectedSameTitle() {
         print("重复点击了标题")
-        self.getData()
+        self.getDynamicData()
     }
     
     func contentViewDidEndScroll() {

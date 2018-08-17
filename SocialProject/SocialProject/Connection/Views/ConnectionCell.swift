@@ -11,9 +11,11 @@ import UIKit
 class ConnectionCell: UITableViewCell {
     @IBOutlet weak var avartarImgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var projectNameLabel: UILabel!
     
     @IBOutlet weak var concernBtn: UIButton!
+    @IBOutlet weak var concernCountLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

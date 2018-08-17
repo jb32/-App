@@ -12,10 +12,10 @@ import DNSPageView
 class ConnectionContentController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var dataArray: [ConnectionModel] = []
-    var type = "直销圈"
+    var dataArray: [UserModel] = []
+    var type = "1"
     
-    var pushAction:(_ vc: RCConversationViewController) -> Void = {_ in }
+    var pushAction:(_ vc: UserInfoViewController) -> Void = {_ in }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,19 +54,23 @@ extension ConnectionContentController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionCell", for: indexPath) as! ConnectionCell
         let model = self.dataArray[indexPath.row]
         var defaultImg = UIImage(named: "avatar_boy")
-        if model.userAccount?.sex == "1" {
+        cell.nameLabel.textColor = UIColor.themTwoColor
+        if model.sex == "1" {
+            cell.nameLabel.textColor = UIColor.themOneColor
             defaultImg = UIImage(named: "avatar_girl")
         }
-        cell.avartarImgView.setWebImage(with: Image_Path+(model.userAccount?.headImg)!, placeholder: defaultImg)
-        cell.nameLabel.text = model.userAccount?.name
-        cell.descriptionLabel.text = model.introduce
+        cell.avartarImgView.setWebImage(with: Image_Path+model.headImg, placeholder: defaultImg)
+        cell.projectNameLabel.text = model.newDynamic
+        cell.nameLabel.text = model.name
+        cell.concernCountLabel.text = model.concernNumber
+        cell.distanceLabel.text = model.userAddress + " " + model.distance
         cell.concernBtn.addTarget(self, action: #selector(concernAction(_:)), for: .touchUpInside)
         return cell
     }
@@ -79,10 +83,11 @@ extension ConnectionContentController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let userVC = UIStoryboard(name: .message).initialize(class: UserInfoViewController.self)
         let model = self.dataArray[indexPath.row]
-        let chatVC = RCConversationViewController.init(conversationType: .ConversationType_PRIVATE, targetId: model.userAccount?.id)
-        chatVC?.title = model.userAccount?.name
-        self.pushAction(chatVC!)
+        userVC.id = "\(model.id)"
+        userVC.title = model.name
+        self.pushAction(userVC)
     }
 }
 
@@ -104,8 +109,9 @@ extension ConnectionContentController {
     func concernRequest(indexPath: IndexPath) {
         self.showBlurHUD()
         let model = self.dataArray[indexPath.row]
-        let attentionRequest = AttentionRequest(ID: userID, concernID: Int((model.userAccount?.id)!)!)
-        WebAPI.send(attentionRequest) { (isSuccess, result, error) in
+        self.showBlurHUD()
+        let req = AttentionReq(id: userID, otherId: "\(model.id)")
+        WebAPI.send(req) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
                 self.showBlurHUD(result: .success, title: "关注成功") { [unowned self] in

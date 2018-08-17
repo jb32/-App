@@ -36,24 +36,27 @@ class DynamicController: UIViewController {
         
         // 创建DNSPageStyle，设置样式
         let style = DNSPageStyle()
-        style.isTitleScrollEnable = true
+        style.isTitleScrollEnable = false
         style.titleSelectedColor = .themOneColor
         style.titleColor = .themTwoColor
         style.titleViewBackgroundColor = .backgroundColor
         
         // 设置标题内容
-        let titles = ["推荐", "热门", "项目", "专栏", "好友动态", "资讯"]
+        let titles = ["推荐", "热门", "项目", "资讯", "好友动态"]
         
         // 创建每一页对应的controller
         let childViewControllers: [DynamicContentController] = titles.map { str -> DynamicContentController in
             let controller = UIStoryboard(name: .dynamic).initialize(class: DynamicContentController.self)
             controller.type = str
             controller.view.backgroundColor = UIColor.backgroundColor
+            controller.pushAction = { [unowned self] vc in
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
             return controller
         }
         
         // 创建对应的DNSPageView，并设置它的frame
-        let pageView = DNSPageView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT), style: style, titles: titles, childViewControllers: childViewControllers)
+        let pageView = DNSPageView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT - 44), style: style, titles: titles, childViewControllers: childViewControllers)
         view.addSubview(pageView)
     }
     
