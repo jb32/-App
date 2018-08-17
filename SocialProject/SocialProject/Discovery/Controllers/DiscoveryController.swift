@@ -39,6 +39,9 @@ class DiscoveryController: UITableViewController {
             self.navigationController?.pushViewController(rankVC, animated: true)
         default:
             // 应用商店
+            let appStoreVC = UIStoryboard(name: .appStore).initialize(class: AppStoreNavController.self)
+            appStoreVC.title = "应用商店"
+            navigationController?.pushViewController(appStoreVC, animated: true)
             break
         }
     }

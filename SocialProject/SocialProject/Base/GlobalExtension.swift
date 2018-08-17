@@ -23,6 +23,7 @@ extension UIStoryboard {
         case dynamic = "DynamicStoryboard"
         case discovery = "DiscoveryStoryboard"
         case mine = "MineStoryboard"
+        case appStore = "AppStore"
     }
     
     convenience init(name: StoryboardName) {

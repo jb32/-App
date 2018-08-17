@@ -2,7 +2,7 @@ platform :ios, ‘8.0’
 use_frameworks!
 target ‘SocialProject’ do
 
-pod ‘Alamofire’
+pod 'Alamofire'
 pod 'AlamofireImage'
 pod 'SwiftyJSON'
 pod 'IQKeyboardManagerSwift'
@@ -11,6 +11,8 @@ pod 'DNSPageView'
 pod 'YLImagePickerController'
 pod 'RongCloudIM/IMLib'
 pod 'RongCloudIM/IMKit'
+pod 'LLCycleScrollView'
+pod 'SnapKit'
 #pod 'RongCloudRTC/RongCallLib'
 #pod 'RongCloudRTC/RongCallKit'
 
