@@ -281,7 +281,7 @@ extension DynamicContentController {
     func collectRequest(indexPath: IndexPath) {
         self.showBlurHUD()
         var model = self.dataArray[indexPath.row]
-        let collectRequest = CollectRequest(ID: model.id, userLoginId: userID)
+        let collectRequest = CollectRequest(ID: userID, dynamicsId: model.id)
         WebAPI.send(collectRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
