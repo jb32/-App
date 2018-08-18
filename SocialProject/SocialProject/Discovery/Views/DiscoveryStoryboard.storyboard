@@ -43,6 +43,7 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dynamic_avatar_boy" translatesAutoresizingMaskIntoConstraints="NO" id="uwO-f4-AdE">
                                                     <rect key="frame" x="55" y="10.5" width="50" height="50"/>
+
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="ATd-Wf-YaX"/>
                                                         <constraint firstAttribute="width" constant="50" id="aWn-gS-6Tb"/>

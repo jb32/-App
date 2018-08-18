@@ -12,10 +12,6 @@ class ContactCell: UITableViewCell {
 
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var titleLB: UILabel!
-    @IBOutlet weak var addBtn: UIButton?
-    @IBOutlet weak var cancelBtn: UIButton?
-    var toAdd: (() -> Void)?
-    var toCancel: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,13 +22,5 @@ class ContactCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-    }
-    
-    @IBAction func doAdd(_ sender: UIButton) {
-        toAdd?()
-    }
-    
-    @IBAction func doCancel(_ sender: UIButton) {
-        toCancel?()
     }
 }

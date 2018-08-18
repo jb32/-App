@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SafariServices
 
 class AppStoreOtherController: ZYYBaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -69,7 +70,8 @@ extension AppStoreOtherController: UICollectionViewDelegateFlowLayout, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let safari = SFSafariViewController(url: URL(string: "https://www.baidu.com")!)
+        present(safari, animated: true, completion: nil)
     }
 }
 

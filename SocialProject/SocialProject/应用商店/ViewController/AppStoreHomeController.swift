@@ -118,6 +118,10 @@ extension AppStoreHomeController: UICollectionViewDelegateFlowLayout, UICollecti
         if let cycArr = cycArr {
             let imagePaths = cycArr.map({ Image_Path + ($0[AppStore.advUrl].string ?? "") })
             header.cycleView.imagePaths = imagePaths
+            header.toSelect = { i in
+                let safari = SFSafariViewController(url: URL(string: "https://www.baidu.com")!)
+                self.present(safari, animated: true, completion: nil)
+            }
         }
         return header
     }

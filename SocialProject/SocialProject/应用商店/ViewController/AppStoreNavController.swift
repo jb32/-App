@@ -13,7 +13,7 @@ class AppStoreNavController: ZYYBaseViewController {
     
     @IBOutlet weak var menuView: AppMenuView!
     
-    var dataArr: [JSON]?
+//    var dataArr: [JSON]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,8 @@ extension AppStoreNavController {
         let req = AppClassReq()
         WebAPI.send(req) { (isSuccess, result, error) in
             if isSuccess, let result = result, let arr = result.array {
-                self.dataArr = arr
+//                self.dataArr = arr
+                self.menuView.dataArr = arr
                 self.menuView.reloadData()
                 
                 if let vc = self.childViewControllers.first as? AppStorePageController {
@@ -59,28 +60,28 @@ extension AppStoreNavController {
     }
 }
 
-extension AppStoreNavController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataArr?.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(type: AppStoreClassCell.self, for: indexPath)
-        
-        if let dataArr = dataArr {
-            let data = dataArr[indexPath.item]
-            cell.titleLB.text = data[AppStore.classType].string
-        }
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
-        
-        menuView.toSelected?(indexPath.item)
-    }
-}
+//extension AppStoreNavController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return dataArr?.count ?? 0
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(type: AppStoreClassCell.self, for: indexPath)
+//
+//        if let dataArr = dataArr {
+//            let data = dataArr[indexPath.item]
+//            cell.titleLB.text = data[AppStore.classType].string
+//        }
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+//
+//        menuView.toSelected?(indexPath.item)
+//    }
+//}
 
 
 

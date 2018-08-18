@@ -11,14 +11,14 @@ import LLCycleScrollView
 
 class CycleCollectionheader: UICollectionReusableView {
     @IBOutlet weak var cycleView: LLCycleScrollView!
-    var toSelect: ((Int) -> Void)?
+    var toSelect: ((Int) -> Void)? {
+        didSet {
+            cycleView.delegate = self
+        }
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-    
-    func asycDelegate() -> Void {
-        cycleView.delegate = self
     }
 }
 

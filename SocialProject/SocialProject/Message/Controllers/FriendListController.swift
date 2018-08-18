@@ -84,19 +84,19 @@ extension FriendListController: UITableViewDataSource, UITableViewDelegate {
                 cell.imgView.image = #imageLiteral(resourceName: "mine_avatar")
             }
             cell.titleLB.text = data[ContactModel.name].string
-            cell.addBtn?.isHidden = data[ContactModel.friends].bool ?? true
-            cell.toAdd = {
-                cell.addBtn?.isEnabled = false
-                self.netAttention(other: "\(data["id"].int ?? 0)", complete: {
-                    cell.addBtn?.isEnabled = true
-                })
-            }
-            cell.toCancel = {
-                cell.cancelBtn?.isEnabled = false
-                self.netCancelAttention(other: "\(data["id"].int ?? 0)", complete: {
-                    cell.cancelBtn?.isEnabled = true
-                })
-            }
+//            cell.addBtn?.isHidden = data[ContactModel.friends].bool ?? true
+//            cell.toAdd = {
+//                cell.addBtn?.isEnabled = false
+//                self.netAttention(other: "\(data["id"].int ?? 0)", complete: {
+//                    cell.addBtn?.isEnabled = true
+//                })
+//            }
+//            cell.toCancel = {
+//                cell.cancelBtn?.isEnabled = false
+//                self.netCancelAttention(other: "\(data["id"].int ?? 0)", complete: {
+//                    cell.cancelBtn?.isEnabled = true
+//                })
+//            }
         }
         
         return cell
@@ -157,7 +157,6 @@ extension FriendListController: UISearchBarDelegate {
             searchArr = nil
             tableView.reloadData()
         }
-        
         return true
     }
 }
@@ -194,45 +193,45 @@ extension FriendListController {
         }
     }
     
-    func netAttention(other id: String, complete: @escaping (() -> Void)) -> Void {
-        guard let idString = UserDefaults.standard.string(forKey: "ID") else { return }
-        
-        showBlurHUD()
-        
-        let req = AttentionReq(id: idString, otherId: id)
-        
-        WebAPI.send(req) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            
-            if isSuccess {
-                NotificationCenter.default.post(name: self.refreshNotity, object: nil)
-                self.showBlurHUD(result: .success, title: "添加成功")
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-            complete()
-        }
-    }
-    
-    func netCancelAttention(other id: String, complete: @escaping (() -> Void)) -> Void {
-        guard let idString = UserDefaults.standard.string(forKey: "ID") else { return }
-        
-        showBlurHUD()
-        
-        let req = CancelAttentionReq(id: idString, otherId: id)
-        
-        WebAPI.send(req) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            
-            if isSuccess {
-                NotificationCenter.default.post(name: self.refreshNotity, object: nil)
-                self.showBlurHUD(result: .success, title: "成功")
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-            complete()
-        }
-    }
+//    func netAttention(other id: String, complete: @escaping (() -> Void)) -> Void {
+//        guard let idString = UserDefaults.standard.string(forKey: "ID") else { return }
+//
+//        showBlurHUD()
+//
+//        let req = AttentionReq(id: idString, otherId: id)
+//
+//        WebAPI.send(req) { (isSuccess, result, error) in
+//            self.hideBlurHUD()
+//
+//            if isSuccess {
+//                NotificationCenter.default.post(name: self.refreshNotity, object: nil)
+//                self.showBlurHUD(result: .success, title: "添加成功")
+//            } else {
+//                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+//            }
+//            complete()
+//        }
+//    }
+//
+//    func netCancelAttention(other id: String, complete: @escaping (() -> Void)) -> Void {
+//        guard let idString = UserDefaults.standard.string(forKey: "ID") else { return }
+//
+//        showBlurHUD()
+//
+//        let req = CancelAttentionReq(id: idString, otherId: id)
+//
+//        WebAPI.send(req) { (isSuccess, result, error) in
+//            self.hideBlurHUD()
+//
+//            if isSuccess {
+//                NotificationCenter.default.post(name: self.refreshNotity, object: nil)
+//                self.showBlurHUD(result: .success, title: "成功")
+//            } else {
+//                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+//            }
+//            complete()
+//        }
+//    }
     
     func netSearch(phone: String) -> Void {
         
