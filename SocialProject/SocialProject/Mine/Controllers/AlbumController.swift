@@ -37,6 +37,7 @@ class AlbumController: ZYYBaseViewController {
     
     
     @IBAction func uploadImageAction(_ sender: UIButton) {
+        self.dataArray.removeAll()
         imagePicker = YLImagePickerController.init(maxImagesCount: 9)
         // 导出图片
         imagePicker?.didFinishPickingPhotosHandle = {(photos: [YLPhotoModel]) in
@@ -154,7 +155,8 @@ extension AlbumController {
         WebAPI.send(deleteRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
-                self.getUserData()
+                self.imgs = (result?.stringValue.components(separatedBy: ","))!
+                self.collectionView.reloadData()
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }

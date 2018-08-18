@@ -11,3 +11,4 @@
 #import "NSString+Encoding.h"
 #import "XWPublishController.h"
 #import <RongIMKit/RongIMKit.h>
+#import "HMPhotoBrowserController.h"

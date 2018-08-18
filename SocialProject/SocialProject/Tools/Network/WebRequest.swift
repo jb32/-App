@@ -208,6 +208,19 @@ struct BrandRequest: RequestType {
     }
 }
 
+// 大咖排行
+struct RankRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/app/selectBigShotRankings"
+    var parameters: Parameters
+    
+    typealias ResponsType = ObjectModelArray<RankModel>
+    
+    init() {
+        self.parameters = ["act": ""]
+    }
+}
+
 // 发现父类
 struct ParentRequest: RequestType {
     let host: String = ROOT_API_HOST

@@ -12,8 +12,8 @@ import UIKit
 // 网络接口
 #if DEBUG // 调试环境
 
-//let ROOT_API_HOST: String = "http://192.168.71.7:8080/shejiaoappserver"
-let ROOT_API_HOST: String = "http://47.92.101.248:8080/shejiaoappserver"
+let ROOT_API_HOST: String = "http://192.168.1.184:8080/shejiaoappserver"
+//let ROOT_API_HOST: String = "http://47.92.101.248:8080/shejiaoappserver"
 
 #else // 正式环境
 let ROOT_API_HOST: String = "http://192.168.71.10:8080/shejiaoappserver"
@@ -40,6 +40,15 @@ let PictureInMargin = CGFloat(3)
 let PictureViewWidth = DEVICE_WIDTH - 75
 //每个item的width
 let PicWidth = (PictureViewWidth - 2 * PictureInMargin) / 3
+
+///cell浏览照片的通知
+let StautsCellBrowserPhotoNotification = "StautsCellBrowserPhotoNotification"
+///选中索引的key
+let StatusCellBrowserPhotoSelectedIndexKey = "StatusCellBrowserPhotoSelectedIndexKey"
+///浏览照片 URL字符串数组的key
+let StatusCellBrowserPhotoURLsKey = "StatusCellBrowserPhotoURLsKey"
+///父视图的图像视图数组的key
+let StatusCellBrowserPhotoImageViewsKey = "StatusCellBrowserPhotoImageViewsKey"
 
 let UPLOAD_IMAGE_SCALE: CGFloat = 0.5
 

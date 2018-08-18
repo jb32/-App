@@ -299,10 +299,17 @@ typedef void(^Failure)(NSError * error);
     }];
 }
 
+
 -(void)postImagesToServer:(NSString *)strUrl dicPostParams:(NSMutableDictionary *)params imageArray:(NSArray *)imageArray file:(NSArray *)fileArray Success:(Success)success andFailure:(Failure)failure{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //分界线的标识符
+        NSString *TWITTERFON_FORM_BOUNDARY = @"AaB03x";
         NSURL *url = [NSURL URLWithString:strUrl];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        //分界线 --AaB03x
+        NSString *MPboundary=[[NSString alloc]initWithFormat:@"--%@",TWITTERFON_FORM_BOUNDARY];
+        //结束符 AaB03x--
+        NSString *endMPboundary=[[NSString alloc]initWithFormat:@"%@--",MPboundary];
         //要上传的图片
         UIImage *image;
         
@@ -340,10 +347,15 @@ typedef void(^Failure)(NSError * error);
         for(int i=0;i<[keys count];i++) {
             //得到当前key
             NSString *key=[keys objectAtIndex:i];
-            //添加字段名称，换行
+            
+            //添加分界线，换行
+            [body appendFormat:@"%@\r\n",MPboundary];
+            //添加字段名称，换2行
             [body appendFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key];
+            
             //添加字段的值
             [body appendFormat:@"%@\r\n",[params objectForKey:key]];
+            
         }
         
         //声明myRequestData，用来放入http body
@@ -359,6 +371,8 @@ typedef void(^Failure)(NSError * error);
             NSMutableString *imgbody = [[NSMutableString alloc] init];
             //此处循环添加图片文件
             //添加图片信息字段
+            ////添加分界线，换行
+            [imgbody appendFormat:@"%@\r\n",MPboundary];
             [imgbody appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%d.jpg\"\r\n", fileArray[i],i];
             //声明上传文件的格式
             [imgbody appendFormat:@"Content-Type: application/octet-stream; charset=utf-8\r\n\r\n"];
@@ -369,9 +383,13 @@ typedef void(^Failure)(NSError * error);
             [myRequestData appendData:data];
             [myRequestData appendData:[ @"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         }
+        //声明结束符：--AaB03x--
+        NSString *end=[[NSString alloc]initWithFormat:@"%@\r\n",endMPboundary];
+        //加入结束符--AaB03x--
+        [myRequestData appendData:[end dataUsingEncoding:NSUTF8StringEncoding]];
         
         //设置HTTPHeader中Content-Type的值
-        NSString *content=[[NSString alloc]initWithFormat:@"multipart/form-data"];
+        NSString *content=[[NSString alloc]initWithFormat:@"multipart/form-data; boundary=%@",TWITTERFON_FORM_BOUNDARY];
         //设置HTTPHeader
         [request setValue:content forHTTPHeaderField:@"Content-Type"];
         //设置Content-Length

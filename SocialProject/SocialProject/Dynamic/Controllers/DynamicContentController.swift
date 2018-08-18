@@ -20,10 +20,39 @@ class DynamicContentController: ZYYBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: 1))
         self.getData()
+        
+        //注册通知
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(browserPhoto),
+                                               name: NSNotification.Name(rawValue: StautsCellBrowserPhotoNotification),
+                                               object: nil)
+    }
+    
+    deinit {
+        //注销通知
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    //MARK:浏览照片的通知监听方法
+    @objc fileprivate func browserPhoto(n: Notification){
+        //1.从通知的userInfo提取参数
+        guard let selectedIndex = n.userInfo?[StatusCellBrowserPhotoSelectedIndexKey] as? Int,
+            let urls = n.userInfo?[StatusCellBrowserPhotoURLsKey] as? [String],
+            let imageViewList = n.userInfo?[StatusCellBrowserPhotoImageViewsKey] as? [UIImageView]
+            else{
+                return
+        }
+        
+        //展现照片浏览控制器
+        let vc = HMPhotoBrowserController.photoBrowser(withSelectedIndex: selectedIndex,
+                                                       urls: urls,
+                                                       parentImageViews: imageViewList)
+        present(vc, animated: true, completion: nil)
+        
     }
     
     func getData() {
@@ -110,7 +139,7 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
         if self.dataArray.count > 0 {
             let model = self.dataArray[indexPath.row]
             cell.model = model
-            cell.concernBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            cell.concernBtn.addTarget(self, action: #selector(concernAction(_:)), for: .touchUpInside)
             cell.collectBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
             cell.commentBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
             cell.transpondBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
@@ -119,12 +148,16 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    @objc func concernAction(_ sender: UIButton) {
+        let cell = sender.superview?.superview as! DynamicCell
+        let indexPath = self.tableView.indexPath(for: cell)
+        self.concernRequest(indexPath: indexPath!)
+    }
+    
     @objc func btnsAction(_ sender: UIButton) {
         let cell = sender.superview?.superview?.superview as! DynamicCell
         let indexPath = self.tableView.indexPath(for: cell)
         switch sender.tag {
-        case 5000:
-            self.concernRequest(indexPath: indexPath!)
         case 5001:
             self.praseRequest(indexPath: indexPath!)
         case 5002:

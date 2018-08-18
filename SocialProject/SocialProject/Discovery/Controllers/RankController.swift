@@ -12,11 +12,15 @@ class RankController: ZYYBaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var dataArray: [RankModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: 1))
+        
+        self.getRankData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +47,7 @@ extension RankController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.dataArray.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -51,7 +55,27 @@ extension RankController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectionCell", for: indexPath) as! ConnectionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MasterCell", for: indexPath) as! MasterCell
+        let model = self.dataArray[indexPath.row]
+        cell.rankLabel.text = "\(indexPath.row + 1)"
+        cell.headImgView.setWebImage(with: Image_Path+model.head_img)
+        cell.nicknameLabel.text = model.name
         return cell
+    }
+}
+
+extension RankController {
+    func getRankData() {
+        self.showBlurHUD()
+        let rankRequest = RankRequest()
+        WebAPI.send(rankRequest) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                self.dataArray = (result?.objectModels)!
+                self.tableView.reloadData()
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        }
     }
 }
