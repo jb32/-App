@@ -84,7 +84,7 @@ extension UserInfoViewController {
             if isSuccess, let result = result?.array?.first {
                 self.data = result
                 self.userCell.nameLB.text = result[ContactModel.name].string
-                self.userCell.idLB.text = result[ContactModel.id].string ?? id
+                self.userCell.idLB.text = "\(result[ContactModel.id].int ?? (Int(id) ?? 0))"
                 
                 if let url = URL(string: Image_Path + (result[ContactModel.headImg].string ?? "")) {
                     self.userCell.imgView.af_setImage(withURL: url)

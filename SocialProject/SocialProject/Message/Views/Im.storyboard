@@ -196,30 +196,14 @@
                                                         <constraint firstItem="ZxR-1o-rgx" firstAttribute="top" secondItem="E8p-ZI-bZa" secondAttribute="top" id="zCf-oD-cpl"/>
                                                     </constraints>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvy-46-Ath">
-                                                    <rect key="frame" x="280" y="17" width="80" height="30"/>
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="plI-M6-UHv"/>
-                                                    </constraints>
-                                                    <state key="normal" title="取消关注">
-                                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="doCancel:" destination="20N-lw-7dJ" eventType="touchUpInside" id="qV6-bd-otX"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="vvy-46-Ath" firstAttribute="centerY" secondItem="0cs-CB-wcm" secondAttribute="centerY" id="IXD-hA-HOB"/>
                                                 <constraint firstItem="E8p-ZI-bZa" firstAttribute="leading" secondItem="0cs-CB-wcm" secondAttribute="leading" constant="15" id="RzC-oL-Vj4"/>
-                                                <constraint firstItem="vvy-46-Ath" firstAttribute="trailing" secondItem="0cs-CB-wcm" secondAttribute="trailingMargin" id="SN3-7G-Jfw"/>
                                                 <constraint firstAttribute="bottom" secondItem="E8p-ZI-bZa" secondAttribute="bottom" constant="10" id="SU0-kW-9vr"/>
                                                 <constraint firstItem="E8p-ZI-bZa" firstAttribute="top" secondItem="0cs-CB-wcm" secondAttribute="top" constant="10" id="WSg-VQ-tN7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="cancelBtn" destination="vvy-46-Ath" id="u6w-TG-fDp"/>
                                             <outlet property="imgView" destination="ZxR-1o-rgx" id="fU2-Jd-YY6"/>
                                             <outlet property="titleLB" destination="cOj-rt-CUV" id="dwX-6f-kwG"/>
                                         </connections>
@@ -507,30 +491,14 @@
                                                         <constraint firstItem="lem-4Q-lPD" firstAttribute="top" secondItem="KDS-YE-49p" secondAttribute="top" id="HVF-f6-LIT"/>
                                                     </constraints>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PMQ-uG-Df5">
-                                                    <rect key="frame" x="280" y="18" width="80" height="30"/>
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="8mj-zQ-JuE"/>
-                                                    </constraints>
-                                                    <state key="normal" title="取消关注">
-                                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="doCancel:" destination="xkI-TH-0vg" eventType="touchUpInside" id="esC-0Y-oZe"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="PMQ-uG-Df5" secondAttribute="trailing" id="3LL-kc-TLK"/>
                                                 <constraint firstItem="KDS-YE-49p" firstAttribute="top" secondItem="RgK-UR-WzH" secondAttribute="top" constant="10" id="Pzz-c6-wp0"/>
-                                                <constraint firstItem="PMQ-uG-Df5" firstAttribute="centerY" secondItem="RgK-UR-WzH" secondAttribute="centerY" id="k0W-No-yac"/>
                                                 <constraint firstItem="KDS-YE-49p" firstAttribute="leading" secondItem="RgK-UR-WzH" secondAttribute="leading" constant="15" id="wzB-uf-ac0"/>
                                                 <constraint firstAttribute="bottom" secondItem="KDS-YE-49p" secondAttribute="bottom" constant="10" id="yNV-3r-J99"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="cancelBtn" destination="PMQ-uG-Df5" id="ltj-tr-uko"/>
                                             <outlet property="imgView" destination="lem-4Q-lPD" id="7wT-Xq-gx1"/>
                                             <outlet property="titleLB" destination="b7e-YZ-0EE" id="d3G-zB-hgB"/>
                                         </connections>
@@ -610,30 +578,14 @@
                                                         <constraint firstItem="0P7-Y5-Dxh" firstAttribute="top" secondItem="Tmg-ov-a65" secondAttribute="top" id="g36-Ze-gra"/>
                                                     </constraints>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fb3-Be-TSH">
-                                                    <rect key="frame" x="280" y="17" width="80" height="30"/>
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="FLr-RI-MaF"/>
-                                                    </constraints>
-                                                    <state key="normal" title="添加关注">
-                                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="doAdd:" destination="A8g-YD-rca" eventType="touchUpInside" id="fJi-7o-9CZ"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Tmg-ov-a65" firstAttribute="top" secondItem="Sop-Fc-7jk" secondAttribute="top" constant="10" id="QWM-CH-t9N"/>
                                                 <constraint firstItem="Tmg-ov-a65" firstAttribute="leading" secondItem="Sop-Fc-7jk" secondAttribute="leading" constant="15" id="RDj-zY-tbh"/>
-                                                <constraint firstItem="fb3-Be-TSH" firstAttribute="centerY" secondItem="Sop-Fc-7jk" secondAttribute="centerY" id="Vqe-QU-tFs"/>
                                                 <constraint firstAttribute="bottom" secondItem="Tmg-ov-a65" secondAttribute="bottom" constant="10" id="YPF-vg-ptr"/>
-                                                <constraint firstItem="fb3-Be-TSH" firstAttribute="trailing" secondItem="Sop-Fc-7jk" secondAttribute="trailingMargin" id="uYV-V5-W1c"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addBtn" destination="fb3-Be-TSH" id="khn-in-EIJ"/>
                                             <outlet property="imgView" destination="0P7-Y5-Dxh" id="0oW-Wm-zh2"/>
                                             <outlet property="titleLB" destination="wO4-S1-RwP" id="jGJ-pf-1Lh"/>
                                         </connections>
@@ -713,30 +665,14 @@
                                                         <constraint firstItem="Wn4-lC-VFM" firstAttribute="top" secondItem="6Xb-Ki-rYF" secondAttribute="top" id="pQ7-Pj-nW1"/>
                                                     </constraints>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MG5-J9-6eV">
-                                                    <rect key="frame" x="280" y="17" width="80" height="30"/>
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="kSt-BN-mOx"/>
-                                                    </constraints>
-                                                    <state key="normal" title="添加关注">
-                                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="doAdd:" destination="LpT-Ys-XwY" eventType="touchUpInside" id="7Ar-YK-Jiy"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="6Xb-Ki-rYF" secondAttribute="bottom" constant="10" id="3FY-sU-slE"/>
-                                                <constraint firstItem="MG5-J9-6eV" firstAttribute="centerY" secondItem="ZjF-xe-etV" secondAttribute="centerY" id="3ku-Ls-3wT"/>
-                                                <constraint firstItem="MG5-J9-6eV" firstAttribute="trailing" secondItem="ZjF-xe-etV" secondAttribute="trailingMargin" id="cWW-oT-1ef"/>
                                                 <constraint firstItem="6Xb-Ki-rYF" firstAttribute="top" secondItem="ZjF-xe-etV" secondAttribute="top" constant="10" id="jo7-Pg-pF3"/>
                                                 <constraint firstItem="6Xb-Ki-rYF" firstAttribute="leading" secondItem="ZjF-xe-etV" secondAttribute="leading" constant="15" id="uy5-0O-2qD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addBtn" destination="MG5-J9-6eV" id="WP4-GG-D3i"/>
                                             <outlet property="imgView" destination="Wn4-lC-VFM" id="b8h-eJ-JFB"/>
                                             <outlet property="titleLB" destination="bU1-cx-a3q" id="Wbo-6g-Hql"/>
                                         </connections>
@@ -823,30 +759,14 @@
                                                         <constraint firstItem="oS1-nX-66y" firstAttribute="top" secondItem="Jew-QK-FbW" secondAttribute="top" id="2GC-p5-yHV"/>
                                                     </constraints>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Y3-el-s1i">
-                                                    <rect key="frame" x="280" y="17" width="80" height="30"/>
-                                                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="Hxw-5G-JDq"/>
-                                                    </constraints>
-                                                    <state key="normal" title="添加关注">
-                                                        <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="doAdd:" destination="F6I-qz-awg" eventType="touchUpInside" id="hgF-dk-6ac"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Jew-QK-FbW" firstAttribute="top" secondItem="8y0-Z5-Nsh" secondAttribute="top" constant="10" id="AbL-kH-hfe"/>
                                                 <constraint firstAttribute="bottom" secondItem="Jew-QK-FbW" secondAttribute="bottom" constant="10" id="EFI-lf-C4L"/>
-                                                <constraint firstItem="1Y3-el-s1i" firstAttribute="trailing" secondItem="8y0-Z5-Nsh" secondAttribute="trailingMargin" id="Lpe-Fu-Sic"/>
-                                                <constraint firstItem="1Y3-el-s1i" firstAttribute="centerY" secondItem="8y0-Z5-Nsh" secondAttribute="centerY" id="hpf-Sh-RKH"/>
                                                 <constraint firstItem="Jew-QK-FbW" firstAttribute="leading" secondItem="8y0-Z5-Nsh" secondAttribute="leading" constant="15" id="qyo-9u-A1q"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addBtn" destination="1Y3-el-s1i" id="ate-GW-S6L"/>
                                             <outlet property="imgView" destination="oS1-nX-66y" id="G0O-ht-EiE"/>
                                             <outlet property="titleLB" destination="zyh-1g-zv6" id="MDQ-1O-Bc0"/>
                                         </connections>
@@ -885,6 +805,6 @@
         <image name="mine_avatar" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bKU-2Z-hKT"/>
+        <segue reference="bVK-wS-BM9"/>
     </inferredMetricsTieBreakers>
 </document>
