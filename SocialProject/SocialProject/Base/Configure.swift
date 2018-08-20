@@ -12,8 +12,8 @@ import UIKit
 // 网络接口
 #if DEBUG // 调试环境
 
-let ROOT_API_HOST: String = "http://192.168.1.184:8080/shejiaoappserver"
-//let ROOT_API_HOST: String = "http://47.92.101.248:8080/shejiaoappserver"
+//let ROOT_API_HOST: String = "http://192.168.1.184:8080/shejiaoappserver"
+let ROOT_API_HOST: String = "http://47.92.101.248:8080/shejiaoappserver"
 
 #else // 正式环境
 let ROOT_API_HOST: String = "http://192.168.71.10:8080/shejiaoappserver"
@@ -32,6 +32,7 @@ let DEVICE_WIDTH: CGFloat = UIScreen.main.bounds.width // 设备宽
 let DEVICE_HEIGHT: CGFloat = UIScreen.main.bounds.height // 设备高
 let userID: String = UserDefaults.standard.string(forKey: "ID") ?? ""
 let token: String = UserDefaults.standard.string(forKey: "token") ?? ""
+let circleType: String = UserDefaults.standard.string(forKey: "circleType") ?? ""
 //配图视图外侧的间距
 let PictureOutMargin = CGFloat(10)
 //配图视图内侧的间距

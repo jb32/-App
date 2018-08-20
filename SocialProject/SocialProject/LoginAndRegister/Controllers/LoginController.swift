@@ -57,20 +57,34 @@ class LoginController: ZYYBaseViewController {
         self.showBlurHUD()
         let loginRequest = LoginRequest(mobile: phoneStr, password: self.passwordTF.text!)
         WebAPI.send(loginRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
             if isSuccess {
                 UserDefaults.standard.set(result!["id"].stringValue, forKey: "ID")
                 UserDefaults.standard.set(result!["token"].stringValue, forKey: "token")
-                UserDefaults.standard.set(result!["circleType"].intValue, forKey: "circleType")
+                UserDefaults.standard.set(result!["circleType"].stringValue, forKey: "circleType")
                 UserDefaults.standard.synchronize()
-                if result!["circleType"] == .null {
-                    let circleVC = UIStoryboard(name: .user).initialize(class: CircleController.self)
-                    self.navigationController?.pushViewController(circleVC, animated: true)
-                } else {
-                    let mainVC = UIStoryboard(name: .main).initialize(class: ZYYBaseTabbarController.self)
-                    UIApplication.shared.keyWindow?.rootViewController = mainVC
-                }
                 self.login(name: phoneStr, userid: userID, token: token, password: self.passwordTF.text!.md5Hashed)
+                LocationManager.shareManager.creatLocationManager().startLocation { (location, adress, error) in
+                    print("经度 \(location?.coordinate.longitude ?? 0.0)")
+                    print("纬度 \(location?.coordinate.latitude ?? 0.0)")
+                    print("地址\(adress ?? "")")
+                    print("error\(error ?? "没有错误")")
+                    
+                    let locationReuqest = LocationRequest(ID: userID, longitude: (location?.coordinate.longitude)!, latitude: (location?.coordinate.latitude)!)
+                    WebAPI.send(locationReuqest, completeHandler: { (isSuccess, result, errror) in
+                        self.hideBlurHUD()
+                        if isSuccess {
+                            if circleType.length == 0 {
+                                let circleVC = UIStoryboard(name: .user).initialize(class: CircleController.self)
+                                self.navigationController?.pushViewController(circleVC, animated: true)
+                            } else {
+                                let mainVC = UIStoryboard(name: .main).initialize(class: ZYYBaseTabbarController.self)
+                                UIApplication.shared.keyWindow?.rootViewController = mainVC
+                            }
+                        } else {
+                            
+                        }
+                    })
+                }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
@@ -116,19 +130,6 @@ extension LoginController: UITextFieldDelegate {
 extension LoginController {
     func login(name: String, userid: String, token: String, password: String) {
         RCIM.shared().connect(withToken: token, success: { (userID) in
-//            RCRealTimeLocationManager.shared().getRealTimeLocationProxy(.ConversationType_PRIVATE, targetId: userID, success: { (realTimeLocation) in
-//                let location = realTimeLocation?.getLocation(userID)
-//                let locationReuqest = LocationRequest(ID: userID!, longitude: (location?.coordinate.longitude)!, latitude: (location?.coordinate.latitude)!)
-//                WebAPI.send(locationReuqest, completeHandler: { (isSuccess, result, errror) in
-//                    if isSuccess {
-//                        
-//                    } else {
-//                        
-//                    }
-//                })
-//            }, error: { (status) in
-//                print("get location share failure with code " + "\(status)")
-//            })
             print("登录成功 ==== 用户ID:" + userID!)
         }, error: { (status) in
             print("error status ==== %ld", status.rawValue)

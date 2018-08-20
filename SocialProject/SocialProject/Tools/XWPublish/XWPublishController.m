@@ -268,7 +268,7 @@ typedef void(^Failure)(NSError * error);
     // 可以选择上传大图数据或者小图数据->
     
     //大图数据
-    NSArray *bigImageDataArray = [self getBigImageArray];
+    NSArray *bigImageArray = [self getBigImageArray];
     
     //小图数组
     NSArray *smallImageArray = self.imageArray;
@@ -277,7 +277,7 @@ typedef void(^Failure)(NSError * error);
     NSMutableArray *smallImageDataArray = [NSMutableArray array];
 
     NSMutableArray *fileArr = [NSMutableArray array];
-    for (UIImage *smallImg in smallImageArray) {
+    for (UIImage *smallImg in bigImageArray) {
         NSData *smallImgData = UIImagePNGRepresentation(smallImg);
         [smallImageDataArray addObject:smallImgData];
         [fileArr addObject:@"file"];

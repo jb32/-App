@@ -70,7 +70,7 @@ extension ConnectionContentController: UITableViewDelegate, UITableViewDataSourc
         cell.projectNameLabel.text = model.newDynamic
         cell.nameLabel.text = model.name
         cell.concernCountLabel.text = model.concernNumber
-        cell.distanceLabel.text = model.userAddress + " " + model.distance
+        cell.distanceLabel.text = model.address + " " + model.distance
         cell.concernBtn.addTarget(self, action: #selector(concernAction(_:)), for: .touchUpInside)
         return cell
     }

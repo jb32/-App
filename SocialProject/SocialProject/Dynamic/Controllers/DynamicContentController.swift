@@ -65,8 +65,7 @@ class DynamicContentController: ZYYBaseViewController {
         } else if type == "咨询" {
             self.getInformationData()
         } else {
-            let circleType = UserDefaults.standard.integer(forKey: "circleType")
-            self.getProjectData(type: "\(circleType)")
+            self.getProjectData(type: circleType)
         }
     }
 
@@ -107,7 +106,7 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
     func updateRowHeight(indexPath: IndexPath) -> CGFloat {
         let model = self.dataArray[indexPath.row]
         var height:CGFloat = 105
-        let textHeight = String.getTextHeigh(textStr: (model.content), font: UIFont.systemFont(ofSize: 15), width: DEVICE_WIDTH - 75)
+        let textHeight = String.getTextHeigh(textStr: (model.comment), font: UIFont.systemFont(ofSize: 15), width: DEVICE_WIDTH - 75)
         print(textHeight)
         height = height + textHeight
         //4.配图视图
