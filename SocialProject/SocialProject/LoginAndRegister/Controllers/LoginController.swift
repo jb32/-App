@@ -68,22 +68,29 @@ class LoginController: ZYYBaseViewController {
                     print("纬度 \(location?.coordinate.latitude ?? 0.0)")
                     print("地址\(adress ?? "")")
                     print("error\(error ?? "没有错误")")
-                    
-                    let locationReuqest = LocationRequest(ID: userID, longitude: (location?.coordinate.longitude)!, latitude: (location?.coordinate.latitude)!)
-                    WebAPI.send(locationReuqest, completeHandler: { (isSuccess, result, errror) in
-                        self.hideBlurHUD()
-                        if isSuccess {
-                            if circleType.length == 0 {
-                                let circleVC = UIStoryboard(name: .user).initialize(class: CircleController.self)
-                                self.navigationController?.pushViewController(circleVC, animated: true)
-                            } else {
-                                let mainVC = UIStoryboard(name: .main).initialize(class: ZYYBaseTabbarController.self)
-                                UIApplication.shared.keyWindow?.rootViewController = mainVC
+                    if location != nil {
+                        let locationReuqest = LocationRequest(ID: userID, longitude: (location?.coordinate.longitude)!, latitude: (location?.coordinate.latitude)!)
+                        WebAPI.send(locationReuqest, completeHandler: { (isSuccess, result, errror) in
+                            self.hideBlurHUD()
+                            if isSuccess {
+                                if circleType.length == 0 {
+                                    let circleVC = UIStoryboard(name: .user).initialize(class: CircleController.self)
+                                    self.navigationController?.pushViewController(circleVC, animated: true)
+                                } else {
+                                    let mainVC = UIStoryboard(name: .main).initialize(class: ZYYBaseTabbarController.self)
+                                    UIApplication.shared.keyWindow?.rootViewController = mainVC
+                                }
                             }
+                        })
+                    } else {
+                        if circleType.length == 0 {
+                            let circleVC = UIStoryboard(name: .user).initialize(class: CircleController.self)
+                            self.navigationController?.pushViewController(circleVC, animated: true)
                         } else {
-                            
+                            let mainVC = UIStoryboard(name: .main).initialize(class: ZYYBaseTabbarController.self)
+                            UIApplication.shared.keyWindow?.rootViewController = mainVC
                         }
-                    })
+                    }
                 }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)

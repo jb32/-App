@@ -30,9 +30,27 @@ let RONGCLOUD_IM_APPKEY: String = "x4vkb1qpxfiok"
 let DEVICE_ID: String = UIDevice.current.identifierForVendor!.uuidString // 设备uuid
 let DEVICE_WIDTH: CGFloat = UIScreen.main.bounds.width // 设备宽
 let DEVICE_HEIGHT: CGFloat = UIScreen.main.bounds.height // 设备高
-let userID: String = UserDefaults.standard.string(forKey: "ID") ?? ""
-let token: String = UserDefaults.standard.string(forKey: "token") ?? ""
-let circleType: String = UserDefaults.standard.string(forKey: "circleType") ?? ""
+var userID: String {
+    if UserDefaults.standard.value(forKey: "ID") != nil {
+        return UserDefaults.standard.value(forKey: "ID") as! String
+    } else {
+        return ""
+    }
+}
+var token: String {
+    if UserDefaults.standard.value(forKey: "token") != nil {
+        return UserDefaults.standard.value(forKey: "token") as! String
+    } else {
+        return ""
+    }
+}
+var circleType: String {
+    if UserDefaults.standard.value(forKey: "circleType") != nil {
+        return UserDefaults.standard.value(forKey: "circleType") as! String
+    } else {
+        return ""
+    }
+}
 //配图视图外侧的间距
 let PictureOutMargin = CGFloat(10)
 //配图视图内侧的间距

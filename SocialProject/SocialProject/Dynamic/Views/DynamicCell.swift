@@ -24,7 +24,7 @@ class DynamicCell: UITableViewCell {
     var model: DynamicModel? {
         didSet {
             nameLabel.text = model?.nickname
-            avatarImgView.setWebImage(with: model?.headImg, placeholder: UIImage(named: "dynamic_avatar_boy"))
+            avatarImgView.setWebImage(with: Image_Path+(model?.headImg)!, placeholder: UIImage(named: "dynamic_avatar_boy"))
             timeLabel.text = model?.createtime
             contentLabel.text = model?.comment
             likeBtn.setTitle("点赞"+(model?.praselen)!, for: .normal)

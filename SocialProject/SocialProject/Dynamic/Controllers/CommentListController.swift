@@ -61,6 +61,8 @@ extension CommentListController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentCell
         let model = self.dataArray[indexPath.row]
+        cell.nicknameLabel.text = model.commentNickname
+        cell.avtarImgView.setWebImage(with: Image_Path+model.commentImg)
         cell.timeLabel.text = model.commenttime
         cell.contentLabel.text = model.comment
         return cell

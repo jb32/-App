@@ -61,8 +61,8 @@ class DynamicController: UIViewController {
     }
     
     @objc func rightAction() {
-        let publishVC = XWPublishController()
-        self.present(publishVC, animated: true, completion: nil)
+        let publishVC = PublishController()
+        self.navigationController?.pushViewController(publishVC, animated: true)
     }
 
     override func didReceiveMemoryWarning() {

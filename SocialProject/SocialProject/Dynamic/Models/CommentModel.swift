@@ -15,6 +15,8 @@ struct CommentModel: JSONParsable {
     let commentid: String
     let comment: String
     let commenttime: String
+    let commentNickname: String
+    let commentImg: String
     
     init(json: JSON) {
         self.id = json["id"].stringValue
@@ -22,6 +24,8 @@ struct CommentModel: JSONParsable {
         self.commentid = json["commentid"].stringValue
         self.comment = json["comment"].stringValue
         self.commenttime = json["commenttime"].stringValue
+        self.commentNickname = json["commentNickname"].stringValue
+        self.commentImg = json["commentImg"].stringValue
     }
     
     static func parse(_ json: JSON) -> CommentModel? {

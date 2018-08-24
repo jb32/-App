@@ -10,10 +10,14 @@ import UIKit
 
 class WalletController: ZYYBaseViewController {
 
+    @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var banlanceLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        bgView.backgroundColor = .themOneColor
+        self.getBanlanceData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +25,19 @@ class WalletController: ZYYBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    // 充值
+    @IBAction func rechargeAction(_ sender: UIButton) {
+        let rechargeVC = UIStoryboard(name: .mine).initialize(class: RechargeController.self)
+        self.navigationController?.pushViewController(rechargeVC, animated: true)
+    }
+    
+    // 明细
+    @IBAction func detailsAction(_ sender: UIButton) {
+        let detailsVC = UIStoryboard(name: .mine).initialize(class: DetailsController.self)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -32,4 +48,19 @@ class WalletController: ZYYBaseViewController {
     }
     */
 
+}
+
+extension WalletController {
+    func getBanlanceData() {
+        self.showBlurHUD()
+        let balanceRequest = BalanceRequest(ID: userID)
+        WebAPI.send(balanceRequest) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                self.banlanceLabel.text = "余额：" + result!["balance"].stringValue
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        }
+    }
 }

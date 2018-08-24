@@ -194,6 +194,30 @@ struct CircleRequest: RequestType {
     }
 }
 
+struct OthersInfoRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/app/selectUserAlbum"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String) {
+        self.parameters = ["id": ID]
+    }
+}
+
+struct OthersDynamicRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/myDynamics/app/othersDynamics"
+    var parameters: Parameters
+    
+    typealias ResponsType = ObjectModelArray<DynamicModel>
+    
+    init(ID: String) {
+        self.parameters = ["id": ID]
+    }
+}
+
 // MARK: 发现
 // 直销品牌
 struct BrandRequest: RequestType {
@@ -297,6 +321,19 @@ struct CollectRequest: RequestType {
     
     init(ID: String, dynamicsId: String) {
         self.parameters = ["id": ID, "dynamicsId": dynamicsId]
+    }
+}
+
+// 删除动态
+struct DeleteDynamicRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/deleteDynamic"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String, loginId: String) {
+        self.parameters = ["id": ID, "loginId": loginId]
     }
 }
 
@@ -405,6 +442,19 @@ struct UserInfoRequest: RequestType {
     }
 }
 
+// 用户关系
+struct UserConnectionRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/userRelation/app/countUserRelationNum"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String) {
+        self.parameters = ["id": ID]
+    }
+}
+
 // 修改用户信息
 struct UpdateUserInfoRequest: RequestType {
     let host: String = ROOT_API_HOST
@@ -453,9 +503,12 @@ struct UploadPhotoRequest: RequestType {
     
     typealias ResponsType = JSON
     
-    init(ID: String, file: [Data], url: String) {
+    init(ID: String, file: [Data], url: String, type: String, comment: String) {
         self.datas = file
         self.parameters = ["id": ID]
+        if comment.length != 0 {
+            self.parameters = ["id": ID, "type": type, "comment": comment]
+        }
         if url.length != 0 {
             path = url
         }
@@ -509,6 +562,33 @@ struct CollectionListRequest: RequestType {
     }
 }
 
+// 余额
+struct BalanceRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/settlementRecord/selectUserBalance"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String) {
+        self.parameters = ["id": ID]
+    }
+}
+
+// 明细
+struct DetailsRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/settlementRecord/selectAllDetailed"
+    var parameters: Parameters
+    
+    typealias ResponsType = ObjectModelArray<TradeModel>
+    
+    init(ID: String) {
+        self.parameters = ["id": ID]
+    }
+}
+
+// MARK:消息
 /// 好友等关系列表
 struct ContactRequest: RequestType {
     
@@ -659,8 +739,32 @@ struct AppListReq: RequestType {
 }
 
 
+// MARK: 简介
+// 查询个人主简介
+struct MainDescribtionRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/userProfile/app/getProfile"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String) {
+        parameters = ["id": ID]
+    }
+}
 
-
+// 查询个人简介
+struct DescribtionRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/userProfile/app/selectProfile"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String) {
+        parameters = ["id": ID]
+    }
+}
 
 
 

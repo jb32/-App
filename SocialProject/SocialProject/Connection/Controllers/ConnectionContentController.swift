@@ -15,7 +15,7 @@ class ConnectionContentController: UIViewController {
     var dataArray: [UserModel] = []
     var type = "1"
     
-    var pushAction:(_ vc: UserInfoViewController) -> Void = {_ in }
+    var pushAction:(_ vc: UIViewController) -> Void = {_ in }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +70,11 @@ extension ConnectionContentController: UITableViewDelegate, UITableViewDataSourc
         cell.projectNameLabel.text = model.newDynamic
         cell.nameLabel.text = model.name
         cell.concernCountLabel.text = model.concernNumber
-        cell.distanceLabel.text = model.address + " " + model.distance
+        if model.distance.length == 0 {
+            cell.distanceLabel.text = model.address + " " + "0km"
+        } else {
+            cell.distanceLabel.text = model.address + " " + model.distance
+        }
         cell.concernBtn.addTarget(self, action: #selector(concernAction(_:)), for: .touchUpInside)
         return cell
     }
@@ -83,10 +87,9 @@ extension ConnectionContentController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let userVC = UIStoryboard(name: .message).initialize(class: UserInfoViewController.self)
+        let userVC = UIStoryboard(name: .connection).initialize(class: InformationController.self)
         let model = self.dataArray[indexPath.row]
-        userVC.id = "\(model.id)"
-        userVC.title = model.name
+        userVC.model = model
         self.pushAction(userVC)
     }
 }
@@ -107,7 +110,6 @@ extension ConnectionContentController {
     }
 
     func concernRequest(indexPath: IndexPath) {
-        self.showBlurHUD()
         let model = self.dataArray[indexPath.row]
         self.showBlurHUD()
         let req = AttentionReq(id: userID, otherId: "\(model.id)")

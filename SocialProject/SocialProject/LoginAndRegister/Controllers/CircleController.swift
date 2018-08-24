@@ -14,7 +14,11 @@ class CircleController: ZYYBaseViewController {
     
     var dataArray: [CircleModel] = []
     var model: CircleModel?
+    
+    var type: Bool = true
 
+    var saveModelType:(_ model: CircleModel) -> Void = {_ in }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,7 +29,9 @@ class CircleController: ZYYBaseViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
         self.getCircleData()
-        self.setRightItem(title: "保存")
+        if self.type {
+            self.setRightItem(title: "保存")
+        }
     }
     
     override func rightAction() {
@@ -91,19 +97,23 @@ extension CircleController: UICollectionViewDelegateFlowLayout, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         model = self.dataArray[indexPath.item]
-        if !(model?.selected)! {
-            for i in 0..<self.dataArray.count {
-                var temp = self.dataArray[i]
-                if temp.selected {
-                    temp.selected = false
-                    self.dataArray.remove(at: i)
-                    self.dataArray.insert(temp, at: i)
+        if !type {
+            self.saveModelType(model!)
+        } else {
+            if !(model?.selected)! {
+                for i in 0..<self.dataArray.count {
+                    var temp = self.dataArray[i]
+                    if temp.selected {
+                        temp.selected = false
+                        self.dataArray.remove(at: i)
+                        self.dataArray.insert(temp, at: i)
+                    }
                 }
+                model?.selected = true
+                self.dataArray.remove(at: indexPath.item)
+                self.dataArray.insert(model!, at: indexPath.item)
+                self.collectionView.reloadData()
             }
-            model?.selected = true
-            self.dataArray.remove(at: indexPath.item)
-            self.dataArray.insert(model!, at: indexPath.item)
-            self.collectionView.reloadData()
         }
     }
 }
