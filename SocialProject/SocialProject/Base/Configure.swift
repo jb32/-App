@@ -11,9 +11,8 @@ import UIKit
 
 // 网络接口
 #if DEBUG // 调试环境
-
-//let ROOT_API_HOST: String = "http://192.168.1.184:8080/shejiaoappserver"
-let ROOT_API_HOST: String = "http://47.92.101.248:8080/shejiaoappserver"
+//let ROOT_API_HOST: String = "http://47.92.101.248:8080/shejiaoappserver"
+let ROOT_API_HOST: String = "http://192.168.1.184:8080/shejiaoappserver"
 
 #else // 正式环境
 let ROOT_API_HOST: String = "http://192.168.71.10:8080/shejiaoappserver"

@@ -741,6 +741,16 @@ struct AppListReq: RequestType {
     }
 }
 
+struct FashionReq: RequestType {//selectAppFashionableVane
+    let host: String = ROOT_API_HOST
+    let path: String = "/applicationStore/app/selectAppFashionableVane"
+    var parameters: Parameters
+
+    typealias ResponsType = JSON
+    init() {
+        parameters = [:]
+    }
+}
 
 // MARK: 简介
 // 查询个人主简介

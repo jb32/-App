@@ -11,7 +11,13 @@ import SwiftyJSON
 
 class HorizontalCollectionCell: UICollectionViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
-    var dataArr: [JSON]?
+    var dataArr: [JSON]? {
+        didSet {
+            if dataArr != nil {
+                collectionView.reloadData()
+            }
+        }
+    }
     var toSelect: ((Int) -> Void)?
 }
 
@@ -24,6 +30,12 @@ extension HorizontalCollectionCell: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(type: AppCollectionCell.self, for: indexPath)
+        if let dataArr = dataArr {
+            let data = dataArr[indexPath.item]
+            cell.imgView.af_setImage(withURL: URL(string: data["file_url"].string ?? "")!)
+            cell.titleLB.text = data["title"].string
+        }
+        
         return cell
     }
     

@@ -66,6 +66,7 @@ extension AppStoreHomeController: UICollectionViewDelegateFlowLayout, UICollecti
         switch indexPath.section {
         case 1:
             let cell = collectionView.dequeueReusableCell(type: HorizontalCollectionCell.self, for: indexPath)
+            cell.dataArr = ads
             cell.toSelect = { i in
                 let safari = SFSafariViewController(url: URL(string: "https://www.baidu.com")!)
                 self.present(safari, animated: true, completion: nil)
@@ -143,7 +144,7 @@ extension AppStoreHomeController {
             } else {
                 
             }
-            
+            self.netFashion()
         }
     }
     
@@ -160,6 +161,19 @@ extension AppStoreHomeController {
             
             if let classId = self.classId {
                 self.netApps(classId: classId)
+            }
+        }
+    }
+    
+    func netFashion() -> Void {
+        let req = FashionReq()
+        
+        WebAPI.send(req) { (isSuccess, result, error) in
+            if isSuccess, let result = result, let arr = result.array {
+                self.ads = arr
+                self.collectionView.reloadData()
+            } else {
+                
             }
         }
     }
