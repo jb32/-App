@@ -52,6 +52,10 @@ class MineController: UIViewController {
         }
         childViewControllers.append(myVC)
         let describtionVC = UIStoryboard(name: .mine).initialize(class: DescribtionController.self)
+        describtionVC.isMain = true
+        describtionVC.pushAction = { [unowned self] vc in
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         childViewControllers.append(describtionVC)
         let albumVC = UIStoryboard(name: .mine).initialize(class: AlbumController.self)
         albumVC.presentAction = { [unowned self] vc in
@@ -171,7 +175,7 @@ extension MineController: UIImagePickerControllerDelegate, UINavigationControlle
             
             let imageData = UIImageJPEGRepresentation(image, 0.5)!
             self.showBlurHUD(title: "修改头像中")
-            let uploadRequest = UploadPhotoRequest(ID: userID, file: [imageData], url: "/app/headUploadFile", type: "", comment: "")
+            let uploadRequest = UploadPhotoRequest(ID: userID, file: [imageData], url: "/app/headUploadFile", type: "", comment: "", content: "")
             WebAPI.upload(uploadRequest, progressHandler: { (progress) in
                 
             }, completeHandler: { (isSuccess, urlString, error) in

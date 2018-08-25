@@ -10,10 +10,7 @@ import UIKit
 import YLImagePickerController
 
 class AlbumController: ZYYBaseViewController {
-    
-    var others: Bool = false
-    var ID: String = ""
-    
+        
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var layout: UICollectionViewFlowLayout!
@@ -57,7 +54,7 @@ class AlbumController: ZYYBaseViewController {
                 }
             }
             self.showBlurHUD()
-            let uploadRequest = UploadPhotoRequest(ID: userID, file: self.dataArray, url: "", type: "", comment: "")
+            let uploadRequest = UploadPhotoRequest(ID: userID, file: self.dataArray, url: "", type: "", comment: "", content: "")
             WebAPI.upload(uploadRequest, progressHandler: { (progress) in
                 
             }, completeHandler: { (isSuccess, urlString, error) in
@@ -106,9 +103,7 @@ extension AlbumController: UICollectionViewDelegateFlowLayout, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlbumCell", for: indexPath) as! AlbumCell
         cell.photoImg.setWebImage(with: Image_Path+imgs[indexPath.item], placeholder: nil)
-        if !others {
-            cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture(gesture:))))
-        }
+        cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture(gesture:))))
         return cell
     }
     
@@ -140,31 +135,17 @@ extension AlbumController: UICollectionViewDelegateFlowLayout, UICollectionViewD
 
 extension AlbumController {
     func getUserData() {
-        if others {
-            self.showBlurHUD()
-            let userRequest = OthersInfoRequest(ID: ID)
-            WebAPI.send(userRequest) { (isSuccess, result, error) in
-                self.hideBlurHUD()
-                if isSuccess {
-                    self.imgs = (result?.stringValue.components(separatedBy: ","))!
+        self.showBlurHUD()
+        let userRequest = UserInfoRequest(ID: userID)
+        WebAPI.send(userRequest) { (isSuccess: Bool, user: UserModel?, error: NetworkError?) in
+            self.hideBlurHUD()
+            if isSuccess {
+                if (user?.album.length)! > 0 {
+                    self.imgs = (user?.album.components(separatedBy: ","))!
                     self.collectionView.reloadData()
-                } else {
-                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
                 }
-            }
-        } else {
-            self.showBlurHUD()
-            let userRequest = UserInfoRequest(ID: userID)
-            WebAPI.send(userRequest) { (isSuccess: Bool, user: UserModel?, error: NetworkError?) in
-                self.hideBlurHUD()
-                if isSuccess {
-                    if (user?.album.length)! > 0 {
-                        self.imgs = (user?.album.components(separatedBy: ","))!
-                        self.collectionView.reloadData()
-                    }
-                } else {
-                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
-                }
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
         }
     }

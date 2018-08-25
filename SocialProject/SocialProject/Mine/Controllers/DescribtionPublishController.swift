@@ -17,6 +17,7 @@ class DescribtionPublishController: XWPublishBaseController {
     var noteTextBackgroudView: UIView!
     var contentTV: UITextView!
     var textNumberLabel: UILabel!
+    var submitBtn: UIButton!
     
     var noteTextHeight: CGFloat = 0.0
     var allViewHeight: CGFloat = 0.0
@@ -25,7 +26,7 @@ class DescribtionPublishController: XWPublishBaseController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        self.title = "简介发布"
         self.view.backgroundColor = .white
         self.mainScrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT))
         self.mainScrollView.delegate = self
@@ -43,7 +44,8 @@ class DescribtionPublishController: XWPublishBaseController {
         noteTextBackgroudView.backgroundColor = .white
         mainScrollView.addSubview(noteTextBackgroudView)
         
-        self.contentTV = UITextView()
+        contentTV = UITextView()
+        contentTV.backgroundColor = UIColor.backgroundColor
         contentTV.keyboardType = .default
         contentTV.font = UIFont.systemFont(ofSize: 15.0)
         contentTV.textColor = .themTwoColor
@@ -58,6 +60,14 @@ class DescribtionPublishController: XWPublishBaseController {
         textNumberLabel.text = "0/\(kMaxTextCount)"
         self.mainScrollView.addSubview(textNumberLabel)
         
+        //发布按钮样式->可自定义!
+        submitBtn = UIButton()
+        submitBtn.setTitle("发布", for: .normal)
+        submitBtn.setTitleColor(UIColor.white, for: .normal)
+        submitBtn.backgroundColor = UIColor.themOneColor
+        submitBtn.addTarget(self, action: #selector(submitBtnClicked), for: .touchUpInside)
+        self.mainScrollView.addSubview(submitBtn)
+        
         updateViewsFrame()
     }
     
@@ -69,17 +79,59 @@ class DescribtionPublishController: XWPublishBaseController {
             noteTextHeight = 100
         }
         
-        noteTextBackgroudView.frame = CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: noteTextHeight)
+        noteTextBackgroudView.frame = CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: noteTextHeight + 10)
         
         //文本编辑框
-        contentTV.frame = CGRect(x: 15, y: 0, width: DEVICE_WIDTH - 30, height: noteTextHeight)
+        contentTV.frame = CGRect(x: 15, y: 10, width: DEVICE_WIDTH - 30, height: noteTextHeight)
         
         //文字个数提示Label
         textNumberLabel.frame = CGRect(x: 0, y: contentTV.frame.origin.y + contentTV.frame.size.height-15, width: DEVICE_WIDTH-10, height: 15)
         
         self.updatePickerViewFrameY(textNumberLabel.frame.origin.y + textNumberLabel.frame.size.height)
-        allViewHeight = noteTextHeight + self.getPickerViewFrame().size.height + 15
+        
+        //发布按钮
+        submitBtn.bounds = CGRect(x: 15, y: self.getPickerViewFrame().origin.y+self.getPickerViewFrame().size.height+10, width: DEVICE_WIDTH - 30, height: 40)
+        submitBtn.frame = CGRect(x: 15, y: self.getPickerViewFrame().origin.y+self.getPickerViewFrame().size.height+10, width: DEVICE_WIDTH - 30, height: 40)
+        allViewHeight = noteTextHeight + 10 + self.getPickerViewFrame().size.height + 15 + 50
         mainScrollView.contentSize = CGSize(width: 0, height: allViewHeight)
+    }
+    
+    @objc func submitBtnClicked() {
+        if checkInput() {
+            submitToServer()
+        }
+    }
+    
+    func checkInput() -> Bool {
+        if contentTV.text.length == 0 {
+            self.showBlurHUD(result: .warning, title: "请输入文字")
+            return false
+        }
+        if contentTV.text.length > 300 {
+            self.showBlurHUD(result: .warning, title: "超出文本限制")
+            return false
+        }
+        return true
+    }
+    
+    func submitToServer() {
+        self.showBlurHUD()
+        let imageData: [Data] = self.getBigImageArray() as! [Data]
+        let uploadRequest = UploadPhotoRequest(ID: userID, file: imageData, url: "/userProfile/app/releaseProfile", type: "", comment: "", content: contentTV.text)
+        WebAPI.upload(uploadRequest, progressHandler: { (progress) in
+            
+        }, completeHandler: { (isSuccess, urlString, error) in
+            self.hideBlurHUD()
+            if isSuccess == true {
+                let alert = LYAlertView(title: "上传成功")
+                alert.addAlertAction(with: "确定", style: .destructive) {[unowned self] _ in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                alert.show()
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        })
     }
 
     override func didReceiveMemoryWarning() {

@@ -5,7 +5,7 @@
 //  Created by Mac on 2018/8/23.
 //  Copyright © 2018年 ZYY. All rights reserved.
 //
-
+import Foundation
 import SwiftyJSON
 
 struct TradeModel: JSONParsable {

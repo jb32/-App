@@ -1,45 +1,27 @@
 //
-//  DynamicCell.swift
+//  DescibtionCell.swift
 //  SocialProject
 //
-//  Created by Mac on 2018/7/16.
+//  Created by Mac on 2018/8/24.
 //  Copyright © 2018年 ZYY. All rights reserved.
 //
 
 import UIKit
 
-class DynamicCell: UITableViewCell {
-
-    @IBOutlet weak var avatarImgView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+class DescibtionCell: UITableViewCell {
+    
     @IBOutlet weak var contentLabel: UILabel!
-    @IBOutlet weak var likeBtn: UIButton!
-    @IBOutlet weak var transpondBtn: UIButton!
-    @IBOutlet weak var commentBtn: UIButton!
-    @IBOutlet weak var collectBtn: UIButton!
-    @IBOutlet weak var concernBtn: UIButton!
-    @IBOutlet weak var photoView: StatusPictureView!
-    
-    var model: DynamicModel? {
-        didSet {
-            nameLabel.text = model?.nickname
-            avatarImgView.setWebImage(with: Image_Path+(model?.headImg)!, placeholder: UIImage(named: "dynamic_avatar_boy"))
-            timeLabel.text = model?.createtime
-            contentLabel.text = model?.comment
-            likeBtn.setTitle("点赞"+(model?.praselen)!, for: .normal)
-            transpondBtn.setTitle("转发"+(model?.forwardlen)!, for: .normal)
-            collectBtn.setTitle("收藏"+(model?.collectionlen)!, for: .normal)
-            photoView.viewModel = model
-        }
-    }
-    
+    @IBOutlet weak var photoView: DescribtionPictureView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        concernBtn.layer.borderWidth = 1
-        concernBtn.layer.borderColor = UIColor.themOneColor.cgColor
+    }
+    
+    var model: DescribtionModel? {
+        didSet {
+            contentLabel.text = model?.content
+            photoView.viewModel = model
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,14 +29,15 @@ class DynamicCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
 }
 
-class StatusPictureView: UIView {
-    var viewModel: DynamicModel? {
+class DescribtionPictureView: UIView {
+    var viewModel: DescribtionModel? {
         didSet{
             calcViewSize()
             var picURLs: [String] = []
-            let arr = viewModel?.image.components(separatedBy: ",")
+            let arr = viewModel?.images.components(separatedBy: ",")
             for url in arr! {
                 if url.length > 0 {
                     picURLs.append(Image_Path+url)
@@ -68,7 +51,7 @@ class StatusPictureView: UIView {
     fileprivate func calcViewSize(){
         //处理宽度
         var picURLs: [String] = []
-        let arr = viewModel?.image.components(separatedBy: ",")
+        let arr = viewModel?.images.components(separatedBy: ",")
         for url in arr! {
             if url.length > 0 {
                 picURLs.append(Image_Path+url)
@@ -77,11 +60,12 @@ class StatusPictureView: UIView {
         
         if picURLs.count == 1{//a.单图，根据配图视图的大小修改subViews[0]的宽度
             let v = subviews[0]
-            v.frame = CGRect(x: 0, y: PictureOutMargin, width: DEVICE_WIDTH - 75, height: 150)
+            v.frame = CGRect(x: 0, y: PictureOutMargin, width: DEVICE_WIDTH - 30, height: 150)
             picviewHeight.constant = 150
         } else {//b.多图，恢复subviews[0]的宽度，保证九宫格布局完整
             let v = subviews[0]
-            v.frame = CGRect(x: 0, y: PictureOutMargin, width: PicWidth, height: PicWidth)
+            let picWidth = (DEVICE_WIDTH - 30 - 2 * PictureInMargin) / 3
+            v.frame = CGRect(x: 0, y: PictureOutMargin, width: picWidth, height: picWidth)
             let pictureSize = calcuPictureViewSize(count: picURLs.count)
             //修改高度
             picviewHeight.constant = pictureSize.height
@@ -144,7 +128,7 @@ class StatusPictureView: UIView {
     @objc fileprivate func tapImageView(tap: UITapGestureRecognizer){
         
         var picURLs: [String] = []
-        let arr = viewModel?.image.components(separatedBy: ",")
+        let arr = viewModel?.images.components(separatedBy: ",")
         for url in arr! {
             if url.length > 0 {
                 picURLs.append(Image_Path+url)
@@ -180,7 +164,7 @@ class StatusPictureView: UIView {
     
 }
 
-extension StatusPictureView{
+extension DescribtionPictureView {
     //1.cell中所有的控件都是提前准备好
     //2.设置的时候，根据数据决定是否显示
     //3.不要动态创建控件
@@ -193,10 +177,11 @@ extension StatusPictureView{
         clipsToBounds = true
         
         let count = 3
+        let picWidth = (DEVICE_WIDTH - 30 - 2 * PictureInMargin) / 3
         let rect = CGRect(x: 0,
                           y: PictureOutMargin,
-                          width: PicWidth,
-                          height: PicWidth)
+                          width: picWidth,
+                          height: picWidth)
         
         for i in 0..<count * count {
             
@@ -208,10 +193,9 @@ extension StatusPictureView{
             let row = CGFloat(i / count)
             //列
             let col = CGFloat(i % count)
+            let xOffset = col * (picWidth + PictureInMargin)
             
-            let xOffset = col * (PicWidth + PictureInMargin)
-            
-            let yOffset = row * (PicWidth + PictureInMargin)
+            let yOffset = row * (picWidth + PictureInMargin)
             
             iv.frame = rect.offsetBy(dx: xOffset, dy: yOffset)
             

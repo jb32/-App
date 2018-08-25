@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6ED94EE89A82AB7FEC0ABAD3FF0F2889"
-               BlueprintName = "YLImagePickerController"
+               BlueprintIdentifier = "44051C6BC790958343DC8C8D83AE04B0"
+               BlueprintName = "LLCycleScrollView"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "YLImagePickerController.framework">
+               BuildableName = "LLCycleScrollView.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

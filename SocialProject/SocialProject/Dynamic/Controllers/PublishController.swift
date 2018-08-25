@@ -36,7 +36,7 @@ class PublishController: XWPublishController {
         }
         self.showBlurHUD()
         let imageData: [Data] = self.getBigImageArray() as! [Data]
-        let uploadRequest = UploadPhotoRequest(ID: userID, file: imageData, url: "/addDynamic", type: "\((self.model?.id)!)", comment: noteTextView.text)
+        let uploadRequest = UploadPhotoRequest(ID: userID, file: imageData, url: "/addDynamic", type: "\((self.model?.id)!)", comment: noteTextView.text, content: "")
         WebAPI.upload(uploadRequest, progressHandler: { (progress) in
             
         }, completeHandler: { (isSuccess, urlString, error) in
