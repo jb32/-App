@@ -21,12 +21,6 @@
 		140FC2A1210868E600F69F52 /* DirectPushController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FC2A0210868E600F69F52 /* DirectPushController.swift */; };
 		140FC2A321086DBA00F69F52 /* ReferralsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FC2A221086DBA00F69F52 /* ReferralsCell.swift */; };
 		141AB6C72126AAB700A29CBD /* CommentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6C62126AAB700A29CBD /* CommentListController.swift */; };
-		141AB6C92126AAC500A29CBD /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6C82126AAC500A29CBD /* CommentModel.swift */; };
-		141AB6CD2126AAD200A29CBD /* CustomInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 141AB6CA2126AAD100A29CBD /* CustomInputView.xib */; };
-		141AB6CE2126AAD200A29CBD /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6CB2126AAD100A29CBD /* CommentCell.swift */; };
-		141AB6CF2126AAD200A29CBD /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6CC2126AAD100A29CBD /* CustomInputView.swift */; };
-		141AB6D22126AAE200A29CBD /* MyDynamicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6D02126AAE200A29CBD /* MyDynamicController.swift */; };
-		141AB6D32126AAE200A29CBD /* MyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141AB6D12126AAE200A29CBD /* MyController.swift */; };
 		141E5D1D211A87B900E2BC62 /* CircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E5D1C211A87B900E2BC62 /* CircleController.swift */; };
 		141E5D1F211A960A00E2BC62 /* CircleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E5D1E211A960A00E2BC62 /* CircleModel.swift */; };
 		141E5D21211A9A2000E2BC62 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E5D20211A9A2000E2BC62 /* CircleCell.swift */; };
@@ -120,7 +114,6 @@
 		1454B39720FF2ABB006C4269 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454B39620FF2ABB006C4269 /* AlbumCell.swift */; };
 		1454B39920FF3B6B006C4269 /* WalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454B39820FF3B6B006C4269 /* WalletController.swift */; };
 		1454B39B20FF3FBE006C4269 /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454B39A20FF3FBE006C4269 /* CollectionController.swift */; };
-		1454B39D20FF3FF0006C4269 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454B39C20FF3FF0006C4269 /* CollectionCell.swift */; };
 		145892402114533900F870F2 /* ChatListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458923F2114533900F870F2 /* ChatListController.swift */; };
 		145F0F3221008DA900202BA6 /* JsonParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145F0F2F21008DA900202BA6 /* JsonParse.swift */; };
 		145F0F3321008DA900202BA6 /* WebAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145F0F3021008DA900202BA6 /* WebAPI.swift */; };
@@ -200,9 +193,11 @@
 		F016CCD721213208003BFBD7 /* BorderButtion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCD621213208003BFBD7 /* BorderButtion.swift */; };
 		F016CCD921213422003BFBD7 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCD821213422003BFBD7 /* UserInfoViewController.swift */; };
 		F016CCDB21213974003BFBD7 /* ContactUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F016CCDA21213974003BFBD7 /* ContactUserCell.swift */; };
+		F032011621310AF50005D38E /* TemplateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F032011421310AF50005D38E /* TemplateView.xib */; };
+		F032011721310AF50005D38E /* TemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032011521310AF50005D38E /* TemplateView.swift */; };
+		F032011921310B380005D38E /* PublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F032011821310B380005D38E /* PublishController.swift */; };
 		F088A70621267B9500D42504 /* MyDynamicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70421267B9400D42504 /* MyDynamicController.swift */; };
 		F088A70721267B9500D42504 /* MyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70521267B9500D42504 /* MyController.swift */; };
-		F088A70921267BB800D42504 /* CommentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70821267BB800D42504 /* CommentListController.swift */; };
 		F088A70D21267BE200D42504 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70A21267BE000D42504 /* CommentCell.swift */; };
 		F088A70E21267BE200D42504 /* CustomInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F088A70B21267BE100D42504 /* CustomInputView.xib */; };
 		F088A70F21267BE200D42504 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088A70C21267BE200D42504 /* CustomInputView.swift */; };
@@ -241,12 +236,6 @@
 		140FC2A0210868E600F69F52 /* DirectPushController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectPushController.swift; sourceTree = "<group>"; };
 		140FC2A221086DBA00F69F52 /* ReferralsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralsCell.swift; sourceTree = "<group>"; };
 		141AB6C62126AAB700A29CBD /* CommentListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListController.swift; sourceTree = "<group>"; };
-		141AB6C82126AAC500A29CBD /* CommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
-		141AB6CA2126AAD100A29CBD /* CustomInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInputView.xib; sourceTree = "<group>"; };
-		141AB6CB2126AAD100A29CBD /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
-		141AB6CC2126AAD100A29CBD /* CustomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
-		141AB6D02126AAE200A29CBD /* MyDynamicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDynamicController.swift; sourceTree = "<group>"; };
-		141AB6D12126AAE200A29CBD /* MyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyController.swift; sourceTree = "<group>"; };
 		141E5D1C211A87B900E2BC62 /* CircleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleController.swift; sourceTree = "<group>"; };
 		141E5D1E211A960A00E2BC62 /* CircleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleModel.swift; sourceTree = "<group>"; };
 		141E5D20211A9A2000E2BC62 /* CircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
@@ -382,7 +371,6 @@
 		1454B39620FF2ABB006C4269 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		1454B39820FF3B6B006C4269 /* WalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletController.swift; sourceTree = "<group>"; };
 		1454B39A20FF3FBE006C4269 /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
-		1454B39C20FF3FF0006C4269 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		1458923F2114533900F870F2 /* ChatListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListController.swift; sourceTree = "<group>"; };
 		145F0F2F21008DA900202BA6 /* JsonParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParse.swift; sourceTree = "<group>"; };
 		145F0F3021008DA900202BA6 /* WebAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebAPI.swift; sourceTree = "<group>"; };
@@ -470,9 +458,11 @@
 		F016CCD621213208003BFBD7 /* BorderButtion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButtion.swift; sourceTree = "<group>"; };
 		F016CCD821213422003BFBD7 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		F016CCDA21213974003BFBD7 /* ContactUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUserCell.swift; sourceTree = "<group>"; };
+		F032011421310AF50005D38E /* TemplateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemplateView.xib; sourceTree = "<group>"; };
+		F032011521310AF50005D38E /* TemplateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateView.swift; sourceTree = "<group>"; };
+		F032011821310B380005D38E /* PublishController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishController.swift; sourceTree = "<group>"; };
 		F088A70421267B9400D42504 /* MyDynamicController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDynamicController.swift; sourceTree = "<group>"; };
 		F088A70521267B9500D42504 /* MyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyController.swift; sourceTree = "<group>"; };
-		F088A70821267BB800D42504 /* CommentListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListController.swift; sourceTree = "<group>"; };
 		F088A70A21267BE000D42504 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		F088A70B21267BE100D42504 /* CustomInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInputView.xib; sourceTree = "<group>"; };
 		F088A70C21267BE200D42504 /* CustomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInputView.swift; sourceTree = "<group>"; };
@@ -920,6 +910,8 @@
 		149C65AE20F73BDD00559E5F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F032011521310AF50005D38E /* TemplateView.swift */,
+				F032011421310AF50005D38E /* TemplateView.xib */,
 				141F150820FC33D3002C014A /* CommonTF.swift */,
 				142C6FFF2105CF1100C84CE1 /* BridgeHeader.h */,
 			);
@@ -1052,6 +1044,7 @@
 				141AB6C62126AAB700A29CBD /* CommentListController.swift */,
 				14B7AD5F20FBBB7000BBBF28 /* DynamicController.swift */,
 				14B7AD6120FBBB8500BBBF28 /* DynamicContentController.swift */,
+				F032011821310B380005D38E /* PublishController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1125,7 +1118,6 @@
 			children = (
 				1454B39020FF1791006C4269 /* MineStoryboard.storyboard */,
 				1454B39620FF2ABB006C4269 /* AlbumCell.swift */,
-				1454B39C20FF3FF0006C4269 /* CollectionCell.swift */,
 				140FC29A2108544E00F69F52 /* MemberCell.swift */,
 				140FC2A221086DBA00F69F52 /* ReferralsCell.swift */,
 			);
@@ -1363,7 +1355,6 @@
 				143FE990210AFB2A002BC1A0 /* close@3x.png in Resources */,
 				143FE9A5210AFB2A002BC1A0 /* MImaCell.xib in Resources */,
 				143FE9A1210AFB2A002BC1A0 /* none.png in Resources */,
-				141AB6CD2126AAD200A29CBD /* CustomInputView.xib in Resources */,
 				143FE991210AFB2A002BC1A0 /* ico_check_nomal.png in Resources */,
 				149C658620F6F7CD00559E5F /* LaunchScreen.storyboard in Resources */,
 				143FE948210AF617002BC1A0 /* SWQRCode.bundle in Resources */,
@@ -1387,6 +1378,7 @@
 				143FE98E210AFB2A002BC1A0 /* close.png in Resources */,
 				143FE993210AFB2A002BC1A0 /* ico_check_nomal@3x.png in Resources */,
 				143FE996210AFB2A002BC1A0 /* ico_check_select@3x.png in Resources */,
+				F032011621310AF50005D38E /* TemplateView.xib in Resources */,
 				F0011CF1211D22330069111E /* Im.storyboard in Resources */,
 				143FE998210AFB2A002BC1A0 /* plus@2x.png in Resources */,
 				14B7AD5C20FBB1DD00BBBF28 /* ConnectionStoryboard.storyboard in Resources */,
@@ -1509,7 +1501,6 @@
 				F0011D01211D6A8B0069111E /* ContactModel.swift in Sources */,
 				143321882106D09F00868F20 /* DynamicModel.swift in Sources */,
 				143FE9DB210AFC92002BC1A0 /* SDWebImageManager.m in Sources */,
-				141AB6C92126AAC500A29CBD /* CommentModel.swift in Sources */,
 				143FE9E2210AFC92002BC1A0 /* UIImageView+WebCache.m in Sources */,
 				14B7AD5A20FBAE9B00BBBF28 /* ConnectionContentController.swift in Sources */,
 				F01242452123D0DC00A0F37C /* AppCollectionCell.swift in Sources */,
@@ -1525,6 +1516,7 @@
 				143FE9A0210AFB2A002BC1A0 /* JJPhotoManeger.m in Sources */,
 				F012424D2124154A00A0F37C /* AppStoreOtherController.swift in Sources */,
 				143950A320F840C0007853A8 /* BaseNavigationController.swift in Sources */,
+				F032011721310AF50005D38E /* TemplateView.swift in Sources */,
 				145892402114533900F870F2 /* ChatListController.swift in Sources */,
 				143FE9DA210AFC92002BC1A0 /* SDWebImageDownloaderOperation.m in Sources */,
 				F015EE142122D48800E3787B /* AppStoreHomeController.swift in Sources */,
@@ -1536,8 +1528,6 @@
 				143FE9AD210AFB2A002BC1A0 /* XWPhotoCell.m in Sources */,
 				14B7AD5E20FBBA2E00BBBF28 /* ConnectionCell.swift in Sources */,
 				143FE947210AF617002BC1A0 /* SWQRCodeManager.swift in Sources */,
-				141AB6CF2126AAD200A29CBD /* CustomInputView.swift in Sources */,
-				141AB6D22126AAE200A29CBD /* MyDynamicController.swift in Sources */,
 				143321852106CA1000868F20 /* GTMBase64.m in Sources */,
 				143FE99D210AFB2A002BC1A0 /* JJMainScrollView.m in Sources */,
 				14B7AC9E20FA46D700BBBF28 /* AppDelegate.swift in Sources */,
@@ -1547,7 +1537,6 @@
 				143FE9A7210AFB2A002BC1A0 /* MShowAllGroup.m in Sources */,
 				F016CCD921213422003BFBD7 /* UserInfoViewController.swift in Sources */,
 				143950A220F840C0007853A8 /* BaseTabbarController.swift in Sources */,
-				141AB6D32126AAE200A29CBD /* MyController.swift in Sources */,
 				143FE9A2210AFB2A002BC1A0 /* MGroupCell.m in Sources */,
 				F0011CFB211D299F0069111E /* ChatPageController.swift in Sources */,
 				140FC29D21085A2700F69F52 /* MemberModel.swift in Sources */,
@@ -1590,7 +1579,6 @@
 				143FE99B210AFB2A002BC1A0 /* MHeaderImaCell.m in Sources */,
 				F0124255212431FF00A0F37C /* AppStoreClassCell.swift in Sources */,
 				143FE9DF210AFC92002BC1A0 /* UIImage+MultiFormat.m in Sources */,
-				F088A70921267BB800D42504 /* CommentListController.swift in Sources */,
 				143FE9DD210AFC92002BC1A0 /* UIButton+WebCache.m in Sources */,
 				1454B39320FF1F6B006C4269 /* DescribtionController.swift in Sources */,
 				143FE93D210AC5FC002BC1A0 /* PersonalInfoCell.swift in Sources */,
@@ -1617,7 +1605,6 @@
 				142C6FCC210571D300C84CE1 /* ProjectModel.swift in Sources */,
 				143FE949210AF617002BC1A0 /* SWQRCodeViewController.swift in Sources */,
 				143FE9D6210AFC92002BC1A0 /* SDImageCache.m in Sources */,
-				1454B39D20FF3FF0006C4269 /* CollectionCell.swift in Sources */,
 				143FE9B0210AFB2A002BC1A0 /* XWPublishController.m in Sources */,
 				F016CCDB21213974003BFBD7 /* ContactUserCell.swift in Sources */,
 				14046836211843E90019B524 /* UsefulPickerView.swift in Sources */,
@@ -1627,7 +1614,7 @@
 				143FE9A6210AFB2A002BC1A0 /* MImaLibTool.m in Sources */,
 				143FE9AC210AFB2A002BC1A0 /* XWImagePickerSheet.m in Sources */,
 				145F0F3421008DA900202BA6 /* WebRequest.swift in Sources */,
-				141AB6CE2126AAD200A29CBD /* CommentCell.swift in Sources */,
+				F032011921310B380005D38E /* PublishController.swift in Sources */,
 				1454B39520FF26D8006C4269 /* AlbumController.swift in Sources */,
 				143FE9D5210AFC92002BC1A0 /* NSData+ImageContentType.m in Sources */,
 				141AB6C72126AAB700A29CBD /* CommentListController.swift in Sources */,
