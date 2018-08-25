@@ -13,13 +13,17 @@
 /**
  *  取消按钮+监听方法
  */
-@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
-- (IBAction)cancelClick:(UIButton *)sender;
-/**
- *  title文字  默认分享新鲜事可在xib修改
- */
-@property (weak, nonatomic) IBOutlet UILabel *titleLB;
+//@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+//- (IBAction)cancelClick:(UIButton *)sender;
+///**
+// *  title文字  默认分享新鲜事可在xib修改
+// */
+//@property (weak, nonatomic) IBOutlet UILabel *titleLB;
 
+/**
+ *  主视图-
+ */
+@property (nonatomic, strong) UIScrollView *mianScrollView;
 
 //背景
 @property(nonatomic,strong) UIView *noteTextBackgroudView;
@@ -35,5 +39,12 @@
 
 //发布按钮
 @property(nonatomic,strong) UIButton *submitBtn;
+
+// 圈子选择
+@property(nonatomic,strong) UIButton *chooseCircleBtn;
+
+- (void)chooseCircleAction:(UIButton *)sender;
+
+- (void)submitToServer;
 
 @end

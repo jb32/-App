@@ -16,6 +16,12 @@ class MineController: UIViewController {
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var avatarImg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var countView: UIView!
+    @IBOutlet weak var friendsCountLabel: UILabel!
+    @IBOutlet weak var fansCountLabel: UILabel!
+    @IBOutlet weak var concernCountLabel: UILabel!
+    
     var userModel: UserModel?
     
     // 相机，相册
@@ -36,6 +42,7 @@ class MineController: UIViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         bgView.backgroundColor = UIColor.themOneColor
+        countView.backgroundColor = UIColor.themOneColor
         
         let titles: [String] = ["我的", "简介", "相册", "动态"]
         var childViewControllers: [UIViewController] = []
@@ -61,7 +68,7 @@ class MineController: UIViewController {
         style.titleViewBackgroundColor = .themOneColor
         
         // 创建对应的DNSPageView，并设置它的frame
-        let pageView = DNSPageView(frame: CGRect(x: 0, y: 110, width: DEVICE_WIDTH, height: DEVICE_HEIGHT - 44 - 100), style: style, titles: titles, childViewControllers: childViewControllers)
+        let pageView = DNSPageView(frame: CGRect(x: 0, y: 110 + 50, width: DEVICE_WIDTH, height: DEVICE_HEIGHT - 44 - 110 - 50), style: style, titles: titles, childViewControllers: childViewControllers)
         self.view.addSubview(pageView)
         
         self.avatarImg.isUserInteractionEnabled = true
@@ -121,6 +128,17 @@ extension MineController {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
         }
+        
+        let connectionRequest = UserConnectionRequest(ID: userID)
+        WebAPI.send(connectionRequest) { (isSuccess, result, error) in
+            if isSuccess {
+                self.friendsCountLabel.text = result!["friends"].stringValue
+                self.concernCountLabel.text = result!["follow"].stringValue
+                self.fansCountLabel.text = result!["fans"].stringValue
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        }
     }
 }
 
@@ -153,7 +171,7 @@ extension MineController: UIImagePickerControllerDelegate, UINavigationControlle
             
             let imageData = UIImageJPEGRepresentation(image, 0.5)!
             self.showBlurHUD(title: "修改头像中")
-            let uploadRequest = UploadPhotoRequest(ID: userID, file: [imageData], url: "/app/headUploadFile")
+            let uploadRequest = UploadPhotoRequest(ID: userID, file: [imageData], url: "/app/headUploadFile", type: "", comment: "")
             WebAPI.upload(uploadRequest, progressHandler: { (progress) in
                 
             }, completeHandler: { (isSuccess, urlString, error) in

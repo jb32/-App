@@ -27,14 +27,6 @@ typedef void(^Failure)(NSError * error);
     float allViewHeight;
 }
 
-
-
-
-/**
- *  主视图-
- */
-@property (weak, nonatomic) IBOutlet UIScrollView *mianScrollView;
-
 @end
 
 @implementation XWPublishController
@@ -42,11 +34,17 @@ typedef void(^Failure)(NSError * error);
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.title = @"发布动态";
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelClick:)];
+    
     //收起键盘
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped)];
     tap.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tap];
-    
+    self.mianScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
+    [self.view addSubview:self.mianScrollView];
     [_mianScrollView setDelegate:self];
     self.showInView = _mianScrollView;
     
@@ -84,6 +82,11 @@ typedef void(^Failure)(NSError * error);
     _textNumberLabel.backgroundColor = [UIColor whiteColor];
     _textNumberLabel.text = [NSString stringWithFormat:@"0/%d    ",kMaxTextCount];
     
+    _chooseCircleBtn = [[UIButton alloc]init];
+    [_chooseCircleBtn setTitle:@"项目选择" forState:UIControlStateNormal];
+    [_chooseCircleBtn setTitleColor:[UIColor colorWithRed:243.0/255.0 green:60.0/255.0 blue:62.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [_chooseCircleBtn addTarget:self action:@selector(chooseCircleAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     _explainLabel = [[UILabel alloc]init];
 //    _explainLabel.text = @"添加图片不超过9张，文字备注不超过300字";
     _explainLabel.text = [NSString stringWithFormat:@"添加图片不超过9张，文字备注不超过%d字", kMaxTextCount];
@@ -110,11 +113,17 @@ typedef void(^Failure)(NSError * error);
     [_mianScrollView addSubview:_noteTextBackgroudView];
     [_mianScrollView addSubview:_noteTextView];
     [_mianScrollView addSubview:_textNumberLabel];
+    [_mianScrollView addSubview:_chooseCircleBtn];
     [_mianScrollView addSubview:_explainLabel];
     [_mianScrollView addSubview:_submitBtn];
     
     [self updateViewsFrame];
 }
+
+- (void)chooseCircleAction:(UIButton *)sender {
+    
+}
+
 /**
  *  界面布局 frame
  */
@@ -135,9 +144,10 @@ typedef void(^Failure)(NSError * error);
     //文字个数提示Label
     _textNumberLabel.frame = CGRectMake(0, _noteTextView.frame.origin.y + _noteTextView.frame.size.height-15, SCREENWIDTH-10, 15);
     
+    _chooseCircleBtn.frame = CGRectMake(10, _textNumberLabel.frame.origin.y + _textNumberLabel.frame.size.height, SCREENWIDTH-20, 30);
     
     //photoPicker
-    [self updatePickerViewFrameY:_textNumberLabel.frame.origin.y + _textNumberLabel.frame.size.height];
+    [self updatePickerViewFrameY:_chooseCircleBtn.frame.origin.y + _chooseCircleBtn.frame.size.height];
     
     
     //说明文字
@@ -265,44 +275,51 @@ typedef void(^Failure)(NSError * error);
 #pragma mark - 上传数据到服务器前将图片转data（上传服务器用form表单：未写）
 - (void)submitToServer {
     
-    // 可以选择上传大图数据或者小图数据->
-    
-    //大图数据
-    NSArray *bigImageDataArray = [self getBigImageArray];
-    
-    //小图数组
-    NSArray *smallImageArray = self.imageArray;
-    
-    //小图二进制数据
-    NSMutableArray *smallImageDataArray = [NSMutableArray array];
-
-    NSMutableArray *fileArr = [NSMutableArray array];
-    for (UIImage *smallImg in smallImageArray) {
-        NSData *smallImgData = UIImagePNGRepresentation(smallImg);
-        [smallImageDataArray addObject:smallImgData];
-        [fileArr addObject:@"file"];
-    }
-    NSLog(@"上传服务器... +++ 文本内容:%@",_noteTextView.text);
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:_noteTextView.text forKey:@"comment"];
-    [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"ID"] forKey:@"id"];
-    [dic setValue:@"1" forKey:@"type"];
-    [self postImagesToServer:@"http://192.168.1.184:8080/shejiaoappserver/addDynamic" dicPostParams:dic imageArray:smallImageArray file:fileArr Success:^(id responseObject) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"发布成功!" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionCacel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [alertController addAction:actionCacel];
-        [self presentViewController:alertController animated:YES completion:nil];
-    } andFailure:^(NSError *error) {
-        
-    }];
+//    // 可以选择上传大图数据或者小图数据->
+//    
+//    //大图数据
+//    NSArray *bigImageDataArray = [self getBigImageArray];
+//    
+//    //小图数组
+//    NSArray *smallImageArray = self.imageArray;
+//    
+//    //小图二进制数据
+//    NSMutableArray *smallImageDataArray = [NSMutableArray array];
+//
+//    NSMutableArray *fileArr = [NSMutableArray array];
+//    for (UIImage *smallImg in smallImageArray) {
+//        NSData *smallImgData = UIImagePNGRepresentation(smallImg);
+//        [smallImageDataArray addObject:smallImgData];
+//        [fileArr addObject:@"file"];
+//    }
+//    NSLog(@"上传服务器... +++ 文本内容:%@",_noteTextView.text);
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//    [dic setValue:_noteTextView.text forKey:@"comment"];
+//    [dic setValue:[[NSUserDefaults standardUserDefaults] valueForKey:@"ID"] forKey:@"id"];
+//    [dic setValue:@"1" forKey:@"type"];
+//    [self postImagesToServer:@"http://47.92.101.248:8080/shejiaoappserver/addDynamic" dicPostParams:dic imageArray:self.bigImageArray file:fileArr Success:^(id responseObject) {
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:@"发布成功!" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *actionCacel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }];
+//        [alertController addAction:actionCacel];
+//        [self presentViewController:alertController animated:YES completion:nil];
+//    } andFailure:^(NSError *error) {
+//        
+//    }];
 }
+
 
 -(void)postImagesToServer:(NSString *)strUrl dicPostParams:(NSMutableDictionary *)params imageArray:(NSArray *)imageArray file:(NSArray *)fileArray Success:(Success)success andFailure:(Failure)failure{
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //分界线的标识符
+        NSString *TWITTERFON_FORM_BOUNDARY = @"AaB03x";
         NSURL *url = [NSURL URLWithString:strUrl];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        //分界线 --AaB03x
+        NSString *MPboundary=[[NSString alloc]initWithFormat:@"--%@",TWITTERFON_FORM_BOUNDARY];
+        //结束符 AaB03x--
+        NSString *endMPboundary=[[NSString alloc]initWithFormat:@"%@--",MPboundary];
         //要上传的图片
         UIImage *image;
         
@@ -340,10 +357,15 @@ typedef void(^Failure)(NSError * error);
         for(int i=0;i<[keys count];i++) {
             //得到当前key
             NSString *key=[keys objectAtIndex:i];
-            //添加字段名称，换行
+            
+            //添加分界线，换行
+            [body appendFormat:@"%@\r\n",MPboundary];
+            //添加字段名称，换2行
             [body appendFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",key];
+            
             //添加字段的值
             [body appendFormat:@"%@\r\n",[params objectForKey:key]];
+            
         }
         
         //声明myRequestData，用来放入http body
@@ -359,6 +381,8 @@ typedef void(^Failure)(NSError * error);
             NSMutableString *imgbody = [[NSMutableString alloc] init];
             //此处循环添加图片文件
             //添加图片信息字段
+            ////添加分界线，换行
+            [imgbody appendFormat:@"%@\r\n",MPboundary];
             [imgbody appendFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%d.jpg\"\r\n", fileArray[i],i];
             //声明上传文件的格式
             [imgbody appendFormat:@"Content-Type: application/octet-stream; charset=utf-8\r\n\r\n"];
@@ -369,9 +393,13 @@ typedef void(^Failure)(NSError * error);
             [myRequestData appendData:data];
             [myRequestData appendData:[ @"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
         }
+        //声明结束符：--AaB03x--
+        NSString *end=[[NSString alloc]initWithFormat:@"%@\r\n",endMPboundary];
+        //加入结束符--AaB03x--
+        [myRequestData appendData:[end dataUsingEncoding:NSUTF8StringEncoding]];
         
         //设置HTTPHeader中Content-Type的值
-        NSString *content=[[NSString alloc]initWithFormat:@"multipart/form-data"];
+        NSString *content=[[NSString alloc]initWithFormat:@"multipart/form-data; boundary=%@",TWITTERFON_FORM_BOUNDARY];
         //设置HTTPHeader
         [request setValue:content forHTTPHeaderField:@"Content-Type"];
         //设置Content-Length
@@ -406,12 +434,12 @@ typedef void(^Failure)(NSError * error);
     // Dispose of any resources that can be recreated.
     NSLog(@"内存警告...");
 }
-- (IBAction)cancelClick:(UIButton *)sender {
+- (void)cancelClick:(UIBarButtonItem *)sender {
     NSLog(@"取消");
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *actionCacel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *actionGiveUpPublish = [UIAlertAction actionWithTitle:@"放弃上传" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
     [alertController addAction:actionCacel];
     [alertController addAction:actionGiveUpPublish];

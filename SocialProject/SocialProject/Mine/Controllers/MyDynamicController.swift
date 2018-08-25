@@ -11,6 +11,8 @@ import DNSPageView
 
 class MyDynamicController: ZYYBaseViewController {
     
+    var others: Bool = false
+    var ID: String = ""
     @IBOutlet weak var tableView: UITableView!
     
     var dataArray: [DynamicModel] = []
@@ -26,23 +28,40 @@ class MyDynamicController: ZYYBaseViewController {
 
         // Do any additional setup after loading the view.
         
+        //注册通知
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(browserPhoto),
+                                               name: NSNotification.Name(rawValue: StautsCellBrowserPhotoNotification),
+                                               object: nil)
+    }
+    
+    deinit {
+        //注销通知
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    //MARK:浏览照片的通知监听方法
+    @objc fileprivate func browserPhoto(n: Notification){
+        //1.从通知的userInfo提取参数
+        guard let selectedIndex = n.userInfo?[StatusCellBrowserPhotoSelectedIndexKey] as? Int,
+            let urls = n.userInfo?[StatusCellBrowserPhotoURLsKey] as? [String],
+            let imageViewList = n.userInfo?[StatusCellBrowserPhotoImageViewsKey] as? [UIImageView]
+            else{
+                return
+        }
+        
+        //展现照片浏览控制器
+        let vc = HMPhotoBrowserController.photoBrowser(withSelectedIndex: selectedIndex,
+                                                       urls: urls,
+                                                       parentImageViews: imageViewList)
+        present(vc, animated: true, completion: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -65,7 +84,7 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
     func updateRowHeight(indexPath: IndexPath) -> CGFloat {
         let model = self.dataArray[indexPath.row]
         var height:CGFloat = 105
-        let textHeight = String.getTextHeigh(textStr: (model.content), font: UIFont.systemFont(ofSize: 15), width: DEVICE_WIDTH - 75)
+        let textHeight = String.getTextHeigh(textStr: (model.comment), font: UIFont.systemFont(ofSize: 15), width: DEVICE_WIDTH - 75)
         print(textHeight)
         height = height + textHeight
         //4.配图视图
@@ -100,6 +119,9 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
             cell.concernBtn.isHidden = true
             cell.collectBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
             cell.commentBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            if !others {
+                cell.transpondBtn.setTitle("删除", for: .normal)
+            }
             cell.transpondBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
             cell.likeBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
         }
@@ -113,7 +135,11 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
         case 5001:
             self.praseRequest(indexPath: indexPath!)
         case 5002:
-            self.transmitRequest(indexPath: indexPath!)
+            if others {
+                self.transmitRequest(indexPath: indexPath!)
+            } else {
+                self.deleteRequest(indexPath: indexPath!)
+            }
         case 5003:
             let commentVC = UIStoryboard(name: .dynamic).initialize(class: CommentListController.self)
             let model = self.dataArray[(indexPath?.row)!]
@@ -130,15 +156,29 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
 extension MyDynamicController {
     
     func getDynamicData() {
-        self.showBlurHUD()
-        let dynamicRequest = MyDynamicRequest(ID: userID)
-        WebAPI.send(dynamicRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.dataArray = (result?.objectModels)!
-                self.tableView.reloadData()
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+        if others {
+            self.showBlurHUD()
+            let dynamicRequest = OthersDynamicRequest(ID: ID)
+            WebAPI.send(dynamicRequest) { (isSuccess, result, error) in
+                self.hideBlurHUD()
+                if isSuccess {
+                    self.dataArray = (result?.objectModels)!
+                    self.tableView.reloadData()
+                } else {
+                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
+                }
+            }
+        } else {
+            self.showBlurHUD()
+            let dynamicRequest = MyDynamicRequest(ID: userID)
+            WebAPI.send(dynamicRequest) { (isSuccess, result, error) in
+                self.hideBlurHUD()
+                if isSuccess {
+                    self.dataArray = (result?.objectModels)!
+                    self.tableView.reloadData()
+                } else {
+                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
+                }
             }
         }
     }
@@ -175,6 +215,24 @@ extension MyDynamicController {
                     model.forwardlen = "\(Int(model.forwardlen)! + 1)"
                     self.dataArray.remove(at: indexPath.row)
                     self.dataArray.insert(model, at: indexPath.row)
+                    self.tableView.reloadData()
+                }
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        }
+    }
+    
+    // 删除
+    func deleteRequest(indexPath: IndexPath) {
+        self.showBlurHUD()
+        let model = self.dataArray[indexPath.row]
+        let deleteRequest = DeleteDynamicRequest(ID: model.id, loginId: userID)
+        WebAPI.send(deleteRequest) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                self.showBlurHUD(result: .success, title: "删除成功") { [unowned self] in
+                    self.dataArray.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 }
             } else {

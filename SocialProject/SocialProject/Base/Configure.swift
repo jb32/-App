@@ -29,8 +29,27 @@ let RONGCLOUD_IM_APPKEY: String = "x4vkb1qpxfiok"
 let DEVICE_ID: String = UIDevice.current.identifierForVendor!.uuidString // 设备uuid
 let DEVICE_WIDTH: CGFloat = UIScreen.main.bounds.width // 设备宽
 let DEVICE_HEIGHT: CGFloat = UIScreen.main.bounds.height // 设备高
-let userID: String = UserDefaults.standard.string(forKey: "ID") ?? ""
-let token: String = UserDefaults.standard.string(forKey: "token") ?? ""
+var userID: String {
+    if UserDefaults.standard.value(forKey: "ID") != nil {
+        return UserDefaults.standard.value(forKey: "ID") as! String
+    } else {
+        return ""
+    }
+}
+var token: String {
+    if UserDefaults.standard.value(forKey: "token") != nil {
+        return UserDefaults.standard.value(forKey: "token") as! String
+    } else {
+        return ""
+    }
+}
+var circleType: String {
+    if UserDefaults.standard.value(forKey: "circleType") != nil {
+        return UserDefaults.standard.value(forKey: "circleType") as! String
+    } else {
+        return ""
+    }
+}
 //配图视图外侧的间距
 let PictureOutMargin = CGFloat(10)
 //配图视图内侧的间距
@@ -39,6 +58,15 @@ let PictureInMargin = CGFloat(3)
 let PictureViewWidth = DEVICE_WIDTH - 75
 //每个item的width
 let PicWidth = (PictureViewWidth - 2 * PictureInMargin) / 3
+
+///cell浏览照片的通知
+let StautsCellBrowserPhotoNotification = "StautsCellBrowserPhotoNotification"
+///选中索引的key
+let StatusCellBrowserPhotoSelectedIndexKey = "StatusCellBrowserPhotoSelectedIndexKey"
+///浏览照片 URL字符串数组的key
+let StatusCellBrowserPhotoURLsKey = "StatusCellBrowserPhotoURLsKey"
+///父视图的图像视图数组的key
+let StatusCellBrowserPhotoImageViewsKey = "StatusCellBrowserPhotoImageViewsKey"
 
 let UPLOAD_IMAGE_SCALE: CGFloat = 0.5
 

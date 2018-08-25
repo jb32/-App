@@ -32,6 +32,8 @@ class MyController: UITableViewController {
             self.pushAction(qrcodeVC)
         default:
             // 我的二维码
+            let myqrcodeVC = QRCodeViewController()
+            self.pushAction(myqrcodeVC)
             break
         }
     }

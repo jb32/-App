@@ -24,9 +24,9 @@ class DynamicCell: UITableViewCell {
     var model: DynamicModel? {
         didSet {
             nameLabel.text = model?.nickname
-            avatarImgView.setWebImage(with: model?.headImg, placeholder: UIImage(named: "dynamic_avatar_boy"))
+            avatarImgView.setWebImage(with: Image_Path+(model?.headImg)!, placeholder: UIImage(named: "dynamic_avatar_boy"))
             timeLabel.text = model?.createtime
-            contentLabel.text = model?.content
+            contentLabel.text = model?.comment
             likeBtn.setTitle("点赞"+(model?.praselen)!, for: .normal)
             transpondBtn.setTitle("转发"+(model?.forwardlen)!, for: .normal)
             collectBtn.setTitle("收藏"+(model?.collectionlen)!, for: .normal)
@@ -143,38 +143,39 @@ class StatusPictureView: UIView {
     //MARK:手机监听方法
     @objc fileprivate func tapImageView(tap: UITapGestureRecognizer){
         
-        //        guard let iv = tap.view,
-        //            let picURLs = viewModel?.picURLs else{
-        //                return
-        //        }
+        var picURLs: [String] = []
+        let arr = viewModel?.image.components(separatedBy: ",")
+        for url in arr! {
+            if url.length > 0 {
+                picURLs.append(Image_Path+url)
+            }
+        }
+        guard let iv = tap.view else{
+            return
+            
+        }
         
-        //        var selectedIndex = iv.tag
-        //
-        //        //针对四张图处理
-        //        if picURLs.count == 4 && selectedIndex > 1 {
-        //            selectedIndex -= 1
-        //        }
-        //
-        //        let urls = (picURLs as NSArray).value(forKey: "largePic") as! [String]
-        //
-        //        //处理可见的图像视图数组
-        //        var imageViewList = [UIImageView]()
-        //
-        //        for iv in subviews as! [UIImageView] {
-        //
-        //            if !iv.isHidden {
-        //                imageViewList.append(iv)
-        //            }
-        //
-        //        }
-        //
-        //        //发送通知
-        //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: StautsCellBrowserPhotoNotification),
-        //                                        object: self,
-        //                                        userInfo: [ StatusCellBrowserPhotoURLsKey: urls,
-        //                                                    StatusCellBrowserPhotoSelectedIndexKey: selectedIndex,
-        //                                                    StatusCellBrowserPhotoImageViewsKey:imageViewList
-        //            ])
+        var selectedIndex = iv.tag
+        
+        //针对四张图处理
+        if picURLs.count == 4 && selectedIndex > 1 {
+            selectedIndex -= 1
+        }
+        //处理可见的图像视图数组
+        var imageViewList = [UIImageView]()
+        for iv in subviews as! [UIImageView] {
+            if !iv.isHidden {
+                imageViewList.append(iv)
+            }
+        }
+        
+        //发送通知
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: StautsCellBrowserPhotoNotification),
+                                        object: self,
+                                        userInfo: [ StatusCellBrowserPhotoURLsKey: urls,
+                                                    StatusCellBrowserPhotoSelectedIndexKey: selectedIndex,
+                                                    StatusCellBrowserPhotoImageViewsKey:imageViewList
+            ])
     }
     
 }

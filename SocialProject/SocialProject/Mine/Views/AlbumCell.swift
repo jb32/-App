@@ -12,5 +12,8 @@ class AlbumCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImg: UIImageView!
     
-    
+    override func awakeFromNib() {
+        photoImg.contentMode = .scaleAspectFill
+        photoImg.clipsToBounds = true
+    }
 }

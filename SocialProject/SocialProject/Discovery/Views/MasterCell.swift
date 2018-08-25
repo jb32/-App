@@ -1,15 +1,18 @@
 //
-//  CollectionCell.swift
+//  MasterCell.swift
 //  SocialProject
 //
-//  Created by Mac on 2018/7/18.
+//  Created by Mac on 2018/8/18.
 //  Copyright © 2018年 ZYY. All rights reserved.
 //
 
 import UIKit
 
-class CollectionCell: UITableViewCell {
-
+class MasterCell: UITableViewCell {
+    @IBOutlet weak var nicknameLabel: UILabel!
+    
+    @IBOutlet weak var rankLabel: UILabel!
+    @IBOutlet weak var headImgView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

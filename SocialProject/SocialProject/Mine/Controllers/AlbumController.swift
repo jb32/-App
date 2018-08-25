@@ -11,6 +11,9 @@ import YLImagePickerController
 
 class AlbumController: ZYYBaseViewController {
     
+    var others: Bool = false
+    var ID: String = ""
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var layout: UICollectionViewFlowLayout!
@@ -30,6 +33,7 @@ class AlbumController: ZYYBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
         let width = (DEVICE_WIDTH - 45) / 3
         layout.itemSize = CGSize(width: width, height: width)
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -37,6 +41,7 @@ class AlbumController: ZYYBaseViewController {
     
     
     @IBAction func uploadImageAction(_ sender: UIButton) {
+        self.dataArray.removeAll()
         imagePicker = YLImagePickerController.init(maxImagesCount: 9)
         // 导出图片
         imagePicker?.didFinishPickingPhotosHandle = {(photos: [YLPhotoModel]) in
@@ -52,7 +57,7 @@ class AlbumController: ZYYBaseViewController {
                 }
             }
             self.showBlurHUD()
-            let uploadRequest = UploadPhotoRequest(ID: userID, file: self.dataArray, url: "")
+            let uploadRequest = UploadPhotoRequest(ID: userID, file: self.dataArray, url: "", type: "", comment: "")
             WebAPI.upload(uploadRequest, progressHandler: { (progress) in
                 
             }, completeHandler: { (isSuccess, urlString, error) in
@@ -101,7 +106,9 @@ extension AlbumController: UICollectionViewDelegateFlowLayout, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AlbumCell", for: indexPath) as! AlbumCell
         cell.photoImg.setWebImage(with: Image_Path+imgs[indexPath.item], placeholder: nil)
-        cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture(gesture:))))
+        if !others {
+            cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture(gesture:))))
+        }
         return cell
     }
     
@@ -133,17 +140,31 @@ extension AlbumController: UICollectionViewDelegateFlowLayout, UICollectionViewD
 
 extension AlbumController {
     func getUserData() {
-        self.showBlurHUD()
-        let userRequest = UserInfoRequest(ID: userID)
-        WebAPI.send(userRequest) { (isSuccess: Bool, user: UserModel?, error: NetworkError?) in
-            self.hideBlurHUD()
-            if isSuccess {
-                if (user?.album.length)! > 0 {
-                    self.imgs = (user?.album.components(separatedBy: ","))!
+        if others {
+            self.showBlurHUD()
+            let userRequest = OthersInfoRequest(ID: ID)
+            WebAPI.send(userRequest) { (isSuccess, result, error) in
+                self.hideBlurHUD()
+                if isSuccess {
+                    self.imgs = (result?.stringValue.components(separatedBy: ","))!
                     self.collectionView.reloadData()
+                } else {
+                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
                 }
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        } else {
+            self.showBlurHUD()
+            let userRequest = UserInfoRequest(ID: userID)
+            WebAPI.send(userRequest) { (isSuccess: Bool, user: UserModel?, error: NetworkError?) in
+                self.hideBlurHUD()
+                if isSuccess {
+                    if (user?.album.length)! > 0 {
+                        self.imgs = (user?.album.components(separatedBy: ","))!
+                        self.collectionView.reloadData()
+                    }
+                } else {
+                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
+                }
             }
         }
     }
@@ -154,7 +175,8 @@ extension AlbumController {
         WebAPI.send(deleteRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
-                self.getUserData()
+                self.imgs = (result?.stringValue.components(separatedBy: ","))!
+                self.collectionView.reloadData()
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
