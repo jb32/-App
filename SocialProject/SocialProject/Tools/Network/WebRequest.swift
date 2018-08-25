@@ -187,10 +187,10 @@ struct CircleRequest: RequestType {
     let path: String = "/getAccountById"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<UserModel>
+    typealias ResponsType = ObjectModelPagedArray<ConnectionModel>
     
-    init(ID: String, type: String) {
-        self.parameters = ["id": ID, "circleType": type]
+    init(ID: String, type: String, page: Int) {
+        self.parameters = ["id": ID, "circleType": type, "pageNum": page]
     }
 }
 
@@ -503,11 +503,14 @@ struct UploadPhotoRequest: RequestType {
     
     typealias ResponsType = JSON
     
-    init(ID: String, file: [Data], url: String, type: String, comment: String) {
+    init(ID: String, file: [Data], url: String, type: String, comment: String, content: String) {
         self.datas = file
         self.parameters = ["id": ID]
         if comment.length != 0 {
             self.parameters = ["id": ID, "type": type, "comment": comment]
+        }
+        if content.length != 0 {
+            self.parameters = ["id": ID, "content": content]
         }
         if url.length != 0 {
             path = url
@@ -756,7 +759,7 @@ struct MainDescribtionRequest: RequestType {
     let path: String = "/userProfile/app/getProfile"
     var parameters: Parameters
     
-    typealias ResponsType = JSON
+    typealias ResponsType = DescribtionModel
     
     init(ID: String) {
         parameters = ["id": ID]
@@ -769,7 +772,7 @@ struct DescribtionRequest: RequestType {
     let path: String = "/userProfile/app/selectProfile"
     var parameters: Parameters
     
-    typealias ResponsType = JSON
+    typealias ResponsType = ObjectModelArray<DescribtionModel>
     
     init(ID: String) {
         parameters = ["id": ID]

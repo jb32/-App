@@ -77,6 +77,6 @@ struct ObjectModelPagedArray<J: JSONParsable>: JSONParsable, Pageble {
     }
     
     static func parse(_ json: JSON) -> ObjectModelPagedArray<J>? {
-        return ObjectModelPagedArray<J>(json: json["data"], currentPageIndex: json["currentPage"].intValue, totalPageIndex: json["totalPage"].intValue)
+        return ObjectModelPagedArray<J>(json: json, currentPageIndex: json["currentPage"].intValue, totalPageIndex: json["pageCount"].intValue)
     }
 }

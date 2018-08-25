@@ -1,35 +1,30 @@
 //
-//  DescribtionController.swift
+//  OthersDescribtionController.swift
 //  SocialProject
 //
-//  Created by Mac on 2018/7/18.
+//  Created by Mac on 2018/8/24.
 //  Copyright © 2018年 ZYY. All rights reserved.
 //
 
 import UIKit
 
-class DescribtionController: ZYYBaseViewController {
+class OthersDescribtionController: UIViewController {
     
-    var isMain: Bool = false
-    
+    var ID: String = ""
+
     @IBOutlet weak var tableView: UITableView!
-    let emptyView = EmptyView.getTemplateView()
     var dataArray: [DescribtionModel] = []
     
     var pushAction:(_ vc: UIViewController) -> Void = {_ in }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if isMain {
-            getMainDescribtionData()
-        } else {
-            getAllDescibtionData()
-        }
+        netRelation()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: 1))
         //注册通知
@@ -80,7 +75,7 @@ class DescribtionController: ZYYBaseViewController {
 
 }
 
-extension DescribtionController: UITableViewDelegate, UITableViewDataSource {
+extension OthersDescribtionController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -134,51 +129,20 @@ extension DescribtionController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension DescribtionController {
-    func getMainDescribtionData() {
+extension OthersDescribtionController {
+    func netRelation() {
+        self.dataArray.removeAll()
         self.showBlurHUD()
-        let describtionRequest = MainDescribtionRequest(ID: userID)
-        WebAPI.send(describtionRequest) { (isSuccess: Bool, model: DescribtionModel?, error: NetworkError?) in
-            self.hideBlurHUD()
-            if isSuccess {
-                if model?.ID == 0 {
-                    self.addEmptyView()
-                } else {
-                    self.emptyView.removeFromSuperview()
-                    self.dataArray.removeAll()
-                    self.dataArray.append(model!)
-                    self.tableView.reloadData()
-                }
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
-    
-    func getAllDescibtionData() {
-        self.showBlurHUD()
-        let describtionRequest = DescribtionRequest(ID: userID)
-        WebAPI.send(describtionRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.dataArray = (result?.objectModels)!
+        let req = RelationReq(user: userID, otherId: ID)
+        WebAPI.send(req) { (isSuccess, result, error) in
+            if isSuccess, let result = result {
+                let model = DescribtionModel.parse(result["profile"])
+                self.dataArray.append(model!)
                 self.tableView.reloadData()
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
+            self.hideBlurHUD()
         }
-    }
-}
-
-extension DescribtionController {
-    func addEmptyView() {
-        emptyView.frame = self.view.bounds
-        emptyView.addBtn.addTarget(self, action: #selector(addDescribtion), for: .touchUpInside)
-        self.view.addSubview(emptyView)
-    }
-    
-    @objc func addDescribtion() {
-        let describtionVC = DescribtionPublishController()
-        self.pushAction(describtionVC)
     }
 }

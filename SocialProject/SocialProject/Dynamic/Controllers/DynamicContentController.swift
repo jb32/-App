@@ -122,7 +122,7 @@ extension DynamicContentController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             pictureHeight = 0
         case 1:
-            pictureHeight = 120
+            pictureHeight = 150
         default:
             let row = (picURLs.count - 1) / 3 + 1
             pictureHeight = CGFloat(row) * PicWidth

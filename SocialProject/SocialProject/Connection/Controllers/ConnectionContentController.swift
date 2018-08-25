@@ -12,8 +12,9 @@ import DNSPageView
 class ConnectionContentController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    var dataArray: [UserModel] = []
+    var dataArray: [ConnectionModel] = []
     var type = "1"
+    var page = 1
     
     var pushAction:(_ vc: UIViewController) -> Void = {_ in }
     
@@ -23,7 +24,15 @@ class ConnectionContentController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: 1))
-        self.getConnectionPersonList(type: type)
+        self.getConnectionPersonList(type: self.type)
+        tableView.addMJHeader { [unowned self] in
+            self.page = 1
+            self.getConnectionPersonList(type: self.type)
+        }
+        tableView.addMJFooter { [unowned self] in
+            self.page = 1 + self.page
+            self.getConnectionPersonList(type: self.type)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,6 +84,13 @@ extension ConnectionContentController: UITableViewDelegate, UITableViewDataSourc
         } else {
             cell.distanceLabel.text = model.address + " " + model.distance
         }
+        if model.followState {
+            cell.concernBtn.setTitle("已关注", for: .normal)
+            cell.concernBtn.isUserInteractionEnabled = false
+        } else {
+            cell.concernBtn.setTitle("+ 关注", for: .normal)
+            cell.concernBtn.isUserInteractionEnabled = true
+        }
         cell.concernBtn.addTarget(self, action: #selector(concernAction(_:)), for: .touchUpInside)
         return cell
     }
@@ -97,15 +113,24 @@ extension ConnectionContentController: UITableViewDelegate, UITableViewDataSourc
 extension ConnectionContentController {
     func getConnectionPersonList(type: String) {
         self.showBlurHUD()
-        let circleRequest = CircleRequest(ID: userID, type: type)
+        let circleRequest = CircleRequest(ID: userID, type: type, page: page)
         WebAPI.send(circleRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
-                self.dataArray = (result?.objectModels)!
+                if self.page > 1 {
+                    self.dataArray += (result?.objectModels)!
+                } else {
+                    self.dataArray.removeAll()
+                    self.dataArray = (result?.objectModels)!
+                }
                 self.tableView.reloadData()
+                if (result?.objectModels)!.count == 0 {
+                    self.tableView.noMoreData()
+                }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
+            self.tableView.stopReload()
         }
     }
 
@@ -129,6 +154,7 @@ extension ConnectionContentController {
 extension ConnectionContentController: DNSPageReloadable {
     func titleViewDidSelectedSameTitle() {
         print("重复点击了标题")
+        self.page = 1
         self.getConnectionPersonList(type: self.type)
     }
     

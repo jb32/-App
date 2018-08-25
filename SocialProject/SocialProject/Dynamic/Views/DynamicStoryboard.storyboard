@@ -25,11 +25,11 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DynamicCell" rowHeight="260" id="hL5-4G-Uuk" customClass="DynamicCell" customModule="SocialProject" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="260"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="DynamicCell" rowHeight="290" id="hL5-4G-Uuk" customClass="DynamicCell" customModule="SocialProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="290"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hL5-4G-Uuk" id="wG9-jk-95K">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="259.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="289.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" tag="5000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mrk-oO-cuZ">
@@ -73,7 +73,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fy1-OC-kpe">
-                                                    <rect key="frame" x="60" y="237.5" width="300" height="20"/>
+                                                    <rect key="frame" x="60" y="267.5" width="300" height="20"/>
                                                     <subviews>
                                                         <button opaque="NO" tag="5004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcL-CQ-QXB">
                                                             <rect key="frame" x="225" y="0.0" width="75" height="20"/>
@@ -145,10 +145,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uj-IJ-kJC" userLabel="配图视图" customClass="StatusPictureView" customModule="SocialProject" customModuleProvider="target">
-                                                    <rect key="frame" x="60" y="107.5" width="300" height="120"/>
+                                                    <rect key="frame" x="60" y="107.5" width="300" height="150"/>
                                                     <color key="backgroundColor" red="0.98823529409999999" green="0.24313725489999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="120" id="ET2-db-WRt"/>
+                                                        <constraint firstAttribute="height" constant="150" id="ET2-db-WRt"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="picviewHeight" destination="ET2-db-WRt" id="Rct-8j-VM2"/>
