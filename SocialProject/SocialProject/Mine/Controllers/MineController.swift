@@ -52,7 +52,6 @@ class MineController: UIViewController {
         }
         childViewControllers.append(myVC)
         let describtionVC = UIStoryboard(name: .mine).initialize(class: DescribtionController.self)
-        describtionVC.isMain = true
         describtionVC.pushAction = { [unowned self] vc in
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -63,6 +62,9 @@ class MineController: UIViewController {
         }
         childViewControllers.append(albumVC)
         let dynamicVC = UIStoryboard(name: .mine).initialize(class: MyDynamicController.self)
+        dynamicVC.pushAction = { [unowned self] vc in
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         childViewControllers.append(dynamicVC)
         
         // 创建DNSPageStyle，设置样式

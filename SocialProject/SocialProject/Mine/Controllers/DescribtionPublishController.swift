@@ -12,6 +12,9 @@ let kMaxTextCount = 300
 
 class DescribtionPublishController: XWPublishBaseController {
     
+    var isEdit: Bool = false
+    var model: DescribtionModel?
+    
     var mainScrollView: UIScrollView!
     
     var noteTextBackgroudView: UIView!
@@ -26,7 +29,8 @@ class DescribtionPublishController: XWPublishBaseController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.title = "简介发布"
+        self.title = self.isEdit ? "编辑简介" : "发布简介"
+        
         self.view.backgroundColor = .white
         self.mainScrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT))
         self.mainScrollView.delegate = self
@@ -65,8 +69,17 @@ class DescribtionPublishController: XWPublishBaseController {
         submitBtn.setTitle("发布", for: .normal)
         submitBtn.setTitleColor(UIColor.white, for: .normal)
         submitBtn.backgroundColor = UIColor.themOneColor
+        submitBtn.layer.cornerRadius = 20
+        submitBtn.layer.masksToBounds = true
+        submitBtn.layer.shouldRasterize = true
+        submitBtn.layer.rasterizationScale = UIScreen.main.scale
         submitBtn.addTarget(self, action: #selector(submitBtnClicked), for: .touchUpInside)
         self.mainScrollView.addSubview(submitBtn)
+        
+        if isEdit {
+            self.contentTV.text = model?.content
+            self.imageArray.addObjects(from: (model?.images.components(separatedBy: ","))!)
+        }
         
         updateViewsFrame()
     }
@@ -102,6 +115,10 @@ class DescribtionPublishController: XWPublishBaseController {
         }
     }
     
+    override func pickerViewFrameChanged() {
+        self.updateViewsFrame()
+    }
+    
     func checkInput() -> Bool {
         if contentTV.text.length == 0 {
             self.showBlurHUD(result: .warning, title: "请输入文字")
@@ -115,23 +132,51 @@ class DescribtionPublishController: XWPublishBaseController {
     }
     
     func submitToServer() {
-        self.showBlurHUD()
-        let imageData: [Data] = self.getBigImageArray() as! [Data]
-        let uploadRequest = UploadPhotoRequest(ID: userID, file: imageData, url: "/userProfile/app/releaseProfile", type: "", comment: "", content: contentTV.text)
-        WebAPI.upload(uploadRequest, progressHandler: { (progress) in
-            
-        }, completeHandler: { (isSuccess, urlString, error) in
-            self.hideBlurHUD()
-            if isSuccess == true {
-                let alert = LYAlertView(title: "上传成功")
-                alert.addAlertAction(with: "确定", style: .destructive) {[unowned self] _ in
-                    self.navigationController?.popViewController(animated: true)
+        if isEdit {
+            var temp: String = ""
+            let arr = model?.images.components(separatedBy: ",")
+            for img in arr! {
+                if self.imageArray.contains(img) {
+                } else {
+                    temp = temp + img + ","
                 }
-                alert.show()
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
-        })
+            self.showBlurHUD()
+            let imageData: [Data] = self.getBigImageArray() as! [Data]
+            let uploadRequest = UploadPhotoRequest(ID: String(format: "%d", (model?.ID)!), file: imageData, url: "/userProfile/app/updataProfile", type: "", comment: temp, content: contentTV.text)
+            WebAPI.upload(uploadRequest, progressHandler: { (progress) in
+                
+            }, completeHandler: { (isSuccess, urlString, error) in
+                self.hideBlurHUD()
+                if isSuccess == true {
+                    let alert = LYAlertView(title: "修改成功")
+                    alert.addAlertAction(with: "确定", style: .destructive) {[unowned self] _ in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    alert.show()
+                } else {
+                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
+                }
+            })
+        } else {
+            self.showBlurHUD()
+            let imageData: [Data] = self.getBigImageArray() as! [Data]
+            let uploadRequest = UploadPhotoRequest(ID: userID, file: imageData, url: "/userProfile/app/releaseProfile", type: "", comment: "", content: contentTV.text)
+            WebAPI.upload(uploadRequest, progressHandler: { (progress) in
+                
+            }, completeHandler: { (isSuccess, urlString, error) in
+                self.hideBlurHUD()
+                if isSuccess == true {
+                    let alert = LYAlertView(title: "上传成功")
+                    alert.addAlertAction(with: "确定", style: .destructive) {[unowned self] _ in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    alert.show()
+                } else {
+                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
+                }
+            })
+        }
     }
 
     override func didReceiveMemoryWarning() {

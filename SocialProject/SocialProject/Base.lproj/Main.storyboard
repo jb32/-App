@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="1" green="0.31764705879999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="selectedImageTintColor" red="1" green="0.31764705879999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.0" green="0.76078431372549016" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="qyG-cN-0vr" kind="relationship" relationship="viewControllers" id="OJN-Mp-mGp"/>
@@ -436,6 +436,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="发现" id="zcL-AE-o92"/>
+                    <connections>
+                        <outlet property="brandImg" destination="CD3-yk-JJS" id="NuU-I6-ChH"/>
+                        <outlet property="rankImg" destination="cXE-qq-tKt" id="UAG-ct-QaV"/>
+                        <outlet property="shopImg" destination="39U-i6-JuI" id="jXe-Zk-F7S"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zFQ-wB-Eyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -492,7 +497,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.98699545860290527" green="0.21074241399765015" blue="0.38466441631317139" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.76078431369999999" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="SPo-8z-rXA" firstAttribute="top" secondItem="Voy-rr-tnc" secondAttribute="top" constant="15" id="ACf-Zc-cRQ"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bxS-ZO-beQ" secondAttribute="trailing" constant="20" symbolic="YES" id="FCm-hM-wFZ"/>
@@ -593,7 +598,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.98699545860000004" green="0.21074241399999999" blue="0.38466441629999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.76078431369999999" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="mfg-vw-VW7" secondAttribute="trailing" id="2lF-8e-0Bv"/>
                                     <constraint firstItem="4Sb-P3-Qqi" firstAttribute="height" secondItem="Fx0-WL-7xS" secondAttribute="height" id="C1b-q9-eOi"/>

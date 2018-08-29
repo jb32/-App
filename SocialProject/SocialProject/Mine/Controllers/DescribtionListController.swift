@@ -1,32 +1,30 @@
 //
-//  OthersDescribtionController.swift
+//  DescribtionListController.swift
 //  SocialProject
 //
-//  Created by Mac on 2018/8/24.
+//  Created by Mac on 2018/8/27.
 //  Copyright © 2018年 ZYY. All rights reserved.
 //
 
 import UIKit
 
-class OthersDescribtionController: UIViewController {
+class DescribtionListController: ZYYBaseViewController {
     
-    var ID: String = ""
-
     @IBOutlet weak var tableView: UITableView!
     var dataArray: [DescribtionModel] = []
     
-    var pushAction:(_ vc: UIViewController) -> Void = {_ in }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        netRelation()
+        getAllDescibtionData()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: 1))
+        
+        setRightItem(title: "添加")
         //注册通知
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(browserPhoto),
@@ -56,6 +54,11 @@ class OthersDescribtionController: UIViewController {
         present(vc, animated: true, completion: nil)
         
     }
+    
+    override func rightAction() {
+        let describtionVC = DescribtionPublishController()
+        self.navigationController?.pushViewController(describtionVC, animated: true)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -75,7 +78,7 @@ class OthersDescribtionController: UIViewController {
 
 }
 
-extension OthersDescribtionController: UITableViewDelegate, UITableViewDataSource {
+extension DescribtionListController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -93,7 +96,7 @@ extension OthersDescribtionController: UITableViewDelegate, UITableViewDataSourc
     
     func updateRowHeight(indexPath: IndexPath) -> CGFloat {
         let model = self.dataArray[indexPath.row]
-        var height:CGFloat = 90
+        var height:CGFloat = 130
         let textHeight = String.getTextHeigh(textStr: (model.content), font: UIFont.systemFont(ofSize: 15), width: DEVICE_WIDTH - 30)
         height = height + textHeight
         //4.配图视图
@@ -121,29 +124,80 @@ extension OthersDescribtionController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DescibtionCell", for: indexPath) as! DescibtionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DescribtionListCell", for: indexPath) as! DescribtionListCell
         if self.dataArray.count > 0 {
             let model = self.dataArray[indexPath.row]
             cell.model = model
+            cell.settingBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            cell.editBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
+            cell.deleteBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
         }
         return cell
     }
+    
+    @objc func btnsAction(_ sender: UIButton) {
+        let cell = sender.superview?.superview?.superview as! DescribtionListCell
+        let indexPath = self.tableView.indexPath(for: cell)
+        let model = self.dataArray[(indexPath?.row)!]
+        switch sender.tag {
+        case 666:
+            // 设置主简介
+            setMainDescobtion(model: model)
+        case 667:
+            // 编辑
+            let editVC = DescribtionPublishController()
+            editVC.isEdit = true
+            editVC.model = model
+            self.navigationController?.pushViewController(editVC, animated: true)
+        default:
+            // 删除
+            deleteDescribtion(model: model)
+        }
+    }
 }
 
-extension OthersDescribtionController {
-    func netRelation() {
-        self.dataArray.removeAll()
+extension DescribtionListController {
+    func getAllDescibtionData() {
         self.showBlurHUD()
-        let req = RelationReq(user: userID, otherId: ID)
-        WebAPI.send(req) { (isSuccess, result, error) in
-            if isSuccess, let result = result {
-                let model = DescribtionModel.parse(result["profile"])
-                self.dataArray.append(model!)
+        let describtionRequest = DescribtionRequest(ID: userID)
+        WebAPI.send(describtionRequest) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                self.dataArray = (result?.objectModels)!
                 self.tableView.reloadData()
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
+        }
+    }
+    
+    func setMainDescobtion(model: DescribtionModel) {
+        self.showBlurHUD()
+        let setMainReq = SetMainDescribtionRequest(ID: "\(model.ID)")
+        WebAPI.send(setMainReq) { (isSuccess, result, error) in
             self.hideBlurHUD()
+            if isSuccess {
+                self.showBlurHUD(result: .success, title: "设置成功") { [unowned self] in
+                    self.getAllDescibtionData()
+                }
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        }
+    }
+    
+    func deleteDescribtion(model: DescribtionModel) {
+        self.showBlurHUD()
+        let deleteReq = DeleteDescribtionRequest(ID: "\(model.ID)")
+        WebAPI.send(deleteReq) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                self.showBlurHUD(result: .success, title: "删除成功") { [unowned self] in
+                    self.getAllDescibtionData()
+                }
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
         }
     }
 }

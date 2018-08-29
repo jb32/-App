@@ -84,7 +84,7 @@ typedef void(^Failure)(NSError * error);
     
     _chooseCircleBtn = [[UIButton alloc]init];
     [_chooseCircleBtn setTitle:@"项目选择" forState:UIControlStateNormal];
-    [_chooseCircleBtn setTitleColor:[UIColor colorWithRed:243.0/255.0 green:60.0/255.0 blue:62.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [_chooseCircleBtn setTitleColor:[UIColor colorWithRed:0.000 green:0.761 blue:0.663 alpha:1.00] forState:UIControlStateNormal];
     [_chooseCircleBtn addTarget:self action:@selector(chooseCircleAction:) forControlEvents:UIControlEventTouchUpInside];
     
     _explainLabel = [[UILabel alloc]init];
@@ -99,11 +99,11 @@ typedef void(^Failure)(NSError * error);
     _submitBtn = [[UIButton alloc]init];
     [_submitBtn setTitle:@"发布" forState:UIControlStateNormal];
     [_submitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_submitBtn setBackgroundColor:[UIColor colorWithRed:243.0/255.0 green:60.0/255.0 blue:62.0/255.0 alpha:1.0]];
+    [_submitBtn setBackgroundColor:[UIColor colorWithRed:0.000 green:0.761 blue:0.663 alpha:1.00]];
     
     //圆角
     //设置圆角
-    [_submitBtn.layer setCornerRadius:4.0f];
+    [_submitBtn.layer setCornerRadius:20.0f];
     [_submitBtn.layer setMasksToBounds:YES];
     [_submitBtn.layer setShouldRasterize:YES];
     [_submitBtn.layer setRasterizationScale:[UIScreen mainScreen].scale];

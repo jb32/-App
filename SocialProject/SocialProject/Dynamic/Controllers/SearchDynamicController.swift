@@ -1,49 +1,43 @@
 //
-//  MyDynamicController.swift
+//  SearchDynamicController.swift
 //  SocialProject
 //
-//  Created by Mac on 2018/8/15.
+//  Created by Mac on 2018/8/29.
 //  Copyright © 2018年 ZYY. All rights reserved.
 //
 
 import UIKit
-import DNSPageView
 
-class MyDynamicController: ZYYBaseViewController {
+class SearchDynamicController: ZYYBaseViewController {
     
-    var others: Bool = false
-    var ID: String = ""
     @IBOutlet weak var tableView: UITableView!
+    var titleView: ZYYCommonTF?
     
-    var page = 1
     var dataArray: [DynamicModel] = []
-    
-    var pushAction:(_ vc: UIViewController) -> Void = {_ in }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.getDynamicData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: 1))
+        
+        titleView = ZYYCommonTF(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH - 100, height: 30))
+        titleView?.delegate = self
+        titleView?.backgroundColor = UIColor.backgroundColor
+        titleView?.returnKeyType = .search
+        titleView?.leftViewMode = UITextFieldViewMode.unlessEditing
+        titleView?.leftView = UIImageView(image: UIImage(named: "search"))
+        titleView?.placeholder = "搜索"
+        titleView?.textAlignment = .center
+        titleView?.font = UIFont.systemFont(ofSize: 14.0)
+        self.navigationItem.titleView = titleView
+        
         //注册通知
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(browserPhoto),
                                                name: NSNotification.Name(rawValue: StautsCellBrowserPhotoNotification),
                                                object: nil)
-        tableView.addMJHeader { [unowned self] in
-            self.page = 1
-            self.getDynamicData()
-        }
-        tableView.addMJFooter { [unowned self] in
-            self.page = 1 + self.page
-            self.getDynamicData()
-        }
     }
     
     deinit {
@@ -73,10 +67,21 @@ class MyDynamicController: ZYYBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }
 
-extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
+extension SearchDynamicController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -118,7 +123,6 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
             pictureHeight = CGFloat(row - 1) * PictureInMargin + pictureHeight
         }
         height = height + pictureHeight
-        print("======================" + "\(height)")
         return height
     }
     
@@ -127,17 +131,20 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
         if self.dataArray.count > 0 {
             let model = self.dataArray[indexPath.row]
             cell.model = model
-            cell.concernBtn.isHidden = true
+            cell.concernBtn.addTarget(self, action: #selector(concernAction(_:)), for: .touchUpInside)
             cell.transpondNameBtn.addTarget(self, action: #selector(toOthersAction(_:)), for: .touchUpInside)
             cell.collectBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
             cell.commentBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
-            if !others {
-                cell.transpondBtn.setTitle("删除", for: .normal)
-            }
             cell.transpondBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
             cell.likeBtn.addTarget(self, action: #selector(btnsAction(_:)), for: .touchUpInside)
         }
         return cell
+    }
+    
+    @objc func concernAction(_ sender: UIButton) {
+        let cell = sender.superview?.superview as! DynamicCell
+        let indexPath = self.tableView.indexPath(for: cell)
+        self.concernRequest(indexPath: indexPath!)
     }
     
     @objc func toOthersAction(_ sender: UIButton) {
@@ -147,7 +154,7 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
         let model = self.dataArray[(indexPath?.row)!]
         userVC.ID = model.fromUserId
         userVC.name = model.fromName
-        self.pushAction(userVC)
+        self.navigationController?.pushViewController(userVC, animated: true)
     }
     
     @objc func btnsAction(_ sender: UIButton) {
@@ -166,7 +173,7 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
             let commentVC = UIStoryboard(name: .dynamic).initialize(class: CommentListController.self)
             let model = self.dataArray[(indexPath?.row)!]
             commentVC.model = model
-            self.pushAction(commentVC)
+            self.navigationController?.pushViewController(commentVC, animated: true)
         case 5004:
             if sender.isSelected {
                 self.cancelRequest(indexPath: indexPath!, type: 0)
@@ -179,44 +186,37 @@ extension MyDynamicController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension MyDynamicController {
-    
-    func getDynamicData() {
-        if others {
-            self.showBlurHUD()
-            let dynamicRequest = OthersDynamicRequest(ID: ID, page: self.page)
-            WebAPI.send(dynamicRequest) { (isSuccess, result, error) in
-                self.hideBlurHUD()
-                if isSuccess {
-                    if self.page > 1 {
-                        self.dataArray += (result?.objectModels)!
-                    } else {
-                        self.dataArray.removeAll()
-                        self.dataArray = (result?.objectModels)!
-                    }
-                    self.tableView.reloadData()
-                    self.tableView.stopReload()
-                } else {
-                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
-                }
+extension SearchDynamicController {
+    func getData() {
+        self.showBlurHUD()
+        self.dataArray.removeAll()
+        let dynamicRequest = SearchDynamicRequest(comment: (titleView?.text)!)
+        WebAPI.send(dynamicRequest) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                self.dataArray = (result?.objectModels)!
+                self.tableView.reloadData()
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
-        } else {
-            self.showBlurHUD()
-            let dynamicRequest = MyDynamicRequest(ID: userID, page: self.page)
-            WebAPI.send(dynamicRequest) { (isSuccess, result, error) in
-                self.hideBlurHUD()
-                if isSuccess {
-                    if self.page > 1 {
-                        self.dataArray += (result?.objectModels)!
-                    } else {
-                        self.dataArray.removeAll()
-                        self.dataArray = (result?.objectModels)!
-                    }
-                    self.tableView.reloadData()
-                    self.tableView.stopReload()
-                } else {
-                    self.showBlurHUD(result: .failure, title: error?.errorMsg)
+        }
+    }
+    
+    // 关注
+    func concernRequest(indexPath: IndexPath) {
+        self.showBlurHUD()
+        let model = self.dataArray[indexPath.row]
+        self.showBlurHUD()
+        let req = AttentionReq(id: userID, otherId: "\(model.id)")
+        WebAPI.send(req) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            self.hideBlurHUD()
+            if isSuccess {
+                self.showBlurHUD(result: .success, title: "关注成功") { [unowned self] in
+                    self.getData()
                 }
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
         }
     }
@@ -296,33 +296,11 @@ extension MyDynamicController {
             }
         }
     }
-    
-    // 删除
-    func deleteRequest(indexPath: IndexPath) {
-        self.showBlurHUD()
-        let model = self.dataArray[indexPath.row]
-        let deleteRequest = DeleteDynamicRequest(ID: model.id, loginId: userID)
-        WebAPI.send(deleteRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.showBlurHUD(result: .success, title: "删除成功") { [unowned self] in
-                    self.dataArray.remove(at: indexPath.row)
-                    self.tableView.reloadData()
-                }
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
 }
 
-extension MyDynamicController: DNSPageReloadable {
-    func titleViewDidSelectedSameTitle() {
-        print("重复点击了标题")
-        self.getDynamicData()
-    }
-    
-    func contentViewDidEndScroll() {
-        print("contentView滑动结束")
+extension SearchDynamicController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.getData()
+        return true
     }
 }

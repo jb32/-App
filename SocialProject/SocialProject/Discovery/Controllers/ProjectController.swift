@@ -44,6 +44,7 @@ class ProjectController: ZYYBaseViewController {
             controller.view.backgroundColor = UIColor.backgroundColor
             for model in self.projectData {
                 if model.typeName == str {
+                    controller.ID = model.id
                     controller.getProjectData(ID: model.id)
                 }
             }

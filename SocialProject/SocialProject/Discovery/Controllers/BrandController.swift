@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import DNSPageView
 
 enum DiscoveryType: Int {
     // 直销品牌
     case brand = 0
     case other
+    case consult
 }
 
 class BrandController: ZYYBaseViewController {
@@ -20,6 +22,8 @@ class BrandController: ZYYBaseViewController {
     
 //    var dataArray: [BrandModel] = []
     var type: DiscoveryType = .other
+    var ID: String = ""
+    var page = 1
     
     var projectData: [ProjectModel] = []
     var pushAction:(_ vc: ProjectDetaiController) -> Void = {_ in }
@@ -32,6 +36,16 @@ class BrandController: ZYYBaseViewController {
         switch type {
         case .brand:
             self.getBrandList()
+        case .consult:
+            tableView.addMJHeader { [unowned self] in
+                self.page = 1
+                self.getInformationData()
+            }
+            tableView.addMJFooter { [unowned self] in
+                self.page = 1 + self.page
+                self.getInformationData()
+            }
+            self.getInformationData()
         default:
             break
         }
@@ -117,5 +131,44 @@ extension BrandController {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
         }
+    }
+    
+    // 咨询
+    func getInformationData() {
+        self.showBlurHUD()
+        let informationRequest = InformationListRequest(page: self.page)
+        WebAPI.send(informationRequest) { (isSuccess, result, error) in
+            self.hideBlurHUD()
+            if isSuccess {
+                if self.page > 1 {
+                    self.projectData += (result?.objectModels)!
+                } else {
+                    self.projectData.removeAll()
+                    self.projectData = (result?.objectModels)!
+                }
+                self.tableView.reloadData()
+                self.tableView.stopReload()
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+        }
+    }
+}
+
+extension BrandController: DNSPageReloadable {
+    func titleViewDidSelectedSameTitle() {
+        print("重复点击了标题")
+        switch type {
+        case .brand:
+            break
+        case .consult:
+            self.getInformationData()
+        default:
+            self.getProjectData(ID: self.ID)
+        }
+    }
+    
+    func contentViewDidEndScroll() {
+        print("contentView滑动结束")
     }
 }

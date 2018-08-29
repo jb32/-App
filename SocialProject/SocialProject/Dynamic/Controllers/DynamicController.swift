@@ -43,17 +43,41 @@ class DynamicController: UIViewController {
         
         // 设置标题内容
         let titles = ["推荐", "热门", "项目", "资讯", "好友动态"]
-        
-        // 创建每一页对应的controller
-        let childViewControllers: [DynamicContentController] = titles.map { str -> DynamicContentController in
-            let controller = UIStoryboard(name: .dynamic).initialize(class: DynamicContentController.self)
-            controller.type = str
-            controller.view.backgroundColor = UIColor.backgroundColor
-            controller.pushAction = { [unowned self] vc in
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            return controller
+        var childViewControllers: [UIViewController] = []
+        let recommendController = UIStoryboard(name: .dynamic).initialize(class: DynamicContentController.self)
+        recommendController.type = "推荐"
+        recommendController.view.backgroundColor = UIColor.backgroundColor
+        recommendController.pushAction = { [unowned self] vc in
+            self.navigationController?.pushViewController(vc, animated: true)
         }
+        childViewControllers.append(recommendController)
+        let hotController = UIStoryboard(name: .dynamic).initialize(class: DynamicContentController.self)
+        hotController.type = "热门"
+        hotController.view.backgroundColor = UIColor.backgroundColor
+        hotController.pushAction = { [unowned self] vc in
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        childViewControllers.append(hotController)
+        let projectController = UIStoryboard(name: .dynamic).initialize(class: DynamicContentController.self)
+        projectController.type = "项目"
+        projectController.view.backgroundColor = UIColor.backgroundColor
+        projectController.pushAction = { [unowned self] vc in
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        childViewControllers.append(projectController)
+        let brandVC = UIStoryboard(name: .discovery).initialize(class: BrandController.self)
+        brandVC.type = .consult
+        brandVC.pushAction = { [unowned self] vc in
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        childViewControllers.append(brandVC)
+        let dynamicController = UIStoryboard(name: .dynamic).initialize(class: DynamicContentController.self)
+        dynamicController.type = "好友动态"
+        dynamicController.view.backgroundColor = UIColor.backgroundColor
+        dynamicController.pushAction = { [unowned self] vc in
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        childViewControllers.append(dynamicController)
         
         // 创建对应的DNSPageView，并设置它的frame
         let pageView = DNSPageView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: DEVICE_HEIGHT - 44), style: style, titles: titles, childViewControllers: childViewControllers)
@@ -84,5 +108,8 @@ class DynamicController: UIViewController {
 }
 
 extension DynamicController: UITextFieldDelegate {
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let dynamicController = UIStoryboard(name: .dynamic).initialize(class: SearchDynamicController.self)
+        self.navigationController?.pushViewController(dynamicController, animated: true)
+    }
 }

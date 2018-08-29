@@ -10,8 +10,6 @@ import UIKit
 
 class DescribtionController: ZYYBaseViewController {
     
-    var isMain: Bool = false
-    
     @IBOutlet weak var tableView: UITableView!
     let emptyView = EmptyView.getTemplateView()
     var dataArray: [DescribtionModel] = []
@@ -20,18 +18,14 @@ class DescribtionController: ZYYBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if isMain {
-            getMainDescribtionData()
-        } else {
-            getAllDescibtionData()
-        }
+        getMainDescribtionData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: DEVICE_WIDTH, height: 1))
+        
         //注册通知
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(browserPhoto),
@@ -62,6 +56,11 @@ class DescribtionController: ZYYBaseViewController {
         
     }
 
+    @IBAction func describtionListAction(_ sender: UIButton) {
+        let listVC = UIStoryboard(name: .mine).initialize(class: DescribtionListController.self)
+        self.pushAction(listVC)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -98,7 +97,7 @@ extension DescribtionController: UITableViewDelegate, UITableViewDataSource {
     
     func updateRowHeight(indexPath: IndexPath) -> CGFloat {
         let model = self.dataArray[indexPath.row]
-        var height:CGFloat = 75
+        var height:CGFloat = 90
         let textHeight = String.getTextHeigh(textStr: (model.content), font: UIFont.systemFont(ofSize: 15), width: DEVICE_WIDTH - 30)
         height = height + textHeight
         //4.配图视图
@@ -117,7 +116,8 @@ extension DescribtionController: UITableViewDelegate, UITableViewDataSource {
             pictureHeight = 150
         default:
             let row = (picURLs.count - 1) / 3 + 1
-            pictureHeight = CGFloat(row) * PicWidth
+            let picWidth = (DEVICE_WIDTH - 30 - 2 * PictureInMargin) / 3
+            pictureHeight = CGFloat(row) * picWidth
             pictureHeight = CGFloat(row - 1) * PictureInMargin + pictureHeight
         }
         height = height + pictureHeight
@@ -149,20 +149,6 @@ extension DescribtionController {
                     self.dataArray.append(model!)
                     self.tableView.reloadData()
                 }
-            } else {
-                self.showBlurHUD(result: .failure, title: error?.errorMsg)
-            }
-        }
-    }
-    
-    func getAllDescibtionData() {
-        self.showBlurHUD()
-        let describtionRequest = DescribtionRequest(ID: userID)
-        WebAPI.send(describtionRequest) { (isSuccess, result, error) in
-            self.hideBlurHUD()
-            if isSuccess {
-                self.dataArray = (result?.objectModels)!
-                self.tableView.reloadData()
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }

@@ -43,7 +43,6 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dynamic_avatar_boy" translatesAutoresizingMaskIntoConstraints="NO" id="uwO-f4-AdE">
                                                     <rect key="frame" x="55" y="10.5" width="50" height="50"/>
-
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="ATd-Wf-YaX"/>
                                                         <constraint firstAttribute="width" constant="50" id="aWn-gS-6Tb"/>
@@ -55,7 +54,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nicheng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbl-D0-VqQ">
                                                     <rect key="frame" x="115" y="27" width="55" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.98699545860000004" green="0.21074241399999999" blue="0.38466441629999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.0" green="0.76078431369999999" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>

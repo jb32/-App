@@ -12,13 +12,18 @@ class DiscoveryController: UITableViewController {
     
     var projectData: [ParentModel] = []
 
+    @IBOutlet weak var brandImg: UIImageView!
+    @IBOutlet weak var rankImg: UIImageView!
+    @IBOutlet weak var shopImg: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         
         self.getProjectData()
-        
+        brandImg.setWebImage(with: Image_Path+"images/directSellingBrand.png")
+        rankImg.setWebImage(with: Image_Path+"images/bigCoffeeRankings.png")
+        shopImg.setWebImage(with: Image_Path+"images/applicationStore.png")
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,7 +95,7 @@ class DiscoveryController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 10
     }
 }
 

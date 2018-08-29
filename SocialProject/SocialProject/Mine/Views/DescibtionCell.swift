@@ -85,11 +85,11 @@ class DescribtionPictureView: UIView {
          7 8 9 - 1 = 6 7 8 / 3 = 2 + 1 =3
          */
         let row = (count! - 1) / 3 + 1
-        
+        let picWidth = (DEVICE_WIDTH - 30 - 2 * PictureInMargin) / 3
         var height: CGFloat = 0.0
-        height = CGFloat(row) * PicWidth + height
+        height = CGFloat(row) * picWidth + height
         height = CGFloat(row - 1) * PictureInMargin + height
-        return CGSize(width: PictureViewWidth, height: height)
+        return CGSize(width: DEVICE_WIDTH - 30, height: height)
     }
     
     

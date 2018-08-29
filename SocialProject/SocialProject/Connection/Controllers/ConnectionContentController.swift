@@ -105,7 +105,8 @@ extension ConnectionContentController: UITableViewDelegate, UITableViewDataSourc
         tableView.deselectRow(at: indexPath, animated: true)
         let userVC = UIStoryboard(name: .connection).initialize(class: InformationController.self)
         let model = self.dataArray[indexPath.row]
-        userVC.model = model
+        userVC.ID = "\(model.id)"
+        userVC.name = model.name
         self.pushAction(userVC)
     }
 }
@@ -124,13 +125,10 @@ extension ConnectionContentController {
                     self.dataArray = (result?.objectModels)!
                 }
                 self.tableView.reloadData()
-                if (result?.objectModels)!.count == 0 {
-                    self.tableView.noMoreData()
-                }
+                self.tableView.stopReload()
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }
-            self.tableView.stopReload()
         }
     }
 

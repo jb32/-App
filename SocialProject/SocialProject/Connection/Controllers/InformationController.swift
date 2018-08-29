@@ -11,7 +11,8 @@ import DNSPageView
 
 class InformationController: ZYYBaseViewController {
     
-    var model: ConnectionModel?
+    var ID: String = ""
+    var name: String = ""
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var avatarImg: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -22,23 +23,23 @@ class InformationController: ZYYBaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         bgView.backgroundColor = .themOneColor
-        nameLabel.text = model?.name
-        avatarImg.setWebImage(with: Image_Path+(model?.headImg)!)
+        nameLabel.text = name
         let titles: [String] = ["简介", "相册", "动态"]
         var childViewControllers: [UIViewController] = []
         let describtionVC = UIStoryboard(name: .connection).initialize(class: OthersDescribtionController.self)
-        describtionVC.ID = String(format: "%d", (model?.id)!)
+        describtionVC.ID = ID
         childViewControllers.append(describtionVC)
         let albumVC = UIStoryboard(name: .connection).initialize(class: OthersAlbumController.self)
-        albumVC.ID = String(format: "%d", (model?.id)!)
+        albumVC.ID = ID
         albumVC.presentAction = { [unowned self] vc in
             self.present(vc, animated: true, completion: nil)
         }
         childViewControllers.append(albumVC)
         let dynamicVC = UIStoryboard(name: .mine).initialize(class: MyDynamicController.self)
         dynamicVC.others = true
-        dynamicVC.ID = String(format: "%d", (model?.id)!)
+        dynamicVC.ID = ID
         childViewControllers.append(dynamicVC)
         
         // 创建DNSPageStyle，设置样式
@@ -52,10 +53,25 @@ class InformationController: ZYYBaseViewController {
         self.view.addSubview(pageView)
         self.view.bringSubview(toFront: bottomView)
         
-        if (model?.followState)! {
-            concernBtn.setTitle("取消关注", for: .normal)
-        } else {
-            concernBtn.setTitle("+ 关注", for: .normal)
+        self.netRelation()
+        
+    }
+    
+    func netRelation() {
+        self.showBlurHUD()
+        let req = RelationReq(user: userID, otherId: ID)
+        WebAPI.send(req) { (isSuccess, result, error) in
+            if isSuccess, let result = result {
+                if result["type"].intValue == 1 || result["type"].intValue == 2 {
+                    self.concernBtn.setTitle("取消关注", for: .normal)
+                } else {
+                    self.concernBtn.setTitle("+ 关注", for: .normal)
+                }
+                self.avatarImg.setWebImage(with: Image_Path+result["info"]["head_img"].stringValue)
+            } else {
+                self.showBlurHUD(result: .failure, title: error?.errorMsg)
+            }
+            self.hideBlurHUD()
         }
     }
 
@@ -68,7 +84,7 @@ class InformationController: ZYYBaseViewController {
         sender.isUserInteractionEnabled = false
         if sender.titleLabel?.text == "取消关注" {
             showBlurHUD()
-            let req = CancelAttentionReq(id: userID, otherId: String(format: "%d", (model?.id)!))
+            let req = CancelAttentionReq(id: userID, otherId: ID)
             WebAPI.send(req) { (isSuccess, result, error) in
                 self.hideBlurHUD()
                 if isSuccess {
@@ -82,7 +98,7 @@ class InformationController: ZYYBaseViewController {
             }
         } else {
             self.showBlurHUD()
-            let req = AttentionReq(id: userID, otherId: String(format: "%d", (model?.id)!))
+            let req = AttentionReq(id: userID, otherId: ID)
             WebAPI.send(req) { (isSuccess, result, error) in
                 self.hideBlurHUD()
                 if isSuccess {
@@ -98,8 +114,8 @@ class InformationController: ZYYBaseViewController {
     }
     
     @IBAction func sendMessageAction(_ sender: UIButton) {
-        let vc = RCConversationViewController(conversationType: .ConversationType_PRIVATE, targetId: String(format: "%d", (model?.id)!))
-        vc?.title = model?.name
+        let vc = RCConversationViewController(conversationType: .ConversationType_PRIVATE, targetId: ID)
+        vc?.title = name
         navigationController?.pushViewController(vc!, animated: true)
     }
 }

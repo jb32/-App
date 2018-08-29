@@ -427,7 +427,7 @@ extension UIViewController {
         var hideAfterSeconds: Double {
             switch self {
             case .success:
-                return 1.5
+                return 1.0
             default:
                 return 2.5
             }

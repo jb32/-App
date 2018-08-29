@@ -20,6 +20,7 @@ class DynamicCell: UITableViewCell {
     @IBOutlet weak var collectBtn: UIButton!
     @IBOutlet weak var concernBtn: UIButton!
     @IBOutlet weak var photoView: StatusPictureView!
+    @IBOutlet weak var transpondNameBtn: UIButton!
     
     var model: DynamicModel? {
         didSet {
@@ -29,8 +30,21 @@ class DynamicCell: UITableViewCell {
             contentLabel.text = model?.comment
             likeBtn.setTitle("点赞"+(model?.praselen)!, for: .normal)
             transpondBtn.setTitle("转发"+(model?.forwardlen)!, for: .normal)
+            commentBtn.setTitle("评论"+(model?.commentlen)!, for: .normal)
             collectBtn.setTitle("收藏"+(model?.collectionlen)!, for: .normal)
             photoView.viewModel = model
+            if (model?.fromName.length)! > 0 {
+                transpondNameBtn.setTitle("转发自" + (model?.fromName)!, for: .normal)
+            } else {
+                transpondNameBtn.setTitle("", for: .normal)
+            }
+            if model?.isfollow == 0 {
+                concernBtn.isHidden = false
+            } else {
+                concernBtn.isHidden = true
+            }
+            likeBtn.isSelected = (model?.praseState)!
+            collectBtn.isSelected = (model?.collectionState)!
         }
     }
     

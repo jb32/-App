@@ -143,6 +143,9 @@ extension AlbumController {
                 if (user?.album.length)! > 0 {
                     self.imgs = (user?.album.components(separatedBy: ","))!
                     self.collectionView.reloadData()
+                } else {
+                    self.imgs.removeAll()
+                    self.collectionView.reloadData()
                 }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
@@ -156,8 +159,13 @@ extension AlbumController {
         WebAPI.send(deleteRequest) { (isSuccess, result, error) in
             self.hideBlurHUD()
             if isSuccess {
-                self.imgs = (result?.stringValue.components(separatedBy: ","))!
-                self.collectionView.reloadData()
+                if result != .null {
+                    self.imgs = (result?.stringValue.components(separatedBy: ","))!
+                    self.collectionView.reloadData()
+                } else {
+                    self.imgs.removeAll()
+                    self.collectionView.reloadData()
+                }
             } else {
                 self.showBlurHUD(result: .failure, title: error?.errorMsg)
             }

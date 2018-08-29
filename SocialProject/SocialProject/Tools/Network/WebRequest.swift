@@ -211,10 +211,10 @@ struct OthersDynamicRequest: RequestType {
     let path: String = "/myDynamics/app/othersDynamics"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<DynamicModel>
+    typealias ResponsType = ObjectModelPagedArray<DynamicModel>
     
-    init(ID: String) {
-        self.parameters = ["id": ID]
+    init(ID: String, page: Int) {
+        self.parameters = ["id": ID, "pageNum": page, "userId": userID]
     }
 }
 
@@ -278,25 +278,25 @@ struct DynamicRequest: RequestType {
     let path: String = "/getBuddyDynamics"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<DynamicModel>
+    typealias ResponsType = ObjectModelPagedArray<DynamicModel>
     
-    init(userId: String) {
-        self.parameters = ["userId": userId]
+    init(userId: String, page: Int) {
+        self.parameters = ["userId": userId, "pageNum": page]
     }
 }
 
-// 点赞
-struct PraiseRequest: RequestType {
-    let host: String = ROOT_API_HOST
-    let path: String = "/addPraseNumber"
-    var parameters: Parameters
-    
-    typealias ResponsType = JSON
-    
-    init(ID: String, userLoginId: String) {
-        self.parameters = ["id": ID, "userLoginId": userLoginId]
-    }
-}
+//// 点赞
+//struct PraiseRequest: RequestType {
+//    let host: String = ROOT_API_HOST
+//    let path: String = "/addPraseNumber"
+//    var parameters: Parameters
+//    
+//    typealias ResponsType = JSON
+//    
+//    init(ID: String, userLoginId: String) {
+//        self.parameters = ["id": ID, "userLoginId": userLoginId]
+//    }
+//}
 
 // 转发
 struct TransmitRequest: RequestType {
@@ -306,21 +306,34 @@ struct TransmitRequest: RequestType {
     
     typealias ResponsType = JSON
     
-    init(ID: String, loginId: String) {
-        self.parameters = ["id": ID, "loginId": loginId]
+    init(ID: String, loginId: String, sourceId: String) {
+        self.parameters = ["id": ID, "loginId": loginId, "sourceId": sourceId]
     }
 }
 
-// 收藏
+// 收藏/点赞
 struct CollectRequest: RequestType {
     let host: String = ROOT_API_HOST
-    let path: String = "/myDynamics/app/addCollectionDynamics"
+    let path: String = "/myDynamics/app/addCFPDynamics"
     var parameters: Parameters
     
     typealias ResponsType = JSON
     
-    init(ID: String, dynamicsId: String) {
-        self.parameters = ["id": ID, "dynamicsId": dynamicsId]
+    init(ID: String, dynamicsId: String, type: Int) {
+        self.parameters = ["id": ID, "dynamicsId": dynamicsId, "type": type]
+    }
+}
+
+// 取消点赞/收藏
+struct CancelCollectRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/myDynamics/app/deleteCFPDynamics"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String, dynamicsId: String, type: Int) {
+        self.parameters = ["id": ID, "dynamicsId": dynamicsId, "type": type]
     }
 }
 
@@ -343,10 +356,10 @@ struct HotRequest: RequestType {
     let path: String = "/getHot"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<DynamicModel>
+    typealias ResponsType = ObjectModelPagedArray<DynamicModel>
     
-    init() {
-        self.parameters = ["id": ""]
+    init(page: Int) {
+        self.parameters = ["userId": userID, "pageNum": page]
     }
 }
 
@@ -356,10 +369,10 @@ struct RecommendRequest: RequestType {
     let path: String = "/getRecommend"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<DynamicModel>
+    typealias ResponsType = ObjectModelPagedArray<DynamicModel>
     
-    init() {
-        self.parameters = ["id": ""]
+    init(page: Int) {
+        self.parameters = ["userId": userID, "pageNum": page]
     }
 }
 
@@ -369,10 +382,10 @@ struct ProjectListRequest: RequestType {
     let path: String = "/getProject"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<DynamicModel>
+    typealias ResponsType = ObjectModelPagedArray<DynamicModel>
     
-    init(type: String) {
-        self.parameters = ["type": type]
+    init(type: String, page: Int) {
+        self.parameters = ["userId": userID, "type": type, "pageNum": page]
     }
 }
 
@@ -382,10 +395,10 @@ struct InformationListRequest: RequestType {
     let path: String = "/getInformation"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<DynamicModel>
+    typealias ResponsType = ObjectModelArray<ProjectModel>
     
-    init() {
-        self.parameters = ["id": ""]
+    init(page: Int) {
+        self.parameters = ["pageNum": page]
     }
 }
 
@@ -415,16 +428,16 @@ struct CommentListRequest: RequestType {
     }
 }
 
-// 发表动态
-struct PublishRequest: RequestType {
+// 搜索动态
+struct SearchDynamicRequest: RequestType {
     let host: String = ROOT_API_HOST
-    let path: String = "/addDynamic"
+    let path: String = "/searchDynamic"
     var parameters: Parameters
     
-    typealias ResponsType = JSON
+    typealias ResponsType = ObjectModelArray<DynamicModel>
     
-    init(userid: String, type: String, comment: String, file: [Data]) {
-        self.parameters = ["id": userid, "type": type, "comment": comment, "file": file]
+    init(comment: String) {
+        self.parameters = ["comment": comment]
     }
 }
 
@@ -506,11 +519,17 @@ struct UploadPhotoRequest: RequestType {
     init(ID: String, file: [Data], url: String, type: String, comment: String, content: String) {
         self.datas = file
         self.parameters = ["id": ID]
+        // 动态
         if comment.length != 0 {
             self.parameters = ["id": ID, "type": type, "comment": comment]
         }
+        // 简介
         if content.length != 0 {
             self.parameters = ["id": ID, "content": content]
+        }
+        // 修改简介
+        if url == "/userProfile/app/updataProfile" {
+            self.parameters = ["id": ID, "content": content, "imgStrDelete": comment]
         }
         if url.length != 0 {
             path = url
@@ -532,10 +551,10 @@ struct MyDynamicRequest: RequestType {
     let path: String = "/myDynamics/app/myDynamics"
     var parameters: Parameters
     
-    typealias ResponsType = ObjectModelArray<DynamicModel>
+    typealias ResponsType = ObjectModelPagedArray<DynamicModel>
     
-    init(ID: String) {
-        self.parameters = ["id": ID]
+    init(ID: String, page: Int) {
+        self.parameters = ["id": ID, "pageNum": page]
     }
 }
 
@@ -560,8 +579,8 @@ struct CollectionListRequest: RequestType {
     
     typealias ResponsType = ObjectModelArray<DynamicModel>
     
-    init(ID: String) {
-        self.parameters = ["id": ID]
+    init(ID: String, page: Int) {
+        self.parameters = ["id": ID, "pageNum": page]
     }
 }
 
@@ -779,14 +798,28 @@ struct DescribtionRequest: RequestType {
     }
 }
 
+// 设置主简介
+struct SetMainDescribtionRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/userProfile/app/setMainProfile"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String) {
+        parameters = ["id": ID, "accoundId": userID]
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
+// 删除简介
+struct DeleteDescribtionRequest: RequestType {
+    let host: String = ROOT_API_HOST
+    let path: String = "/userProfile/app/deleteProfile"
+    var parameters: Parameters
+    
+    typealias ResponsType = JSON
+    
+    init(ID: String) {
+        parameters = ["profileId": ID]
+    }
+}

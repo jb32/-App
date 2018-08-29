@@ -45,6 +45,8 @@ class CircleController: ZYYBaseViewController {
             self.hideBlurHUD()
             if isSuccess {
                 self.showBlurHUD(result: .success, title: "保存成功") { [unowned self] in
+                    UserDefaults.standard.set((self.model?.id)!, forKey: "circleType")
+                    UserDefaults.standard.synchronize()
                     let mainVC = UIStoryboard(name: .main).initialize(class: ZYYBaseTabbarController.self)
                     UIApplication.shared.keyWindow?.rootViewController = mainVC
                 }
