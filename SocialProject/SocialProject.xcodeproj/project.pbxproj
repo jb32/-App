@@ -33,6 +33,7 @@
 		141E5D1F211A960A00E2BC62 /* CircleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E5D1E211A960A00E2BC62 /* CircleModel.swift */; };
 		141E5D21211A9A2000E2BC62 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E5D20211A9A2000E2BC62 /* CircleCell.swift */; };
 		141F150920FC33D3002C014A /* CommonTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141F150820FC33D3002C014A /* CommonTF.swift */; };
+		1425A0CE2136362400669D65 /* SearchDynamicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1425A0CD2136362300669D65 /* SearchDynamicController.swift */; };
 		142C6FCE2105C2AF00C84CE1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C6FCD2105C2AF00C84CE1 /* UserModel.swift */; };
 		143321852106CA1000868F20 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 143321812106CA1000868F20 /* GTMBase64.m */; };
 		143321862106CA1000868F20 /* NSString+Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 143321842106CA1000868F20 /* NSString+Encoding.m */; };
@@ -124,6 +125,8 @@
 		143FE9E1210AFC92002BC1A0 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FE9CF210AFC91002BC1A0 /* UIImageView+HighlightedWebCache.m */; };
 		143FE9E2210AFC92002BC1A0 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FE9D1210AFC91002BC1A0 /* UIImageView+WebCache.m */; };
 		143FE9E3210AFC92002BC1A0 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FE9D3210AFC91002BC1A0 /* UIView+WebCacheOperation.m */; };
+		144EFCE12133D83F00CFF9B8 /* DescribtionListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EFCE02133D83F00CFF9B8 /* DescribtionListController.swift */; };
+		144EFCE32133DEAE00CFF9B8 /* DescribtionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EFCE22133DEAE00CFF9B8 /* DescribtionListCell.swift */; };
 		1454B39120FF1791006C4269 /* MineStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1454B39020FF1791006C4269 /* MineStoryboard.storyboard */; };
 		1454B39320FF1F6B006C4269 /* DescribtionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454B39220FF1F6B006C4269 /* DescribtionController.swift */; };
 		1454B39520FF26D8006C4269 /* AlbumController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1454B39420FF26D8006C4269 /* AlbumController.swift */; };
@@ -269,6 +272,7 @@
 		141E5D1E211A960A00E2BC62 /* CircleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleModel.swift; sourceTree = "<group>"; };
 		141E5D20211A9A2000E2BC62 /* CircleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
 		141F150820FC33D3002C014A /* CommonTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonTF.swift; sourceTree = "<group>"; };
+		1425A0CD2136362300669D65 /* SearchDynamicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDynamicController.swift; sourceTree = "<group>"; };
 		142C6FCD2105C2AF00C84CE1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		142C6FFF2105CF1100C84CE1 /* BridgeHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeHeader.h; sourceTree = "<group>"; };
 		143321802106CA1000868F20 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -407,6 +411,8 @@
 		143FE9D1210AFC91002BC1A0 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		143FE9D2210AFC91002BC1A0 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		143FE9D3210AFC91002BC1A0 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		144EFCE02133D83F00CFF9B8 /* DescribtionListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribtionListController.swift; sourceTree = "<group>"; };
+		144EFCE22133DEAE00CFF9B8 /* DescribtionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribtionListCell.swift; sourceTree = "<group>"; };
 		1454B39020FF1791006C4269 /* MineStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MineStoryboard.storyboard; sourceTree = "<group>"; };
 		1454B39220FF1F6B006C4269 /* DescribtionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribtionController.swift; sourceTree = "<group>"; };
 		1454B39420FF26D8006C4269 /* AlbumController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumController.swift; sourceTree = "<group>"; };
@@ -1115,6 +1121,7 @@
 				14B7AD5F20FBBB7000BBBF28 /* DynamicController.swift */,
 				14B7AD6120FBBB8500BBBF28 /* DynamicContentController.swift */,
 				14E65BDD212ABDCC006D72F5 /* PublishController.swift */,
+				1425A0CD2136362300669D65 /* SearchDynamicController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1197,6 +1204,7 @@
 				14C8C83E212FDA96007BF335 /* DescibtionCell.swift */,
 				14C8C844212FF340007BF335 /* EmptyView.swift */,
 				14C8C846212FF34C007BF335 /* EmptyView.xib */,
+				144EFCE22133DEAE00CFF9B8 /* DescribtionListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1217,6 +1225,7 @@
 				1470D7FB212BA96E00F202AD /* DescribtionPublishController.swift */,
 				1470D7FD212C124000F202AD /* QRCodeViewController.swift */,
 				14039717212E6AC700ACB9ED /* DetailsController.swift */,
+				144EFCE02133D83F00CFF9B8 /* DescribtionListController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1595,6 +1604,7 @@
 				14B7AD6020FBBB7000BBBF28 /* DynamicController.swift in Sources */,
 				140FC2A321086DBA00F69F52 /* ReferralsCell.swift in Sources */,
 				143950A120F840C0007853A8 /* BaseViewController.swift in Sources */,
+				144EFCE12133D83F00CFF9B8 /* DescribtionListController.swift in Sources */,
 				14B7ACA220FB6A7400BBBF28 /* RegisterController.swift in Sources */,
 				143FE9A4210AFB2A002BC1A0 /* MImaCell.m in Sources */,
 				1454B39720FF2ABB006C4269 /* AlbumCell.swift in Sources */,
@@ -1634,6 +1644,7 @@
 				140FC29D21085A2700F69F52 /* MemberModel.swift in Sources */,
 				143FE93B210ABE40002BC1A0 /* PersonalInfoController.swift in Sources */,
 				14046838211843E90019B524 /* Picker.swift in Sources */,
+				144EFCE32133DEAE00CFF9B8 /* DescribtionListCell.swift in Sources */,
 				143FE9DE210AFC92002BC1A0 /* UIImage+GIF.m in Sources */,
 				14E65BD4212AA0BD006D72F5 /* LocationManager.swift in Sources */,
 				143FE9E0210AFC92002BC1A0 /* UIImage+WebP.m in Sources */,
@@ -1730,6 +1741,7 @@
 				14B7AD5820FBAB7400BBBF28 /* ConnectionController.swift in Sources */,
 				F0011CFD211D2BC60069111E /* ContactListViewController.swift in Sources */,
 				14039712212E672F00ACB9ED /* RechargeCell.swift in Sources */,
+				1425A0CE2136362400669D65 /* SearchDynamicController.swift in Sources */,
 				F012423F2123BFBB00A0F37C /* CycleCollectionheader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
